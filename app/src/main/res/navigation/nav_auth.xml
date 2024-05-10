@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/nav_auth_login"
+    android:id="@+id/nav_graph">
+
+    <fragment android:id="@+id/nav_auth_sign_up"
+        android:name="com.is.classroomevnmngapp.ui.auth.sigup.SignUpFragment"
+        tools:layout="@layout/fragment_auth_signup"/>
+
+
+    <fragment android:id="@+id/nav_auth_login"
+        android:name="com.is.classroomevnmngapp.ui.auth.login.LoginFragment"
+        tools:layout="@layout/fragment_auth_login">
+        <action
+            android:id="@+id/action_loginFragment_to_forgetPassFragment"
+            app:destination="@id/nav_auth_forget_password"
+            app:enterAnim="@anim/animate_split_enter"
+            app:exitAnim="@anim/animate_split_exit"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/animate_split_enter"
+            app:popExitAnim="@anim/animate_split_exit"
+            app:popUpTo="@+id/nav_auth_login"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/nav_auth_sign_up"
+            app:enterAnim="@anim/animate_split_enter"
+            app:exitAnim="@anim/animate_split_exit"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/animate_split_enter"
+            app:popExitAnim="@anim/animate_split_exit"
+            app:popUpTo="@+id/nav_auth_login"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment android:id="@+id/nav_auth_forget_password"
+        android:name="com.is.classroomevnmngapp.ui.auth.forget_pass.ForgetPasswordFragment"
+        tools:layout="@layout/fragment_auth_forget_password"/>
+
+</navigation>

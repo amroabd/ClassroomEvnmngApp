@@ -1,0 +1,123 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.ClassroomEvnmngApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimaryVariant">@color/gray_400</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/orange_s_500</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:textColorHint">@color/purple_200</item>
+        <item name="android:textColorPrimary">?colorOnSecondary</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+
+
+        <!-- Customize your theme here. -->
+        <item name="shapeAppearanceSmallComponent">
+            @style/ShapeAppearance.ClassroomEvnmngApp.SmallComponent
+        </item>
+        <item name="shapeAppearanceMediumComponent">
+            @style/ShapeAppearance.ClassroomEvnmngApp.MediumComponent
+        </item>
+        <item name="shapeAppearanceLargeComponent">
+            @style/ShapeAppearance.ClassroomEvnmngApp.LargeComponent
+        </item>
+        <!--here is put name attribute theme, will using without add in widget(button,...)  -->
+        <item name="materialCardViewStyle">@style/Widget.ClassroomEvnmngApp.MaterialCardView</item>
+        <item name="materialButtonStyle">@style/Widget.ClassroomEvnmngApp.Button</item>
+
+    </style>
+
+
+      <!--custom style all button-->
+    <style name="Widget.ClassroomEvnmngApp.Button" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:fontFamily">@font/cairo_semibold</item>
+        <item name="android:paddingVertical" tools:targetApi="o">@dimen/_10sdp</item>
+        <item name="android:textAppearance">@style/TextAppearance.ClassroomEvnmngApp.Button</item>
+    </style>
+
+    <style name="TextAppearance.ClassroomEvnmngApp.Button" parent="TextAppearance.AppCompat.Medium">
+
+    </style>
+
+
+    <!--custom style all cardView -->
+    <style name="Widget.ClassroomEvnmngApp.MaterialCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">
+            @style/MyShapeAppearanceOverlay.ClassroomEvnmngApp.MaterialCardView
+        </item>
+    </style>
+
+    <style name="MyShapeAppearanceOverlay.ClassroomEvnmngApp.MaterialCardView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="ShapeAppearance.ClassroomEvnmngApp.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="ShapeAppearance.ClassroomEvnmngApp.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="ShapeAppearance.ClassroomEvnmngApp.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
+
+    <style name="Theme.ClassroomEvnmngApp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.ClassroomEvnmngApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.ClassroomEvnmngApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <!-- theme  sweet dialog -->
+    <style name="button_Style_dialog">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:minWidth">120dp</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">2dp</item>
+        <item name="android:paddingRight">2dp</item>
+        <item name="android:textColor">@color/is_btn_text_color_white</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:lines">1</item>
+    </style>
+
+    <style name="alert_dialog_dark1" parent="alert_dialog_light1">
+        <item name="android:backgroundDimAmount">0.8</item>
+        <item name="sweet_alert_bg_drawable">@drawable/dialog_background_drak</item>
+        <item name="sweet_alert_title_text_color">@color/is_title_color_dark</item>
+        <item name="sweet_alert_content_text_color">@color/is_message_color_dark</item>
+    </style>
+
+    <style name="alert_dialog_light1" parent="android:Theme.Dialog">
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowBackground">@color/float_transparent</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.4</item>
+        <item name="sweet_alert_bg_drawable">@drawable/dialog_background</item>
+        <item name="sweet_alert_title_text_color">@color/is_title_color</item>
+        <item name="sweet_alert_content_text_color">@color/is_message_color</item>
+    </style>
+    <!-- end theme  sweet dialog -->
+
+</resources>
+

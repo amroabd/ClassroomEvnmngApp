@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_admin_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/label_home" />
+
+    <item
+        android:id="@+id/navigation_admin_check_device"
+        android:icon="@drawable/ic_checkedlaptop72"
+        android:title="@string/label_check_devices" />
+    <item
+        android:id="@+id/navigation_admin_add_schedule"
+        android:icon="@drawable/ic_insert_table_48"
+        android:title="@string/label_add_schedule" />
+    <item
+        android:id="@+id/navigation_admin_config_sensors"
+        android:icon="@drawable/ic_iot_sensor_48"
+        android:title="@string/label_config_sensors" />
+
+    <item
+        android:id="@+id/navigation_admin_setting"
+        android:icon="@drawable/ic_admin_panel_settings_24"
+        android:title="@string/label_setting" />
+
+</menu>

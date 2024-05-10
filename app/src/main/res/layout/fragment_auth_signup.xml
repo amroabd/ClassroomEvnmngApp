@@ -1,0 +1,126 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl"
+    android:orientation="vertical">
+
+
+
+    <LinearLayout
+        android:id="@+id/editLyt"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:elevation="2dp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:background="@drawable/bg_content_lyt"
+        android:orientation="vertical"
+        tools:targetApi="lollipop">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:fontFamily="@font/cairo_black"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            android:text="@string/label_create_new_account" />
+
+        <EditText
+            android:id="@+id/usernameEditText"
+            android:layout_width="wrap_content"
+            android:inputType="textPersonName"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_15sdp"
+            android:background="@drawable/edit_text_background"
+            android:ems="14"
+            android:drawableEnd="@drawable/ic_user_circle_24"
+            android:hint="@string/label_username"
+            tools:ignore="Autofill" />
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="wrap_content"
+            android:inputType="textEmailAddress"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:background="@drawable/edit_text_background"
+            android:ems="14"
+            android:drawableEnd="@drawable/ic_outline_email_24"
+            android:hint="@string/label_email"
+            tools:ignore="Autofill" />
+
+        <EditText
+            android:id="@+id/phoneEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_1sdp"
+            android:background="@drawable/edit_text_background"
+            android:drawableEnd="@drawable/ic_phone_outline_24"
+            android:ems="14"
+            android:hint="@string/label_phone"
+            android:inputType="phone"
+            android:textAlignment="viewStart"
+            tools:ignore="Autofill" />
+
+        <!-- حقل الرمز السري -->
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_15sdp"
+            android:background="@drawable/edit_text_background"
+            android:ems="14"
+            android:gravity="right|center"
+            android:hint="@string/label_password"
+            android:drawableEnd="@drawable/ic_ock_open_24"
+            android:inputType="textPassword"
+            tools:ignore="Autofill,RtlHardcoded" />
+        <Button
+            android:id="@+id/createAccountButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:backgroundTint="@color/orange_s_500"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:text="@string/label_create_account"
+            tools:targetApi="lollipop" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnLyt"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/_20sdp"
+        android:orientation="vertical">
+        <!-- مشكلة في تسجيل الدخول -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="visible"
+            android:fontFamily="@font/cairo_semibold"
+            android:textColor="@color/black"
+            android:text="@string/label_already_account"/>
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="14"
+            android:fontFamily="@font/cairo_semibold"
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:text="@string/label_BodyTitle_login" />
+
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

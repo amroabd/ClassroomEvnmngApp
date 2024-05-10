@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="8.0"
+    tools:context=".ui.user.classroom.ClassRoomUserFragment">
+
+    <LinearLayout
+        android:id="@+id/headLyt"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!-- حقل حساب المستخدم -->
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:fontFamily="@font/cairo_black"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            android:text="@string/label_config_sensors" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/editsLyt"
+        android:layout_weight="3.0"
+        android:background="@drawable/bg_content10_lyt"
+        android:elevation="2dp"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_margin="@dimen/_5sdp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:targetApi="lollipop">
+        <TextView
+            android:id="@+id/titleBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:fontFamily="@font/cairo_black"
+            android:layout_marginBottom="32dp"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            android:text="اختار بيانات المطلوب لضبط الحساس" />
+        <!-- حقل اسم المستخدم -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cairo_semibold"
+            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/label_select_classroom"
+            tools:ignore="Autofill" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="@string/label_select_classroom0"
+            app:startIconTint="@color/main_color_500">
+
+            <AutoCompleteTextView
+                android:id="@+id/classroomSpinner"
+                style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance ="?attr/textAppearanceBody1"
+                android:editable="false"
+                android:singleLine="true"
+                tools:ignore="LabelFor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- حقل اسم المستخدم -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cairo_semibold"
+            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/label_select_sensor"
+            tools:ignore="Autofill" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="يرجى اختيار الحساس"
+            app:startIconTint="@color/main_color_500">
+            <AutoCompleteTextView
+                android:id="@+id/sensorSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:editable="false"
+                tools:ignore="LabelFor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- زر حجز القاعة -->
+        <Button
+            android:id="@+id/startCheckButton"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/cairo_semibold"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:backgroundTint="@color/black"
+            android:ems="8"
+            android:layout_marginVertical="24dp"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            android:text="بدء ضبط الحساس" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cairo_semibold"
+            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:padding="16dp"
+            android:text="عرض نتائج."
+            tools:ignore="Autofill" />
+        <TextView
+            android:id="@+id/showResultCheckTest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+
+            android:background="@drawable/view_screen_text"
+            android:padding="16dp"
+            android:text="here show report result check  device"
+            tools:ignore="Autofill" />
+    </LinearLayout>
+
+</LinearLayout>

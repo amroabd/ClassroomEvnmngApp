@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layoutDirection="locale"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/headLyt"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        xmlns:tools="http://schemas.android.com/tools">
+        <ImageView
+            android:id="@+id/appLogoNameImageView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_60sdp"
+            android:scaleType="fitXY"
+            android:cropToPadding="true"
+            android:visibility="visible"
+            android:src="@drawable/app_logo"
+            tools:targetApi="lollipop"
+            tools:ignore="ContentDescription" />
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_marginVertical="@dimen/_15sdp"
+        android:layout_height="0dp"/>
+
+
+ <!--   <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+        android:layoutDirection="ltr"
+        android:id="@+id/dots_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:dampingRatio="0.6"
+        app:dotsColor="@color/main_color_500"
+        app:dotsStrokeColor="@color/main_color_100"
+        app:dotsCornerRadius="2dp"
+        app:dotsSize="16dp"
+        app:dotsSpacing="6dp"
+        app:dotsStrokeWidth="4dp"
+        app:stiffness="600"
+        />-->
+    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+        android:layoutDirection="ltr"
+        android:id="@+id/dots_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:dotsColor="@color/main_color_100"
+        app:dotsStrokeColor="@color/main_color_200"
+        app:dotsCornerRadius="4dp"
+        app:dotsSize="16dp"
+        app:dotsSpacing="10dp"
+        app:dotsWidthFactor="1.5"
+        app:selectedDotColor="@color/main_color_500"
+        app:progressMode="true"
+        app:stiffness="600"
+        />
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_margin="@dimen/_5sdp"
+        android:padding="@dimen/_8sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ems="5"
+        android:text="@string/next"
+        />
+
+</LinearLayout>

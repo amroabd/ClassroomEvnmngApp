@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/navigation_user_home"
+    android:id="@+id/mobile_navigation">
+
+<fragment  tools:layout="@layout/fragment_user_home"
+    android:name="com.is.classroomevnmngapp.ui.user.home.UserHomeFragment"
+    android:id="@+id/navigation_user_home"/>
+
+    <fragment  tools:layout="@layout/fragment_user_classroom"
+        android:name="com.is.classroomevnmngapp.ui.user.classroom.ClassRoomUserFragment"
+        android:id="@+id/navigation_user_classroom"/>
+
+    <fragment  tools:layout="@layout/fragment_user_reservation"
+        android:name="com.is.classroomevnmngapp.ui.user.reservations.ReservationUserFragment"
+        android:id="@+id/navigation_user_reservation"/>
+    <fragment  tools:layout="@layout/fragment_user_setting"
+        android:name="com.is.classroomevnmngapp.ui.setting.SettingFragment"
+        android:id="@+id/navigation_user_setting"/>
+    <fragment  tools:layout="@layout/fragment_change_password"
+        android:name="com.is.classroomevnmngapp.ui.setting.change_pass.ChangPasswordFragment"
+        android:id="@+id/navigation_change_pass"/>
+
+    <activity android:name="com.is.classroomevnmngapp.ui.auth.login.LoginFragment"
+        tools:layout="@layout/fragment_auth_login"
+        android:id="@+id/nav_login"/>
+
+    <activity android:name="com.is.classroomevnmngapp.ui.auth.sigup.SignUpFragment"
+        tools:layout="@layout/fragment_auth_signup"
+        android:id="@+id/nav_signUp"/>
+
+
+    <fragment android:name="com.is.classroomevnmngapp.ui.admin.AdminHomeFragment"
+        tools:layout="@layout/fragment_admin_home"
+        android:id="@+id/nav_admin_main"/>
+
+</navigation>

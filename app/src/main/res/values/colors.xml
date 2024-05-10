@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">@color/main_color_200</color>
+    <color name="purple_500">@color/main_color_500</color>
+    <color name="purple_700">#2A3D8C</color><!--  244955-->
+    <color name="teal_200">@color/orange_s_200</color><!--03DAC5-->
+    <color name="teal_700">@color/orange_s_700</color><!--#FF018786-->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!--primary color-->
+    <color name="blue_pry_700">#0336FF</color>
+    <color name="blue_pry_500">#496DF9</color>
+    <color name="blue_pry_200">#ADBEFF</color>
+    <!--secondary color-->
+    <color name="orange_s_700">#F57C00</color>
+    <color name="orange_s_500">#FF9800</color>
+    <color name="orange_s_200">#FFCC80</color>
+    <color name="orange_s_50">#FFECB3</color>
+
+    <color name="body_color">#BA68C8</color>
+    <color name="body_color01">#E1BEE7</color>
+
+    <color name="main_color_500">#1A70B9</color><!-- ,0B6482-->
+    <color name="main_color_200">#0AACED</color><!--,EFF4F7,-->
+    <color name="main_color_100">#F0FFFF</color><!-- ,FBFCFE-->
+    <color name="main_color_50">#FDFFFE</color><!--#FDFFFE-->
+
+    <color name="my_app_background">@color/main_color_50</color>
+    <color name="my_app_error">#FFCDD2</color>
+    <color name="my_app_on_error">@android:color/holo_red_light</color>
+        <!--sweet dialog -->
+    <color name="is_title_color_dark">#FFFFFF</color>
+    <color name="is_message_color_dark">#FFFFFF</color>
+    <color name="is_btn_text_color_white">#FFFFFF</color>
+    <color name="float_transparent">#00000000</color>
+    <color name="is_title_color">#575757</color>
+    <color name="is_message_color">#797979</color>
+
+    <color name="success_100">#CCFF90</color>
+    <color name="my_app_success">#76FF03</color>
+    <color name="my_app_on_success">#64DD17</color>
+    <color name="gray_light">#eee</color>
+    <color name="gray_light01">#F4F2F2</color>
+
+    <color name="gray_400">#989595</color>
+    <color name="gray_300">#DCD8D8</color>
+    <color name="gray_d">#F4F3F3</color>
+    <color name="gray_l">#FBFAF8</color>
+
+    <!-- color background view in status success or eeror -->
+    <color name="is_trans_success_stroke_color">#33A5DC86</color>
+    <color name="is_success_stroke_color">#A5DC86</color>
+    <color name="is_error_stroke_color">#F27474</color>
+    <color name="is_warning_stroke_color">#F8BB86</color>
+    <color name="sweet_dialog_bg_color">#FFFFFF</color>
+    <color name="sweet_dialog_bg_color_dark">#E6222222</color>
+
+</resources>

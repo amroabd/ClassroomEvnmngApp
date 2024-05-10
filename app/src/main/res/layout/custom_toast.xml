@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginStart="5.0dip"
+    android:layoutDirection="rtl"
+    android:layout_marginEnd="5.0dip"
+    tools:targetApi="jelly_bean_mr1">
+
+    <TextView
+        android:id="@+id/toastText"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/corner"
+        android:backgroundTint="#90DF25"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:fontFamily="sans-serif-black"
+        android:paddingStart="16.0dip"
+        android:paddingTop="10.0dip"
+        android:paddingEnd="16.0dip"
+        android:paddingBottom="10.0dip"
+        android:drawableRight="@drawable/supervisor_account24px"
+        android:textColor="#ffffffff"
+        tools:ignore="RtlHardcoded"
+        tools:targetApi="lollipop" />
+</FrameLayout>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/item_bg"
+    android:gravity="center"
+    android:layoutDirection="rtl"
+    android:layout_marginVertical="@dimen/_5sdp"
+    android:weightSum="10.0"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:background="@drawable/image_bg"
+        android:tint="@color/my_app_on_error"
+        android:scaleType="center"
+
+        android:src="@drawable/ic_lamp_24" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="9.5"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_titleClassroom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/activatedBackgroundIndicator"
+            android:gravity="center_vertical"
+            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+            android:paddingHorizontal="16dp"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:text="معلومات القاعة" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingHorizontal="16dp"
+                android:textAppearance="?attr/textAppearanceListItemSecondary"
+                tools:targetApi="m"
+                android:text="حالة حجز قاعة" />
+
+            <TextView
+                android:id="@+id/item_statusReserve"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingHorizontal="8dp"
+                android:textAppearance="?attr/textAppearanceListItemSecondary"
+                android:textColor="?attr/colorPrimaryDark"
+                android:drawablePadding="8dp"
+                android:drawableEnd="@drawable/ci_arrow"
+                tools:targetApi="m"
+                android:text="  حجز | لا" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:elevation="0dp"
+                android:minHeight="22dp"
+                android:padding="5dp"
+                android:text="Go reserve |"
+                android:textColor="@color/main_color_500"
+                android:textSize="12sp"
+                app:elevation="0dp"
+                android:visibility="gone"
+                app:icon="@drawable/ic_goback24"
+                app:iconSize="18dp"
+                app:iconTint="#FFECB3"
+                tools:targetApi="lollipop" />
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/item_dateReserve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:textAppearance="?attr/textAppearanceCaption"
+            android:text="تاريخ حجز قاعة" />
+    </LinearLayout>
+
+</LinearLayout>

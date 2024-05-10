@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:insetLeft="1dp"
+    android:insetRight="1dp"
+    android:insetTop="1dp"
+    android:insetBottom="1dp">
+
+    <selector>
+        <item android:state_enabled="false"
+            android:drawable="@drawable/abc_action_bar_item_background_material"/>
+        <item>
+            <shape>
+                <gradient
+                    android:angle="90"
+                    android:endColor="?android:attr/windowBackground"
+                    android:startColor="@color/gray_d"
+                    android:type="linear"
+                    tools:targetApi="lollipop" />
+            </shape>
+        </item>
+    </selector>
+
+</inset>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.MaterialToolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_weight="1"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginBottom="@dimen/_10sdp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/appLogoImageView"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        android:background="@drawable/image_bg"
+        android:cropToPadding="true"
+        android:padding="@dimen/_8sdp"
+        android:layout_marginBottom="@dimen/_1sdp"
+        android:src="@drawable/app_icon"
+        tools:targetApi="lollipop"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/appLogoNameImageView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp"
+        android:scaleType="fitXY"
+        android:cropToPadding="true"
+        android:visibility="visible"
+        android:src="@drawable/app_logo"
+        tools:targetApi="lollipop"
+        tools:ignore="ContentDescription" />
+
+    <!-- حقل حساب المستخدم -->
+    <TextView
+        android:id="@+id/appNameTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="@string/app_name"
+        android:textColor="@color/purple_500"
+        android:textStyle="bold"
+        android:fontFamily="@font/cairo_black"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        />
+</com.google.android.material.appbar.MaterialToolbar>

@@ -1,0 +1,109 @@
+<resources>
+    <string name="app_name">UniAutomate</string>
+    <string name="app_name_ar">UniAutomate
+        <font color="red">
+        ونيوتوميت
+    </font>
+    </string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+    <string name="app_name1">إدارة بيئة الفصول الدراسية</string>
+    <string name="create_new_account_button">create new account</string>
+    <string name="forgot_password_button">forgot password</string>
+    <string name="login_button">login</string>
+    <string name="password_hint">password</string>
+    <string name="username">اسم المستخدم</string>
+    <string name="username_hint">ادخل اسم المستخدم</string>
+    <string name="alarms_destination_label">alarms</string>
+    <string name="user_destination_label">users</string>
+    <string name="admin_destination_label">admin</string>
+    <string name="schedule_destination_label">schedule</string>
+    <string name="timer_destination_label">timer</string>
+    <string name="stopwatch_destination_label">stopwatch</string>
+    <string name="cat_navigation_rail_add_nav_item">add</string>
+    <string name="cat_navigation_rail_remove_nav_item">remove</string>
+    <string name="cat_navigation_rail_increment_badge_number">increment badge number</string>
+    <string name="label_BodyTitle_login">تسجيل الدخول</string>
+    <string name="label_body_msg_login">تسجيل الدخول نظام ادارة بيئة التعليمية</string>
+    <string name="label_body_msg1">إنشاء حساب في نظام ادارة بيئة الفصول <br />
+        الدراسية التي تعمل بتقنية إنترنت الأشياء </string>
+    <string name="label_email_or_username">اسم المستخدم / البريد الإلكتروني</string>
+    <string name="label_email"> البريد الإلكتروني</string>
+    <string name="label_username">اسم المستخدم </string>
+    <string name="label_phone">رقم الهاتف </string>
+    <string name="label_password">كلمة المرور</string>
+    <string name="label_problem_login"><u> هل نسيت كلمة المرور.؟</u>
+
+    </string>
+    <string name="label_rest_password">اعادة تعيين كلمة المرور</string>
+    <string name="label_create_new_account">إنشاء حساب  جديد</string>
+    <string name="label_create_account">إنشاء حساب </string>
+    <string name="label_already_account">هل لديك حساب .؟؟</string>
+    <string name="label_do_not_have_an_account">ليس لديك حساب .؟؟</string>
+    <string name="label_setting">الإعدادات</string>
+    <string name="label_config_sensors">ضبط الحساسات</string>
+    <string name="label_check_devices">فحص الأجهزة</string>
+    <string name="label_add_schedule">إضافة جدول</string>
+    <string name="label_class_rooms">صفحة القاعات</string>
+    <string name="label_base_user_page">الصفحة الأساسية للمستخدم</string>
+    <string name="label_reserve_room">حجز قاعة</string>
+    <string name="page_title_1">onboarding first page</string>
+    <string name="page_title_2">User Interaction: Via a mobile app, users (professors and administrators) can schedule, control, and monitor classroom environments.</string>
+    <string name="page_title_3">System Response: Processes user inputs to adjust environmental settings automatically based on predefined rules or schedules.</string>
+    <string name="app_desc_caption">system integrates various components to manage classroom resources</string>
+    <string name="next">Next</string>
+    <string name="user_interaction">User Interaction</string>
+    <string name="system_interaction">System Interaction</string>
+    <string name="title_activity_user_main">MainActivity</string>
+    <string name="label_home">الرئيسية</string>
+    <string name="label_reservation_date">تاريخ الحجز</string>
+    <string name="label_reservation_time">وقت الحجز</string>
+    <string name="welcome">مرحبًا بكم </string>
+    <string name="label_base_admin">الصفحة الأساسية للمشرف</string>
+    <string name="label_head_spinner_pls_select">يرجى اختيار عنصر</string>
+    <string name="label_select_classroom">اختيار القاعة</string>
+    <string name="LABEL_ADD">إضافة</string>
+    <string name="label_select_sensor">اختيار الحساس</string>
+    <string name="label_input_data_fields">ادخل بيانات المطلوب لحجز قاعة  </string>
+    <string name="label_select_classroom0">يرجى اختيار القاعة</string>
+    <string name="title_activity_light_main">LightMainActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="send">Send</string>
+    <string name="connect">Connect</string>
+    <string name="port">Port</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="device">Device:</string>
+
+    <string name="label_text_notify_down">\"تحميل بيانات الـ \"</string>
+    <string name="label_text_progress_notify">جاري التحميل ....</string>
+
+    <!-- alert dialog text -->
+    <string name="title_update_dialog"> هل تريد تاكيد التعديل</string>
+    <string name="title_update_dialog_error"> هناك خطا ما</string>
+    <string name="msg_update_dialog_error"> خطا رقم: 444</string>
+    <string name="title_update_dialog_note">  ملاحظة !! </string>
+    <string name="note">تنبية !!</string>
+    <string name="msg_update_dialog_note"> ملاحظ :2222</string>
+    <string name="msg_update_dialog"> اضغط علئ  تاكيد لتعديل</string>
+    <string name="ok"> موافق </string>
+    <string name="ok_success"> تم العملية بنجاح !</string>
+    <string name="cancel_err"> تم الغاء العملية !</string>
+    <string name="cancel"> الغاء</string>
+    <string name="sure"> تاكــيد</string>
+    <string name="yes"> نعم</string>
+    <string name="No"> لا </string>
+    <string name="title_progress_notify">loading…</string>
+    <string name="title_progress">تسجيل حساب جديد.</string>
+    <string name="message_progresss">جاري التحقق من تسجيل الحساب...</string>
+    <string name="label_save">Save.</string>
+    <string name="label_message_save">Sure process the save.</string>
+
+</resources>

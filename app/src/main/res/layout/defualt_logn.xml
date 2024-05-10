@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/login_bg"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:id="@+id/topAppBrandLyt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+          android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/appIconImageView"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_120sdp"
+            android:scaleType="fitCenter"
+            android:padding="@dimen/_20sdp"
+            android:background="@drawable/image_bg"
+            android:src="@drawable/app_icon" />
+
+        <TextView
+            android:id="@+id/appTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+            android:textColor="?colorOnPrimary"/>
+    </LinearLayout>
+    <!--body lyt-->
+    <LinearLayout
+        android:id="@+id/bodyLyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:padding="16dp"
+        android:layout_below="@id/topAppBrandLyt"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/bodyTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome"
+            android:ems="10"
+            android:gravity="end"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+            android:textColor="?colorOnSecondary" />
+
+        <TextView
+            android:id="@+id/bodyMessageTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name_ar"
+            android:ems="10"
+            android:gravity="start"
+            android:textStyle="bold"
+            android:layout_marginVertical= "16dp"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            android:textColor="?colorOnSecondary" />
+
+        <TextView
+            android:id="@+id/loginTitleTextView"
+            android:ems="10"
+            android:gravity="end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_BodyTitle_login"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            android:textColor="?colorOnSecondary" />
+        <EditText
+            android:id="@+id/usernameEditText"
+            android:layout_width="wrap_content"
+            android:inputType="textPersonName"
+            android:gravity="end|center"
+            android:drawablePadding="8dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_15sdp"
+            android:background="@drawable/edit_text_background"
+            android:drawableStart="@drawable/ic_user_circle_24"
+            android:ems="10"
+            android:hint="@string/username" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:inputType="textPassword"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            android:background="@drawable/edit_text_background"
+            android:drawableStart="@drawable/password24px"
+            android:ems="10"
+            android:hint="@string/label_password" />
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cairo_semibold"
+            android:textStyle="bold"
+            android:ems="8"
+            android:layout_marginVertical="@dimen/_15sdp"
+            android:backgroundTint="@color/orange_s_500"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:text="@string/label_BodyTitle_login"
+            tools:targetApi="lollipop" />
+    </LinearLayout>
+</RelativeLayout>

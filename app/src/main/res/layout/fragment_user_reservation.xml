@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="5.0"
+    tools:context=".ui.user.classroom.ClassRoomUserFragment">
+
+    <LinearLayout
+        android:id="@+id/headLyt"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!-- حقل حساب المستخدم -->
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/purple_500"
+            android:textStyle="bold"
+
+            android:fontFamily="@font/cairo_black"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:text="@string/label_reserve_room" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/editsLyt"
+        android:layout_weight="2.0"
+        android:background="@drawable/bg_content10_lyt"
+        android:elevation="2dp"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_margin="@dimen/_5sdp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:targetApi="lollipop">
+
+        <TextView
+            android:id="@+id/titleBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="?colorPrimary"
+            android:fontFamily="@font/cairo_black"
+            android:layout_marginBottom="32dp"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            android:text="@string/label_input_data_fields" />
+        <!-- حقل اسم المستخدم -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cairo_semibold"
+                android:paddingHorizontal="8dp"
+                android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+                android:text="@string/username"/>
+            <EditText
+                android:id="@+id/usernameEditText"
+                android:layout_width="wrap_content"
+                android:background="@drawable/edit_text_background"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="15"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:hint="@string/username_hint"
+                tools:ignore="Autofill" />
+        </LinearLayout>
+
+
+        <!-- حقل تاريخ الحجز -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cairo_semibold"
+                android:paddingHorizontal="8dp"
+                android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+                android:text="@string/label_reservation_date"/>
+            <EditText
+                android:id="@+id/dateEditText"
+                android:ems="15"
+                android:layout_width="wrap_content"
+                android:background="@drawable/edit_text_background"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:inputType="datetime"
+                android:layout_height="wrap_content"
+                android:hint="@string/label_reservation_date"
+                tools:ignore="Autofill" />
+        </LinearLayout>
+
+        <!-- حقل وقت الحجز -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cairo_semibold"
+                android:paddingHorizontal="8dp"
+                android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+                android:text="@string/label_reservation_time"/>
+            <EditText
+                android:id="@+id/timeEditText"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:ems="15"
+                android:inputType="time"
+                android:background="@drawable/edit_text_background"
+                android:layout_height="wrap_content"
+                android:hint="@string/label_reservation_time"
+                tools:ignore="Autofill" />
+        </LinearLayout>
+
+        <!-- زر حجز القاعة -->
+        <Button
+            android:id="@+id/reserveButton"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/cairo_semibold"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:ems="8"
+            android:elevation="0dp"
+            android:drawableEnd="@drawable/ic_reserve_24"
+            android:drawableTint="@color/main_color_50"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            android:text="@string/label_reserve_room"
+            tools:targetApi="m" />
+    </LinearLayout>
+
+</LinearLayout>

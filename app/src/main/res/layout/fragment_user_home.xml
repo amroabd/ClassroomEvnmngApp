@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_l"
+    tools:context=".ui.user.home.UserHomeFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/_40sdp"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:contentDescription="@null"
+                android:scaleType="centerInside"
+                android:layout_gravity="center"
+                android:background="@color/main_color_50"
+                android:src="@drawable/app_icon" />
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cairo_black"
+                android:text="@string/label_base_user_page"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:paddingHorizontal="16dp"
+                android:textColor="?attr/colorPrimary"
+                android:layout_marginVertical="24dp"
+                android:textStyle="bold" />
+            <!-- بطاقات الإحصائيات -->
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:rowCount="3"
+                android:paddingHorizontal="8dp"
+                android:alignmentMode="alignMargins"
+                android:columnOrderPreserved="false"
+                android:useDefaultMargins="true">
+
+                <!-- بطاقة إحصائية 1 -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/reserveRoomCard"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:layout_margin="8dp"
+                    app:cardBackgroundColor="@color/white"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:elevation="4dp"
+                    tools:targetApi="lollipop">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingVertical="8dp"
+                        android:paddingHorizontal="16dp">
+
+                        <ImageView
+                            android:id="@+id/reserve_roomIcon"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/ic_reserve_72"
+                            android:tint="?attr/colorPrimary"
+                            tools:ignore="ContentDescription" />
+
+                        <TextView
+                            android:id="@+id/reserve_roomTitle"
+                            android:fontFamily="@font/cairo_semibold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:layout_alignParentBottom="true"
+                            android:layout_toStartOf="@id/reserve_roomIcon"
+                            android:layout_alignParentEnd="true"
+                            android:layout_below="@id/reserve_roomCounts"
+                            android:layout_marginStart="1dp"
+                            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+                            android:text="@string/label_reserve_room"
+                            />
+
+                        <TextView
+                            android:id="@+id/reserve_roomCounts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/reserve_roomIcon"
+                            android:gravity="center"
+                            android:layout_alignTop="@id/reserve_roomIcon"
+                            android:layout_alignBottom="@id/reserve_roomIcon"
+                            android:layout_alignParentEnd="true"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                            />
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- بطاقة إحصائية 2 -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/classRoomsCard"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:layout_margin="8dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:elevation="4dp"
+                    tools:targetApi="lollipop">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingVertical="8dp"
+                        android:paddingHorizontal="16dp">
+
+                        <ImageView
+                            android:id="@+id/class_roomsIcon"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/ic_classroom_72"
+                            android:tint="?attr/colorPrimary" />
+
+                        <TextView
+                            android:id="@+id/class_roomsTitle"
+                            android:fontFamily="@font/cairo_semibold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toStartOf="@id/class_roomsIcon"
+                            android:layout_alignParentEnd="true"
+                            android:gravity="center"
+                            android:layout_alignParentBottom="true"
+                            android:layout_below="@id/class_roomsCounts"
+                            android:layout_marginStart="1dp"
+                            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+                            android:text="@string/label_class_rooms"
+                            />
+
+                        <TextView
+                            android:id="@+id/class_roomsCounts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/class_roomsIcon"
+                            android:gravity="center"
+                            android:layout_alignTop="@id/class_roomsIcon"
+                            android:layout_alignBottom="@id/class_roomsIcon"
+                            android:layout_alignParentEnd="true"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <!-- بطاقة إحصائية 4 -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/settingCard"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:layout_margin="8dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:elevation="4dp"
+                    tools:targetApi="lollipop">
+
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:id="@+id/settingIcon"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/ic_admin_panel_settings_24"
+                            android:tint="?attr/colorPrimary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/cairo_semibold"
+                            android:layout_centerVertical="true"
+                            android:layout_toStartOf="@id/settingIcon"
+                            android:layout_below="@id/settingCounts"
+                            android:layout_alignParentEnd="true"
+                            android:gravity="center"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginStart="1dp"
+                            android:text="@string/label_setting"
+                            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+                            />
+
+                        <TextView
+                            android:id="@+id/settingCounts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/settingIcon"
+                            android:gravity="center"
+                            android:layout_alignTop="@id/settingIcon"
+                            android:layout_alignBottom="@id/settingIcon"
+                            android:layout_alignParentEnd="true"
+                            android:textColor="?attr/colorOnError"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+
+            </GridLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout >

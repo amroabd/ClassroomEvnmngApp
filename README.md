@@ -72,7 +72,7 @@ To get started with this project, you will need the following:
 ## Technologies Used :
 
   - **Android**
-  - **Java
+  - **Java**
  
   - **ViewBinding:** 
 ViewBinding is a feature introduced by Google in Android Studio 3.6 
@@ -80,7 +80,7 @@ that allows you to bind layout views directly to variables in your code.
 It generates a binding class for each XML layout file in your project,
 which you can then use to access and manipulate the views. ViewBinding helps eliminate 
 the need for findViewById() calls and reduces the risk of null pointer exceptions, resulting in more efficient and safe view handling.
- - **Navigation Component: 
+ - **Navigation Component:** 
 The Navigation Component is a part of the Android Jetpack library that simplifies navigation in Android apps.
 It provides a declarative way to define app navigation using a graph-based system. 
 With the Navigation Component, you can define destinations, actions, and transitions between screens in a visual and centralized manner. 

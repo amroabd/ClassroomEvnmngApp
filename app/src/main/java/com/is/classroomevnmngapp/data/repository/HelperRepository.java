@@ -25,7 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static com.is.classroomevnmngapp.utils.constant.NameTableConst.NAME_INIT_SUB_MENU;
 
 
-public final class HelperRepository extends BaseRep {
+public final class HelperRepository extends BaseRepository {
     private static final String TAG = HelperRepository.class.getSimpleName();
     //-----------
     private static HelperRepository mInstance;

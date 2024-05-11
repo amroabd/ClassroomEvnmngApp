@@ -27,7 +27,7 @@ public interface ProfessorDao {
     LiveData<List<ProfessorEntity>> getAll();
 
     @Query("SELECT COUNT(localId) FROM Professors")
-    int GetCount();
+    int getCount();
 
     @Query("DELETE FROM Professors")
     int deleteAllRecords();

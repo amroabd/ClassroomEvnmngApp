@@ -25,7 +25,7 @@ public interface LectureHallDao {
     LiveData<List<LectureHallEntity>> getAll();
 
     @Query("SELECT COUNT(localId) FROM LectureHalls")
-    int GetCount();
+    int getCount();
 
     @Query("DELETE FROM LectureHalls")
     int deleteAllRecords();

@@ -25,7 +25,7 @@ public interface DepartmentDao {
     LiveData<List<DepartmentEntity>> getAll();
 
     @Query("SELECT COUNT(localId) FROM Departments")
-    int GetCount();
+    int getCount();
 
     @Query("DELETE FROM Departments")
     int deleteAllRecords();

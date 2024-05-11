@@ -25,7 +25,7 @@ public interface ScheduleDao {
     LiveData<List<ScheduleEntity>> getAll();
 
     @Query("SELECT COUNT(localId) FROM Schedules")
-    int GetCount();
+    int getCount();
 
     @Query("DELETE FROM Schedules")
     int deleteAllRecords();

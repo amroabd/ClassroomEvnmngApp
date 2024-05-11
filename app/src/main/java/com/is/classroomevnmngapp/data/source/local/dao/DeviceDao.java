@@ -24,7 +24,7 @@ public interface DeviceDao {
     LiveData<List<DeviceEntity>> getAll();
 
     @Query("SELECT COUNT(localId) FROM Devices")
-    int GetCount();
+    int getCount();
 
     @Query("DELETE FROM Devices")
     int deleteAllRecords();

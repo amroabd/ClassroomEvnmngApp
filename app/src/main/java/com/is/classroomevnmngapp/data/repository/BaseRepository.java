@@ -9,6 +9,7 @@ import androidx.sqlite.db.SupportSQLiteQuery;
 
 import com.is.classroomevnmngapp.data.source.local.AppDatabase;
 import com.is.classroomevnmngapp.data.source.local.dao.BaseDao;
+import com.is.classroomevnmngapp.utils.Log1;
 import com.is.classroomevnmngapp.utils.SharePerf;
 
 import org.jetbrains.annotations.Contract;
@@ -20,18 +21,21 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class BaseRep {
-    private static final String TAG = BaseRep.class.getSimpleName();
+public class BaseRepository {
+    private static final String TAG = BaseRepository.class.getSimpleName();
     protected ExecutorService mExecutorService;
     private final BaseDao mBaseDao;
     protected final AppDatabase mDb;
     protected final SharePerf mSharePerf;
 
-    public BaseRep(Context context) {
-        mDb = AppDatabase.getInstance(context);
+    public BaseRepository(Context context) {
+        Log1.d(TAG,"=========>BaseRep(context)<===========");
+        mDb = AppDatabase.getInstance(context.getApplicationContext());
         mBaseDao = mDb.mainMenuDao();
-        mSharePerf=SharePerf.getInstance(context);
+        mSharePerf=SharePerf.getInstance(context.getApplicationContext());
     }
+
+
 
     @NotNull
     @Contract(value = "_, _ -> new", pure = true)

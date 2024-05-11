@@ -28,7 +28,7 @@ public interface ReservationDao {
     LiveData<List<ReservationEntity>> getAll();
 
     @Query("SELECT COUNT(localId) FROM Reservations")
-    int GetCount();
+    int getCount();
 
     @Query("DELETE FROM Reservations")
     int deleteAllRecords();

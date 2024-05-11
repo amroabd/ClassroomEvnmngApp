@@ -9,10 +9,12 @@ To get started with this project, you will need the following:
 * Android Studio
 * An Android device or emulator
 
-1. Clone this repository to your local machine.
-2. Open the project in Android Studio.
-3. Connect your Android device or emulator to your computer.
-4. Run the application.
+1. Clone this repository:
+'https://github.com/amroabd/ClassroomEvnmngApp.git'
+3.  to your local machine.
+4. Open the project in Android Studio.
+5. Connect your Android device or emulator to your computer.
+6. Run the application.
 
 
 ## Features

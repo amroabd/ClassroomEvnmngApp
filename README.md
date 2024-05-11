@@ -1,6 +1,6 @@
 # Classroom Environment Android App
 
-This project provides an Android application designed for use in a classroom environment.
+This Android application leverages split screens to provide a user-friendly interface for classroom management through Internet of Things (IoT) technology.
 
 ## Getting Started
 
@@ -13,6 +13,61 @@ To get started with this project, you will need the following:
 2. Open the project in Android Studio.
 3. Connect your Android device or emulator to your computer.
 4. Run the application.
+
+
+## Features
+
+**1. Login Page**
+  - **User Account Field:** Allows entering username or email address.
+  - **Password Field:** Allows entering password for secure login.
+  - **Problem Logging In:** Provides an option to report login issues.
+  - **New User Account:** Offers an option to create a new account within the app.
+
+**2. Administrator's Main Page**
+
+  **a) Add a Table**
+    - **Add Hall Field:** Enables adding new halls to the app.
+    - **Add Times Field:** Allows specifying available reservation times for halls.
+    - **Add Doctor:** Provides a functionality to add information about doctors or personnel.
+
+  **b) Checking Devices**
+    - **Hall Selection:** Allows choosing a specific hall for device inspection.
+    - **Start Inspection Button:** Initiates the process of scanning devices in the chosen hall.
+    - **Fault Appearance Box:** Displays details of any detected faults during the scan.
+
+  **c) Adjusting the Sensors**
+    - **Selecting the Hall:** Allows choosing the hall for sensor adjustment.
+    - **Sensor Selection:** Enables selecting a specific sensor within the chosen hall.
+    - **Setting the Sensor:** Provides functionality to adjust settings for the chosen sensor.
+
+  **d) Settings**
+    - **Change the Secret Code:**
+      - **Add New Password Box:** Allows entering a new password.
+      - **Confirm Password Box:** Verifies the newly entered password.
+    - **Change Language:** Enables switching the application language.
+
+**3. User Home Page**
+
+  **a) Halls Page**
+    - **Booking Display:** 
+      - Reserved hall: Displays information about the reserved hall with a button to end the reservation.
+      - Unreserved hall: Shows the hall as unlit with a button to navigate to the reservation page.
+    - **Resource Operation Button:**  Provides functionality to control resources within the reserved hall (details on specific resource types and controls to be defined based on your implementation).
+
+  **b) Reserve a Hall**
+    - **Hall Selection:** Allows choosing a hall for booking.
+    - **Reservation Notification:** Informs the user of reservation acceptance or rejection.
+
+  **c) Settings**
+    - **Change the Secret Code:**
+      - **Add New Password Box:** Allows entering a new password.
+      - **Confirm Password Box:** Verifies the newly entered password.
+    - **Change Language:** Enables switching the application language.
+
+
+
+
+
 
 ## Technologies Used :
 

@@ -71,10 +71,10 @@ To get started with this project, you will need the following:
 
 ## Technologies Used :
 
-  - **Android
+  - **Android**
   - **Java
  
-  - **ViewBinding: 
+  - **ViewBinding:** 
 ViewBinding is a feature introduced by Google in Android Studio 3.6 
 that allows you to bind layout views directly to variables in your code. 
 It generates a binding class for each XML layout file in your project,
@@ -86,14 +86,14 @@ It provides a declarative way to define app navigation using a graph-based syste
 With the Navigation Component, you can define destinations, actions, and transitions between screens in a visual and centralized manner. 
 It handles tasks like fragment transactions, back-stack management, deep linking, and passing arguments between destinations,
 making navigation between different screens and features of your app more straightforward and maintainable.
- - **ViewModel and LiveData:
+ - **ViewModel and LiveData:**
 ViewModel and LiveData are components of the Android Jetpack library that are often used together to
 implement the MVVM (Model-View-ViewModel) architecture pattern. ViewModel is responsible for holding and managing UI-related data,
 surviving configuration changes (e.g., screen rotations), and communicating with the underlying data sources.
 LiveData is an observable data holder that allows you to create data objects that can be observed by UI components. 
 LiveData ensures that UI components are always up-to-date with the latest data and automatically updates them when the data changes. 
 ViewModel and LiveData help separate the business logic and data from the UI, promoting better app architecture and testability.
- - **Room Database:
+ - **Room Database:**
 Room is a powerful and efficient SQLite object-relational mapping (ORM) library provided by the Android Jetpack.
 It simplifies database operations in Android apps by providing an abstraction layer over SQLite.
 Room allows you to define entities (data models), DAOs (data access objects), and database-related classes using annotations. 
@@ -101,9 +101,9 @@ It handles tasks like creating, querying, and caching data, and it supports Live
 Room provides compile-time verification of SQL queries, reducing the risk of runtime errors.
 It also offers convenient features like database migrations, query result mapping, and support for database transactions.
 
- - **Retrofit : 
+ - **Retrofit :** 
 A type-safe HTTP client for Android and Java that simplifies the process of making API requests.
- - **Picasso : 
+ - **Picasso :**
  A powerful image downloading and caching library for Android that simplifies the process of loading images from URLs.
 
  

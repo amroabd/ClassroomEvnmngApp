@@ -71,7 +71,7 @@ public class ReservationUserFragment extends Fragment {
         ReservationEntity entity = new ReservationEntity();
         entity.setReserveUsername(ConvertData.to2String(reservationBinding.usernameEditText));
         entity.setReserveDate(ConvertData.to2String(reservationBinding.dateEditText));
-        entity.setReserveTime(ConvertData.to2String(reservationBinding.timeEditText));
+        entity.setReserveStartTime(ConvertData.to2String(reservationBinding.timeEditText));
 
         //------
         int id = viewModel.addReservation(entity);

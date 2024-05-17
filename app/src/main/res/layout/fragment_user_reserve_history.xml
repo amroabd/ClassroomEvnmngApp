@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ui.user.classroom.ClassRoomUserFragment">
+    tools:context=".ui.user.reservations.ReservationHistoryUserFragment">
 
     <TextView
         android:id="@+id/text_dashboard"
@@ -16,7 +16,7 @@
         android:layout_marginVertical="18dp"
         android:textAlignment="textStart"
         android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
-        android:text="قائمة الحجوزات للقاعات"/>
+        android:text="سجل الحجوزات السابقة "/>
 
     <LinearLayout
         android:id="@+id/listLyt"
@@ -32,6 +32,6 @@
             android:layout_height="wrap_content"
             android:paddingVertical="@dimen/_10sdp"
             app:layoutManager="LinearLayoutManager"
-            tools:listitem="@layout/row_item_reserve" />
+            tools:listitem="@layout/row_item_reserve_history" />
     </LinearLayout>
 </LinearLayout>

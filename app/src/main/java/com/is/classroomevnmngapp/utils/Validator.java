@@ -84,7 +84,7 @@ public class Validator {
         paramEditText.clearFocus();
         return false;
     }
-    public static boolean isNotEmptyEditText(@NonNull EditText paramEditText, String msgNote) {
+    public static boolean isNotEmptyEditText(@NonNull TextView paramEditText, String msgNote) {
         String msg_d="Require input data field.!";
         if (TextUtils.isEmpty(paramEditText.getText().toString())) {
             paramEditText.setError(msgNote==null?msg_d:msgNote);

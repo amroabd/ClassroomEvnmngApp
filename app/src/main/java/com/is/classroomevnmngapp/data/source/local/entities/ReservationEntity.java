@@ -9,20 +9,50 @@ import androidx.room.PrimaryKey;
 public class ReservationEntity extends BaseEntity {
     @PrimaryKey(autoGenerate = true)
     private int localId;
-
     @ColumnInfo(name = "ReserveId")
     private int reserveId;
+
+    @ColumnInfo(name = "LectureHallIdFk")
+    private int lectureHallIdFk;
 
     @ColumnInfo(name = "ReserveUsername")
     private String reserveUsername;
 
     @ColumnInfo(name = "ReserveDate")
     private String reserveDate;
-    @ColumnInfo(name = "ReserveTime")
-    private String reserveTime;
+    @ColumnInfo(name = "ReserveStartTime")
+    private String reserveStartTime;
+    @ColumnInfo(name = "ReserveEndTime")
+    private String reserveEndTime;
+    @ColumnInfo(name = "ReserveStatus")
+    private int reserveStatus;
 
     //-----------------------
 
+
+    public String getReserveEndTime() {
+        return reserveEndTime;
+    }
+
+    public void setReserveEndTime(String reserveEndTime) {
+        this.reserveEndTime = reserveEndTime;
+    }
+
+    public int getLectureHallIdFk() {
+        return lectureHallIdFk;
+    }
+
+    public void setLectureHallIdFk(int lectureHallIdFk) {
+        this.lectureHallIdFk = lectureHallIdFk;
+    }
+
+    public int getReserveStatus() {
+        return reserveStatus;
+    }
+
+    public void setReserveStatus(int reserveStatus) {
+        this.reserveStatus = reserveStatus;
+    }
 
     public String getReserveUsername() {
         return reserveUsername;
@@ -56,11 +86,11 @@ public class ReservationEntity extends BaseEntity {
         this.reserveDate = reserveDate;
     }
 
-    public String getReserveTime() {
-        return reserveTime;
+    public String getReserveStartTime() {
+        return reserveStartTime;
     }
 
-    public void setReserveTime(String reserveTime) {
-        this.reserveTime = reserveTime;
+    public void setReserveStartTime(String reserveStartTime) {
+        this.reserveStartTime = reserveStartTime;
     }
 }

@@ -1,4 +1,4 @@
-package com.is.rhismonitor.data.source_data.local_data;
+package com.is.classroomevnmngapp.data.source.local;
 
 
 import androidx.room.TypeConverter;

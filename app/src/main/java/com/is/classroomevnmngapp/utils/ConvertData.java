@@ -5,6 +5,9 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import com.is.classroomevnmngapp.utils.spinner.ListSpinnerAdapter;
 
@@ -61,20 +64,22 @@ public abstract class ConvertData {
         }
         return 0.0F;
     }
-    public static String to2String(EditText editText){
+    @NonNull
+    public static String to2String(@NonNull TextView editText){
         return editText.getText().toString().trim();
     }
-    public static boolean test2String(EditText editText,String s2){
+    public static boolean test2String(@NonNull EditText editText, String s2){
         String s1=editText.getText().toString().trim();
         Log1.i("test2String","[st1:"+s1+"],[st2:"+s2);
         return s1.equals(s2);
     }
-    public static boolean test2Spinner(Spinner spinner,int position_2){
+    public static boolean test2Spinner(@NonNull Spinner spinner, int position_2){
         int p_1=spinner.getSelectedItemPosition();
         Log1.i("test2Spinner",",[sp1: "+p_1+"],[sp2:"+position_2);
         return p_1 == position_2;
     }
 
+    @NonNull
     public static String to2String(String paramString){
         if (paramString != null && paramString.length() > 0 && !paramString.equals("0")) {
             return paramString.contains("null") ? "" : paramString;
@@ -82,6 +87,7 @@ public abstract class ConvertData {
         return "";
     }
 
+    @NonNull
     public static String getMemberType(String paramString) {
         int i = getNumber(paramString);
         return (i > 0) ? ((i == 1) ? "رب الاسرة": ((i == 2) ? "مقدم الرعاية": ((i == 3) ? "فرد": ((i == 4) ? "رب الاسرة/ مقدم الرعاية": "")))) : "";

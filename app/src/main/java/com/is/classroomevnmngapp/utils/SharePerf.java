@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.Random;
+
 public class SharePerf {
     //define
     private final Context mContext;
@@ -29,11 +31,22 @@ public class SharePerf {
 
 
     /* init data User  */
-    public void addUserShare(String userid, String usname, String pass) {
+    public void addUserShare(String usname, String pass, String email,String phone) {
         SharedPreferences.Editor editor = mContext.getSharedPreferences("UserFile", Context.MODE_PRIVATE).edit();
-        editor.putString("user_id", userid);
+        Random random=new Random(100);
+        editor.putString("user_id", ""+random.nextInt(99));
         editor.putString("user_name", usname);
         editor.putString("password", pass);
+        editor.putString("phone", phone);
+        editor.putString("email", email);
+        editor.apply();
+    }
+
+    public void addUserLogin(String userid,String username,String pass){
+        SharedPreferences.Editor editor = mContext.getSharedPreferences("UserFile", Context.MODE_PRIVATE).edit();
+        editor.putString("user_id", userid);
+        editor.putString("password", pass);
+        editor.putString("user_name", username);
         editor.apply();
     }
 
@@ -56,12 +69,7 @@ public class SharePerf {
         editor.putString("user_id", id);
         editor.apply();
     }
-    public void addUserLogin(String email,String pass){
-        SharedPreferences.Editor editor = mContext.getSharedPreferences("UserFile", Context.MODE_PRIVATE).edit();
-        editor.putString("password", pass);
-        editor.putString("email", email);
-        editor.apply();
-    }
+
 
     public boolean isLoggedIn() {
        final SharedPreferences sharedPreferences = mContext.getSharedPreferences("UserFile", Context.MODE_PRIVATE);

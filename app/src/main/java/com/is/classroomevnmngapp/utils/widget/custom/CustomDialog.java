@@ -81,10 +81,11 @@ public class CustomDialog {
         @Override
         public void showAlertRender(Context context, String... msg) {
             checkReceivesMessage(context, msg);
-            new SweetAlertDialog(context/*,SweetAlertDialog.ERROR_TYPE*/).setTitleText(getTitle())
-                    .setContentText("<font color='#F27474'>" + getMsg() + "</font>").show();
+  /*          new SweetAlertDialog(context*//*,SweetAlertDialog.ERROR_TYPE*//*).setTitleText(getTitle())
+                    .setContentText(String.format("<font color='#F27474'>%s</font>", getMsg())).show();*/
 
-            SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(context).setTitleText(getTitle()).setContentText(getMsg())
+            SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(context).setTitleText(getTitle())
+            .setContentText(String.format("<font color='#F27474'>%s</font>", getMsg()))
                     .setConfirmButton(context.getString(R.string.ok), sweetAlertDialog1 -> {
                         alertDialog.onAccept();
                         sweetAlertDialog1.cancel();

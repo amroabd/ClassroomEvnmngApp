@@ -2,19 +2,20 @@
 <selector xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <layer-list>
-            <item  android:width="@dimen/_10sdp"
-                android:height="@dimen/_10sdp" tools:ignore="UnusedAttribute">
+            <item  android:width="@dimen/_12sdp"
+                android:height="@dimen/_12sdp" tools:ignore="UnusedAttribute">
                 <shape>
                     <stroke android:width="@dimen/_1sdp"
-                        android:color="@color/orange_s_50" />
-                    <solid android:color="@color/orange_s_50"/>
-                    <corners android:radius="@dimen/_10sdp" />
+                        android:color="@color/orange_s_500" />
+                    <solid android:color="@color/main_color_100"/>
+                    <corners android:radius="@dimen/_1sdp" />
                 </shape>
             </item>
             <item android:drawable="@drawable/ic_leftarrow24"
-                android:width="@dimen/_5sdp"
+                android:width="@dimen/_8sdp"
                 android:height="@dimen/_8sdp"
-                android:gravity="center" tools:targetApi="m" tools:ignore="UnusedAttribute" />
+                android:gravity="center" tools:targetApi="m"
+                tools:ignore="UnusedAttribute" />
         </layer-list>
 
     </item>

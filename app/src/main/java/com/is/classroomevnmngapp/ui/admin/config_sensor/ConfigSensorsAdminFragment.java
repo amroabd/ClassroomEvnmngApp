@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.is.classroomevnmngapp.data.source.local.entities.ControllerEntity;
 import com.is.classroomevnmngapp.databinding.FragmentAdminConfigSensorsBinding;
 import com.is.classroomevnmngapp.utils.Log1;
 import com.is.classroomevnmngapp.utils.ToastUtil1;
@@ -85,10 +86,18 @@ public class ConfigSensorsAdminFragment extends Fragment {
 
     private void sendConfigSensor() {
         try {
+            ControllerEntity entity = new ControllerEntity();
+
+            entity.setControllerId(Integer.parseInt(sensorId));
+            entity.setLectureHallIdFK(Integer.parseInt(classId));
+            entity.setType("0");
+            entity.setIpAddress("10:10:20:30");
+
+            viewModel.addConfigSensor(entity);
 
             Log1.d(TAG, "classId :" + classId + ",sensorId :" + sensorId);
             //-------------
-            viewModel.sendConfigSensor(classId, sensorId);
+            viewModel.sendConfigSensorRequest(classId, sensorId);
         } catch (Exception e) {
             e.printStackTrace();
         }

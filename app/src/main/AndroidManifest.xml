@@ -16,33 +16,39 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClassroomEvnmngApp">
 
-        <activity android:name=".core.light_control_wifi.WiFiActivity"/>
-        <activity android:name=".core.light_control_bt.ControllingActivity" />
-        <activity
-            android:name=".core.light_control_bt.BluetoothMainActivity"
-            android:label="@string/title_activity_light_main"
-            android:theme="@style/Theme.ClassroomEvnmngApp.NoActionBar">
-            <!--<intent-filter>
+        <activity android:name=".StartActivity">
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
         </activity>
 
-        <activity android:name=".UserMainActivity" />
-        <activity android:name=".ui.AdminMainActivity" />
-        <activity android:name=".ui.onboarding.OnboardingActivity">
+  <!--      <activity android:name=".test.light_control_wifi.WiFiActivity" />
+        <activity android:name=".test.light_control_bt.ControllingActivity" />
+        <activity
+            android:name=".test.light_control_bt.BluetoothMainActivity"
+            android:label="@string/title_activity_light_main"
+            android:theme="@style/Theme.ClassroomEvnmngApp.NoActionBar">
 
-
+            &lt;!&ndash;
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            &ndash;&gt;
+        </activity>-->
 
+        <activity android:name=".UserMainActivity" />
+        <activity android:name=".ui.AdminMainActivity" android:configChanges="colorMode" android:windowSoftInputMode="adjustNothing" />
+        <activity android:name=".ui.onboarding.OnboardingActivity">
+         <!--   <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
         </activity>
         <activity android:name=".AuthMainActivity" />
-
         <activity android:name=".MainActivity" />
 
         <meta-data

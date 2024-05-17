@@ -1,6 +1,6 @@
 package com.is.classroomevnmngapp.data.source.local.dao;
 
-import androidx.lifecycle.LiveData;
+import androidx.paging.DataSource;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -12,8 +12,11 @@ import java.util.List;
 
 @Dao
 public interface LectureHallDao {
-    @Insert
-    void insertLectureHall(LectureHallEntity lectureHallEntity);
+
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    Long insertLectureHall(LectureHallEntity lectureHallEntity);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<LectureHallEntity> entities);
@@ -22,7 +25,7 @@ public interface LectureHallDao {
     LectureHallEntity getLectureHallById(int lectureHallId);
 
     @Query("SELECT * FROM LectureHalls")
-    LiveData<List<LectureHallEntity>> getAll();
+    DataSource.Factory<Integer,LectureHallEntity> getAll();
 
     @Query("SELECT COUNT(localId) FROM LectureHalls")
     int getCount();

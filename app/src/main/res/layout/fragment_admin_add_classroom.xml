@@ -4,35 +4,13 @@ android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="5.0"
-    tools:context=".ui.user.classroom.ClassRoomUserFragment">
+    tools:context=".ui.setting.init_classroom.AddClassroomAdminFragment">
 
-    <LinearLayout
-        android:id="@+id/headLyt"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <!-- حقل حساب المستخدم -->
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/purple_500"
-            android:textStyle="bold"
 
-            android:fontFamily="@font/cairo_black"
-            android:textAppearance="?attr/textAppearanceHeadline5"
-            android:text="@string/label_add_schedule" />
-    </LinearLayout>
 
 
     <LinearLayout
         android:id="@+id/editsLyt"
-        android:layout_weight="2.0"
         android:background="@drawable/bg_content10_lyt"
         android:elevation="2dp"
         android:layout_width="match_parent"
@@ -40,7 +18,8 @@ android:orientation="vertical"
         android:layout_margin="@dimen/_5sdp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        tools:targetApi="lollipop">
+        tools:targetApi="lollipop"
+        tools:ignore="UselessParent">
 
         <TextView
             android:id="@+id/titleBody"
@@ -51,10 +30,11 @@ android:orientation="vertical"
             android:fontFamily="@font/cairo_black"
             android:layout_marginBottom="32dp"
             android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-            android:text="ادخل بيانات المطلوب  لجدولة" />
+            android:text="ادخل بيانات المطلوب  إضافة قاعة" />
         <!-- حقل اسم المستخدم -->
         <LinearLayout
             android:layout_width="wrap_content"
+            android:minWidth="250dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
@@ -63,7 +43,7 @@ android:orientation="vertical"
                 android:fontFamily="@font/cairo_semibold"
                 android:paddingHorizontal="8dp"
                 android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-                android:text="اسم القاعة"/>
+                android:text="@string/label_name_classroom"/>
 
             <EditText
                 android:id="@+id/nameClassroomEditText"
@@ -73,8 +53,9 @@ android:orientation="vertical"
                 android:layout_marginVertical="@dimen/_10sdp"
                 android:background="@drawable/edit_text_background"
                 android:ems="15"
+                android:maxLength="50"
                 android:textColorHint="@color/hint_foreground_material_light"
-                android:hint="ادخل اسم القاعة"
+                android:hint="@string/label_hint_name_classroom"
                 android:inputType="textPersonName"
                 tools:ignore="Autofill" />
         </LinearLayout>
@@ -85,26 +66,36 @@ android:orientation="vertical"
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minWidth="250dp"
             android:orientation="vertical">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/cairo_semibold"
                 android:paddingHorizontal="8dp"
+                android:ems="16"
                 android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-                android:text="أوقات محاضرة"/>
+                android:text="@string/label_avail_devices"/>
 
-            <EditText
-                android:id="@+id/dateLectureEditText"
-                style="@style/Widget.AppCompat.EditText"
-                android:layout_width="wrap_content"
+           <CheckBox android:id="@+id/projector"
+               android:layout_height="wrap_content"
+               android:text="@string/lbl_projector"
+               android:layout_width="match_parent"/>
+            <CheckBox
+                android:id="@+id/lighting"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/_10sdp"
-                android:background="@drawable/edit_text_background"
-                android:ems="15"
-                android:hint="ادخل أوقات محاضرة"
-                android:inputType="datetime"
-                tools:ignore="Autofill" />
+                android:text="@string/lbl_lighting"
+                android:layout_width="match_parent"/>
+            <CheckBox
+                android:id="@+id/smokeDetector"
+                android:layout_height="wrap_content"
+                android:text="@string/label_smokedetector"
+                android:layout_width="match_parent"/>
+            <CheckBox
+                android:id="@+id/aC"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_ac"
+                android:layout_width="match_parent"/>
         </LinearLayout>
 
         <!-- حقل وقت الحجز -->
@@ -118,16 +109,17 @@ android:orientation="vertical"
                 android:fontFamily="@font/cairo_semibold"
                 android:paddingHorizontal="8dp"
                 android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-                android:text="اسم الدكتور"/>
+                android:text="@string/label_capacity_classroom"/>
             <EditText
-                android:id="@+id/nameDoctorEditText"
+                android:id="@+id/capacityEditText"
                 android:layout_marginVertical="@dimen/_10sdp"
                 android:layout_width="wrap_content"
                 android:ems="15"
-                android:inputType="time"
+                android:inputType="number"
+                android:maxLength="4"
                 android:background="@drawable/edit_text_background"
                 android:layout_height="wrap_content"
-                android:hint="ادخل اسم الدكتور"
+                android:hint="@string/label_hint_capacity_classroom"
                 tools:ignore="Autofill" />
         </LinearLayout>
 

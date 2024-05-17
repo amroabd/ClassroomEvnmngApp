@@ -26,11 +26,8 @@
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/nav_auth_sign_up"
-            app:enterAnim="@anim/animate_split_enter"
-            app:exitAnim="@anim/animate_split_exit"
+            app:enterAnim="@anim/animate_slide_up_enter"
             app:launchSingleTop="true"
-            app:popEnterAnim="@anim/animate_split_enter"
-            app:popExitAnim="@anim/animate_split_exit"
             app:popUpTo="@+id/nav_auth_login"
             app:popUpToInclusive="true" />
     </fragment>

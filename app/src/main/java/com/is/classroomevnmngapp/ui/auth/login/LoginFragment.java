@@ -100,7 +100,7 @@ public class LoginFragment extends Fragment {
         viewModel.sendLoginRequest(username, password, new LoginCallback() {
             @Override
             public void onSuccess(LoginResponse response) {
-                SharePerf.getInstance(getContext()).addUserShare(response.getUserId(), username, password);
+                SharePerf.getInstance(getContext()).addUserLogin(response.getUserId(), username, password);
                 SharePerf.getInstance(getContext()).addTypeUser(response.getUserType());
                 //---start activity
                 if (response.getUserType() == TYPE_ACCOUNT_ADMIN) {
@@ -117,7 +117,17 @@ public class LoginFragment extends Fragment {
                 }), "", "Err :" + t.toString());
             }
         });
-        startActivity(new Intent(getActivity(), UserMainActivity.class));
+         if (SharePerf.getInstance(getContext()).isLoggedIn()) {
+             if (SharePerf.getInstance(getContext()).getTypeUser() == TYPE_ACCOUNT_ADMIN) {
+                 startActivity(new Intent(getContext(), AdminMainActivity.class));
+             } else if (SharePerf.getInstance(getContext()).getTypeUser() == TYPE_ACCOUNT_USER) {
+                 startActivity(new Intent(getContext(), UserMainActivity.class));
+             }
+         }else {
+             setDialogCallback(getContext(), new ErrorAlertDialogFactory(() -> {
+
+             }), "", "Err :" + "بيانات تسجيل الدخول غير صحيح ,<br>تاكد من ان لديك حساب سابق او انشى حساب جديد.!!! ");
+         }
     }
 
 }

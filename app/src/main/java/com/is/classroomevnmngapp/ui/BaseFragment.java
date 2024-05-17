@@ -1,4 +1,4 @@
-package com.is.rhismonitor.ui;
+package com.is.classroomevnmngapp.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -18,25 +18,23 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
-import com.is.rhismonitor.R;
-import com.is.rhismonitor.utils.DateUtils;
+import com.is.classroomevnmngapp.R;
+import com.is.classroomevnmngapp.utils.DateUtils;
+import com.is.classroomevnmngapp.utils.widget.custom.CustomDialog;
 
 import org.jetbrains.annotations.NotNull;
 
-import static widget.custom.CustomDialog.NoteAlertDialogFactory;
-import static widget.custom.CustomDialog.setDialogCallback;
 
-public class BaseListFragment extends Fragment {
+public class BaseFragment extends Fragment {
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        hidToolbar(true);
+        //hidToolbar(true);
     }
 
     protected final void showDate(@NotNull TextView textView) {
-        //textView.setOnClickListener(view -> DatePickerFragment.newInstance().showDateDialog(getChildFragmentManager(), textView::setText));
         textView.setOnClickListener(view -> materialDate(textView));
     }
 
@@ -93,14 +91,14 @@ public class BaseListFragment extends Fragment {
     }
 
     protected final void onShowNote(String msg) {
-        setDialogCallback(requireContext(), new NoteAlertDialogFactory(() -> {
+        CustomDialog.setDialogCallback(requireContext(), new CustomDialog.NoteAlertDialogFactory(() -> {
         }), "wrong.", msg);
     }
 
 
     private void popUp(View ancherView) {
         LayoutInflater layoutInflater = (LayoutInflater) requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        @SuppressLint("InflateParams") View popView = layoutInflater.inflate(R.layout.row_columns_four, null);
+        @SuppressLint("InflateParams") View popView = layoutInflater.inflate(android.R.layout.two_line_list_item, null);
         //---
         PopupWindow popupWindow = new PopupWindow(popView, 400, 50, false);
         popupWindow.showAtLocation(ancherView, Gravity.CENTER, 0, 0);

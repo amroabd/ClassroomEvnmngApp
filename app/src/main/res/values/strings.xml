@@ -46,6 +46,7 @@
     <string name="label_config_sensors">ضبط الحساسات</string>
     <string name="label_check_devices">فحص الأجهزة</string>
     <string name="label_add_schedule">إضافة جدول</string>
+    <string name="label_add_class_rooms">إضافة قاعة</string>
     <string name="label_class_rooms">صفحة القاعات</string>
     <string name="label_base_user_page">الصفحة الأساسية للمستخدم</string>
     <string name="label_reserve_room">حجز قاعة</string>
@@ -102,8 +103,21 @@
     <string name="No"> لا </string>
     <string name="title_progress_notify">loading…</string>
     <string name="title_progress">تسجيل حساب جديد.</string>
-    <string name="message_progresss">جاري التحقق من تسجيل الحساب...</string>
+    <string name="message_progresss">جاري التحقق من تسجيل الحساب…</string>
     <string name="label_save">Save.</string>
     <string name="label_message_save">Sure process the save.</string>
+    <string name="label_avail_devices">حالة توفر الاجهزة</string>
+    <string name="label_found_devices"> الاجهزة المتوفرة في القاعة </string>
+    <string name="plse_enter_edit_text">please Enter %1s .!!</string>
+    <string name="label_name_classroom">اسم القاعة</string>
+    <string name="label_smokedetector">SmokeDetector</string>
+    <string name="lbl_lighting">Lighting</string>
+    <string name="lbl_projector">Projector</string>
+    <string name="lbl_ac">AC</string>
+    <string name="label_capacity_classroom">سعة القاعة</string>
+    <string name="label_hint_capacity_classroom">ادخل سعة القاعة</string>
+    <string name="label_hint_name_classroom">ادخل اسم القاعة</string>
+    <string name="label_avail_classroom">حالة توفر القاعة</string>
+    <string name="label_message_sure">Sure process The Reservation</string>
 
 </resources>

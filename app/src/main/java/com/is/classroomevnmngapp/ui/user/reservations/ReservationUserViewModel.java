@@ -4,27 +4,34 @@ import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
+import androidx.paging.PagedList;
 
+import com.is.classroomevnmngapp.data.model.JoinReserveALecture;
+import com.is.classroomevnmngapp.data.repository.ReservationRepository;
 import com.is.classroomevnmngapp.data.source.local.entities.ReservationEntity;
 
 public class ReservationUserViewModel extends AndroidViewModel {
 
-    private MutableLiveData<String> mText;
+
+    private ReservationRepository sReservationRepository;
 
     public ReservationUserViewModel(Application application) {
         super(application);
-        mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
-    }
-
-    public LiveData<String> getText() {
-        return mText;
+        sReservationRepository = ReservationRepository.getInstance(application);
     }
 
 
-    public int addReservation(ReservationEntity entity){
-        return 0;
+    public LiveData<PagedList<JoinReserveALecture>> getReserveALectureList() {
+        return sReservationRepository.getReserveALectureList();
+    }
+
+
+    public long addReservation(ReservationEntity entity) {
+        return sReservationRepository.insertReservation(entity);
+    }
+
+    public void updateReservation(int id, int status) {
+        sReservationRepository.updateReserveStatus(id, status);
     }
 
 }

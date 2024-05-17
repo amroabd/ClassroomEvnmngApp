@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
@@ -36,7 +37,7 @@ import com.is.classroomevnmngapp.data.source.local.entities.UserTypeEntity;
 
 import org.jetbrains.annotations.NotNull;
 
-//@TypeConverters(DateConverter.class)
+@TypeConverters(DateConverter.class)
 @Database(entities =
         {
                 HelperEntity.MainMenu.class,
@@ -57,7 +58,7 @@ import org.jetbrains.annotations.NotNull;
 public abstract class AppDatabase extends RoomDatabase {
 
     protected static final int START_VERSION = 1;
-    protected static final int END_VERSION = 1;
+    protected static final int END_VERSION = 2;
     //------------------
     private static final String TAG = AppDatabase.class.getSimpleName();
     private static final Object LOCK = new Object();

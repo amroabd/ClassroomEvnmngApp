@@ -5,18 +5,42 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ui.user.classroom.ClassRoomUserFragment">
+    tools:context=".ui.setting.init_classroom.ClassRoomListFragment">
 
-    <TextView
-        android:id="@+id/text_dashboard"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="1dp"
         android:layout_marginHorizontal="8dp"
-        android:paddingHorizontal="8dp"
-        android:layout_marginVertical="18dp"
-        android:textAlignment="textStart"
-        android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
-        android:text="سجل القاعات"/>
+        android:gravity="center"
+        android:padding="8dp"
+
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingHorizontal="8dp"
+            android:gravity="center_vertical"
+            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+            android:text="سجل القاعات"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/addClassroom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            app:chipBackgroundColor="@color/white"
+            app:chipEndPadding="0dp"
+            app:chipIcon="@drawable/add_circle_24dp_opsz24"
+            app:chipIconSize="32dp"
+            app:chipIconVisible="true"
+            app:chipMinHeight="24dp"
+            app:chipMinTouchTargetSize="42dp"
+            app:chipStartPadding="0dp" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/listLyt"
@@ -26,12 +50,28 @@
         android:background="@drawable/list_bg"
         android:layout_weight="1"
         android:orientation="horizontal">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listview"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="@dimen/_10sdp"
-            app:layoutManager="LinearLayoutManager"
-            tools:listitem="@layout/row_item_classroom" />
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/text_placeholder"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:elevation="@dimen/_1sdp"
+                android:background="@color/main_color_100"
+                android:textColor="@color/my_app_on_error"
+                android:textAppearance="@style/TextAppearance.Material3.DisplaySmall"
+                android:text="لايوجد سجلات القاعات"
+                android:layout_height="match_parent"
+                tools:targetApi="lollipop" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/_10sdp"
+                app:layoutManager="LinearLayoutManager"
+                tools:listitem="@layout/row_item_classroom" />
+        </FrameLayout>
+
     </LinearLayout>
 </LinearLayout>

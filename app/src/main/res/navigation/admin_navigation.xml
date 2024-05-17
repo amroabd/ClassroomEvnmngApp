@@ -23,11 +23,39 @@
 
     <fragment  tools:layout="@layout/fragment_user_setting"
         android:name="com.is.classroomevnmngapp.ui.setting.SettingFragment"
-        android:id="@+id/navigation_admin_setting"/>
+        android:id="@+id/navigation_admin_setting">
+        <action
+            android:id="@+id/action_settingFragment_to_classroomListFragment"
+            app:destination="@id/navigation_user_classroom"
+            app:enterAnim="@anim/animate_split_enter"
+            app:exitAnim="@anim/animate_split_exit"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/animate_split_enter"
+            app:popExitAnim="@anim/animate_split_exit"
+            app:popUpTo="@+id/fragment_user_setting"
+            app:popUpToInclusive="false" />
+    </fragment>
 
     <fragment  tools:layout="@layout/fragment_change_password"
         android:name="com.is.classroomevnmngapp.ui.setting.change_pass.ChangPasswordFragment"
         android:id="@+id/navigation_change_pass"/>
+
+    <fragment  tools:layout="@layout/fragment_user_classroom"
+        android:name="com.is.classroomevnmngapp.ui.setting.init_classroom.ClassRoomListFragment"
+        android:id="@+id/navigation_user_classroom">
+        <action
+            android:id="@+id/action_classroom_listFragment_to_add_classroomFragment"
+            app:destination="@id/navigation_admin_add_classroom"
+            app:enterAnim="@anim/animate_slide_up_enter"
+            app:exitAnim="@anim/animate_slide_up_exit"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/fragment_user_setting"
+            app:popUpToInclusive="false" />
+    </fragment>
+
+    <fragment  tools:layout="@layout/fragment_admin_add_classroom"
+        android:name="com.is.classroomevnmngapp.ui.setting.init_classroom.AddClassroomAdminFragment"
+        android:id="@+id/navigation_admin_add_classroom"/>
 
 
 

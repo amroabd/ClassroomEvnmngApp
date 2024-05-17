@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="8.0"
-    tools:context=".ui.user.classroom.ClassRoomUserFragment">
+    tools:context=".ui.setting.init_classroom.ClassRoomListFragment">
 
     <LinearLayout
         android:id="@+id/headLyt"

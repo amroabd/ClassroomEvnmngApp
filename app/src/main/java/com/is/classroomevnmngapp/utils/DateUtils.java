@@ -65,21 +65,22 @@ public class DateUtils {
     @NonNull
     public static String getCurrentDTime() {
         //,Locale.ENGLISH
-        return ((new SimpleDateFormat(DEF_YYYY_MM_DD_HH_MM_SS_24,Locale.ENGLISH)).format(Calendar.getInstance().getTime()));
+        return ((new SimpleDateFormat(DEF_YYYY_MM_DD_HH_MM_SS_24, Locale.ENGLISH)).format(Calendar.getInstance().getTime()));
     }
 
     @NotNull
     public static String getNameDay() {
-        return new SimpleDateFormat(FORMAT_DAY_NAME,Locale.ENGLISH).format(new Date());
+        return new SimpleDateFormat(FORMAT_DAY_NAME, Locale.ENGLISH).format(new Date());
     }
 
     @NotNull
     public static String getTime_12() {
-        return (new SimpleDateFormat(DEF_HH_MM_SS_12,Locale.ENGLISH)).format(new Date());
+        return (new SimpleDateFormat(DEF_HH_MM_SS_12, Locale.ENGLISH)).format(new Date());
     }
+
     @NotNull
     public static String getTime_24() {
-        return (new SimpleDateFormat(def_HH_MM_SS_24,Locale.ENGLISH)).format(new Date());
+        return (new SimpleDateFormat(def_HH_MM_SS_24, Locale.ENGLISH)).format(new Date());
     }
 
     @NotNull
@@ -89,18 +90,18 @@ public class DateUtils {
 
 
     public static String convertLong2Date(long milli, String pattern) {
-        Log.i(TAG,"milli_convert_date :"+ milli);//Long.valueOf("1680564666794")
+        Log.i(TAG, "milli_convert_date :" + milli);//Long.valueOf("1680564666794")
         return getSimpleDateFormat(DEF_YYYY_MM_DD_HH_MM_SS_12).format(milli);
     }
 
     @NotNull
     public static String convertLong2Date(String milli, String pattern) {
-        Log.i(TAG,"milli_convert_date :"+ milli);
+        Log.i(TAG, "milli_convert_date :" + milli);
         return getSimpleDateFormat(pattern).format(new Date(Long.parseLong(milli)));
     }
 
     public static long convertDate2long(String strDate, String pattern) throws ParseException {
-        Log.i(TAG, "date to long :"+ strDate);
+        Log.i(TAG, "date to long :" + strDate);
         return Objects.requireNonNull(getSimpleDateFormat(pattern).parse(strDate)).getTime() / ONE_SECOND_MILLI;
     }
 
@@ -127,6 +128,7 @@ public class DateUtils {
         }
     }
 
+
     /***
      * @param date_1 date first as string
      * @param date_2 date second as string
@@ -135,6 +137,27 @@ public class DateUtils {
     public static boolean compare2Date(String date_1, String date_2) {
         if (TextUtils.isEmpty(date_1) || TextUtils.isEmpty(date_2)) return false;
         return getDATE(date_1).after(getDATE(date_2));
+    }
+
+    private static Date getTime(String time) {
+        try {
+            return getSimpleDateFormat("yyyy-MM-dd HH:mm").parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static boolean compareCurrentWithParseTime(String time) {
+        if (time == null) return false;
+        if (time.length()<9)time= String.format("%s %s", getDate(), time);
+
+        try {
+            return new Date().after(getTime(time));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public static boolean isToDay(long oneMillis) {
@@ -169,6 +192,12 @@ public class DateUtils {
         calendar1.set(Calendar.MINUTE, minute);
 
         return calendar1;
+    }
+
+
+    @NotNull
+    public static String getSelectDate(long d) {
+        return (getSimpleDateFormat(DEF_YYYY_MM_DD)).format(new Date(d));
     }
 
 }

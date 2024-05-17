@@ -13,7 +13,7 @@ public class SigUpViewModel extends ViewModel {
 
 
     public void sendSigUpRequest(SignUpRequest signUpRequest, SignUpCallback callback) {
-        new CountDownTimer(5000L,1000L) {
+        new CountDownTimer(3000L,1000L) {
             @Override
             public void onTick(long l) {
 

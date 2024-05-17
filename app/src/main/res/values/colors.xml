@@ -25,6 +25,7 @@
     <color name="main_color_200">#0AACED</color><!--,EFF4F7,-->
     <color name="main_color_100">#F0FFFF</color><!-- ,FBFCFE-->
     <color name="main_color_50">#FDFFFE</color><!--#FDFFFE-->
+    <color name="main_color_150">#DAF4F4</color>
 
     <color name="my_app_background">@color/main_color_50</color>
     <color name="my_app_error">#FFCDD2</color>

@@ -1,9 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:paddingHorizontal="16dp"
+    android:background="@color/gray_l"
+    android:paddingVertical="16dp"
+    android:gravity="center"
     tools:context=".StartActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_15sdp"
+        android:orientation="horizontal"
+        android:elevation="@dimen/_5sdp"
+        android:backgroundTint="@color/success_100"
+        android:background="@drawable/bg_content_lyt"
+        tools:targetApi="lollipop">
+
+        <LinearLayout
+            android:id="@+id/admLyt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:layout_marginEnd="113dp"
+            android:orientation="vertical"
+            tools:targetApi="m">
+
+            <ImageView
+                android:id="@+id/loginASAdminBtn"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_150sdp"
+                android:drawableTop="@drawable/guest"
+                android:scaleType="centerInside"
+                android:src="@drawable/user" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cairo_semibold"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:text="Sign As Admin" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/profmLyt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/admLyt"
+            android:gravity="center"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="113dp"
+            android:orientation="vertical"
+            tools:targetApi="m"
+            tools:ignore="UnusedAttribute">
+
+            <ImageView
+                android:id="@+id/loginASProfBtn"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_150sdp"
+                android:drawableTop="@drawable/user"
+                android:scaleType="centerInside"
+                android:src="@drawable/admin" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cairo_semibold"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:gravity="center"
+                android:text="Sign As Professor" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

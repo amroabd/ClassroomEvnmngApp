@@ -7,11 +7,11 @@
         android:title="@string/label_home" />
 
     <item
-        android:id="@+id/navigation_user_classroom"
+        android:id="@+id/navigation_user_reservation_history"
         android:icon="@drawable/ic_classroom_24"
         android:title="@string/label_class_rooms" />
     <item
-        android:id="@+id/navigation_user_reservation"
+        android:id="@+id/navigation_user_reservation_list"
         android:icon="@drawable/reserve_24"
         android:title="@string/label_reserve_room" />
 

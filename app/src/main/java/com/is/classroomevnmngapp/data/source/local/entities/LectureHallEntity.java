@@ -1,9 +1,13 @@
 package com.is.classroomevnmngapp.data.source.local.entities;
 
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import java.util.Objects;
 
 @Entity(tableName = "LectureHalls")
 public class LectureHallEntity extends BaseEntity {
@@ -15,6 +19,8 @@ public class LectureHallEntity extends BaseEntity {
 
     @ColumnInfo(name = "UniversityIDFK")
     private int universityIdFK;
+    @ColumnInfo(name = "Title")
+    private String title;
 
     @ColumnInfo(name = "Capacity")
     private int capacity;
@@ -33,6 +39,14 @@ public class LectureHallEntity extends BaseEntity {
 
     // SETTER AND GETTER
 
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public int getLocalId() {
         return localId;
@@ -96,5 +110,38 @@ public class LectureHallEntity extends BaseEntity {
 
     public void setAcStatus(int acStatus) {
         this.acStatus = acStatus;
+    }
+
+
+    //==============================================================================
+    public static final DiffUtil.ItemCallback<LectureHallEntity>DIFF_CALLBACK =new DiffUtil.ItemCallback<LectureHallEntity>() {
+
+        @Override
+        public boolean areItemsTheSame(@NonNull LectureHallEntity oldItem, @NonNull LectureHallEntity newItem) {
+            return oldItem.localId == newItem.localId;
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull LectureHallEntity oldItem, @NonNull LectureHallEntity newItem) {
+            return oldItem.equals(newItem);
+        }
+    };
+    //=================================================================================
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LectureHallEntity)) return false;
+        LectureHallEntity entity = (LectureHallEntity) o;
+        return localId == entity.localId &&
+                lectureHallId == entity.lectureHallId &&
+                capacity == entity.capacity &&
+                title.equals(entity.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(localId, lectureHallId, title, capacity);
     }
 }

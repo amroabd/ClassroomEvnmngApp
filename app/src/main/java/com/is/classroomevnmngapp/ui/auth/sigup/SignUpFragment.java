@@ -70,6 +70,7 @@ public class SignUpFragment extends Fragment {
                     public void onSuccess(SigUpResponse response) {
                         if (progressDialog != null && progressDialog.isShowing())
                             progressDialog.dismiss();
+                        SharePerf.getInstance(getContext()).addUserShare(username,password,email,phone);
 
                         setDialogCallback(getContext(), new CustomDialog.NoteAlertDialogFactory(onValidateViews::onFollow),
                                 "Title :" + response.getCode(),

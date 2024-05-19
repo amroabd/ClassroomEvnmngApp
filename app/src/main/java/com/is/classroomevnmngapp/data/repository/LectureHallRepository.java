@@ -9,8 +9,11 @@ import androidx.lifecycle.LiveData;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
+import com.is.classroomevnmngapp.data.repository.remote.INetworkSource;
 import com.is.classroomevnmngapp.data.source.local.dao.LectureHallDao;
 import com.is.classroomevnmngapp.data.source.local.entities.LectureHallEntity;
+import com.is.classroomevnmngapp.data.source.remote.DownloadCallback;
+import com.is.classroomevnmngapp.data.source.remote.UploadCallback;
 import com.is.classroomevnmngapp.utils.Log1;
 import com.is.classroomevnmngapp.utils.executor.AppExecutor;
 
@@ -25,7 +28,7 @@ import java.util.concurrent.TimeoutException;
 import static com.is.classroomevnmngapp.utils.constant.NameTableConst.NAME_LECTURE_HALLS;
 
 
-public final class LectureHallRepository extends BaseRepository {
+public final class LectureHallRepository extends BaseRepository implements INetworkSource {
     private static final String TAG = LectureHallRepository.class.getSimpleName();
     private static LectureHallRepository instance;
     private final LectureHallDao lectureHallDao;
@@ -44,6 +47,38 @@ public final class LectureHallRepository extends BaseRepository {
     }
 
 
+    @Override
+    public void downloadData() {
+        mDownloadCentral.downLoadLectureHalls(new DownloadCallback<List<LectureHallEntity>>() {
+            @Override
+            public void onSuccess(List<LectureHallEntity> tList) {
+               //here : insert list data return from server
+                Log.d(TAG, String.format("insert list data return from server : %s", tList));
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
+    }
+
+    @Override
+    public void uploadingData() {
+        mUploadCentral.uploadLectureHall(new UploadCallback<Object>() {
+            @Override
+            public void onSuccess(Object obj) {
+
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
+    }
+
+
     /***
      *  insert new row to table
      * @param lectureHallEntity obj
@@ -52,9 +87,9 @@ public final class LectureHallRepository extends BaseRepository {
     @SuppressLint("NewApi")
     public long insertLectureHall(LectureHallEntity lectureHallEntity) {
         long rowID = 0;
-        insertFooter(lectureHallEntity,false);
+        insertFooter(lectureHallEntity, false);
         mExecutorService = Executors.newSingleThreadExecutor();
-        Callable<Long> callable = () -> lectureHallDao.insertLectureHall(lectureHallEntity);
+        Callable<Long> callable = () -> lectureHallDao.insertWithTriggerLogic(lectureHallEntity);
         Future<Long> future = mExecutorService.submit(callable);
         try {
             rowID = Math.toIntExact(future.get(100, TimeUnit.MILLISECONDS));
@@ -78,19 +113,18 @@ public final class LectureHallRepository extends BaseRepository {
     }
 
 
-
     /***
      *  list data using pagedList
      */
     @NonNull
-    public LiveData<PagedList<LectureHallEntity>>getAllData(){
-        return new LivePagedListBuilder<>(lectureHallDao.getAll(),configPagedList())
+    public LiveData<PagedList<LectureHallEntity>> getAllData() {
+        return new LivePagedListBuilder<>(lectureHallDao.getAll(), configPagedList())
                 .setFetchExecutor(Executors.newSingleThreadExecutor()).build();
     }
 
 
     public int getCount() {
-        return getCount("lectureHallId", NAME_LECTURE_HALLS);
+        return getCount("id", NAME_LECTURE_HALLS);
         // return mDb.departmentDao().getCount();
     }
 
@@ -98,6 +132,7 @@ public final class LectureHallRepository extends BaseRepository {
     public int deleteAllRecords() {
         return lectureHallDao.deleteAllRecords();
     }
+
 
 
 }

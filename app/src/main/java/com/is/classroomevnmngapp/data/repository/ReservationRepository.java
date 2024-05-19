@@ -9,8 +9,12 @@ import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
 import com.is.classroomevnmngapp.data.model.JoinReserveALecture;
+import com.is.classroomevnmngapp.data.model.ResponseObj;
+import com.is.classroomevnmngapp.data.repository.remote.INetworkSource;
 import com.is.classroomevnmngapp.data.source.local.dao.ReservationDao;
 import com.is.classroomevnmngapp.data.source.local.entities.ReservationEntity;
+import com.is.classroomevnmngapp.data.source.remote.DownloadCallback;
+import com.is.classroomevnmngapp.data.source.remote.UploadCallback;
 import com.is.classroomevnmngapp.utils.Log1;
 import com.is.classroomevnmngapp.utils.executor.AppExecutor;
 
@@ -25,7 +29,7 @@ import java.util.concurrent.TimeoutException;
 import static com.is.classroomevnmngapp.utils.constant.NameTableConst.NAME_RESERVATIONS;
 
 
-public final class ReservationRepository extends BaseRepository  {
+public final class ReservationRepository extends BaseRepository implements INetworkSource {
     private static final String TAG = ReservationRepository.class.getSimpleName();
     private static ReservationRepository instance;
     private final ReservationDao dao;
@@ -43,12 +47,45 @@ public final class ReservationRepository extends BaseRepository  {
         return instance;
     }
 
+    @Override
+    public void downloadData() {
+        mDownloadCentral.downLoadReservations(new DownloadCallback<List<ReservationEntity>>() {
+            @Override
+            public void onSuccess(List<ReservationEntity> tList) {
+                //save result from remote to db local
+                insertAll(tList);
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
+    }
+
+    @Override
+    public void uploadingData() {
+        AppExecutor.getInstance().diskIO().execute(() ->
+                mUploadCentral.uploadReservation(getAll(), new UploadCallback<ResponseObj>() {
+                    @Override
+                    public void onSuccess(ResponseObj obj) {
+                        updateStatusUpload(obj.getlId(), Long.parseLong(obj.getServId()), 1);
+                    }
+
+                    @Override
+                    public void onError(String error) {
+
+                    }
+                }));
+
+    }
+
 
     public long insertReservation(ReservationEntity entity) {
         long rowID = 0;
-        insertFooter(entity,false);
+        insertFooter(entity, false);
         mExecutorService = Executors.newSingleThreadExecutor();
-        Callable<Long> callable = () -> dao.insertReservation(entity);
+        Callable<Long> callable = () -> dao.insertWithTriggerLogic(entity);
         Future<Long> future = mExecutorService.submit(callable);
         try {
             rowID = (future.get(100, TimeUnit.MILLISECONDS));
@@ -68,11 +105,12 @@ public final class ReservationRepository extends BaseRepository  {
 
 
     public void updateReserveStatus(long localID, int status) {
-     AppExecutor.getInstance().diskIO().execute(() -> dao.updateReserveStatus(localID, status));
+        AppExecutor.getInstance().diskIO().execute(() -> dao.updateReserveStatus(localID, status));
     }
 
 
     public void updateStatusUpload(long localID, long centerID, int upload) {
+        AppExecutor.getInstance().diskIO().execute(() -> dao.updateStatusUpload(localID, centerID, upload));
 
     }
 
@@ -81,14 +119,30 @@ public final class ReservationRepository extends BaseRepository  {
     }
 
 
-    public LiveData<List<ReservationEntity>> getAll() {
+    public List<ReservationEntity> getAll() {
         return dao.getAll();
     }
 
 
     public int getCount() {
-        return getCount("reserveId", NAME_RESERVATIONS);
-        // return mDb.departmentDao().getCount();
+        return getCount("id", NAME_RESERVATIONS);
+
+    }
+
+    public int getReservedCount() {
+        Integer countReserved = 0;
+        mExecutorService = Executors.newSingleThreadExecutor();
+        Callable<Integer> callable = dao::getReservedCount;
+        Future<Integer> future = mExecutorService.submit(callable);
+        try {
+            countReserved = (future.get(100, TimeUnit.MILLISECONDS));
+        } catch (ExecutionException | TimeoutException | InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            shutdown(mExecutorService);
+            Log1.d(TAG, "getReservedCount :" + countReserved);
+        }
+        return countReserved;
     }
 
 
@@ -100,11 +154,20 @@ public final class ReservationRepository extends BaseRepository  {
      *  list data using pagedList
      */
     @NonNull
-    public LiveData<PagedList<JoinReserveALecture>>getReserveALectureList(){
-        return new LivePagedListBuilder<>(dao.getReserveALectureList(),configPagedList())
+    public LiveData<PagedList<JoinReserveALecture>> getReserveALectureList() {
+        return new LivePagedListBuilder<>(dao.getReserveALectureList(), configPagedList())
                 .setFetchExecutor(Executors.newSingleThreadExecutor()).build();
     }
 
+
+    /***
+     *  list data using pagedList
+     */
+    @NonNull
+    public LiveData<PagedList<JoinReserveALecture>> getReserveALectureHistList() {
+        return new LivePagedListBuilder<>(dao.getReserveALectureHistList(), configPagedList())
+                .setFetchExecutor(Executors.newSingleThreadExecutor()).build();
+    }
 
 
 }

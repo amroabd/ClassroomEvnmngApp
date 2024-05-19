@@ -46,7 +46,7 @@ public class ReservationHistoryUserFragment extends Fragment {
     private void initRecyclerView() {
        ItemAdapter itemAdapter = new ItemAdapter();
 
-        viewModel.getReserveALectureList().observe(getViewLifecycleOwner(), joinReserveALectures -> {
+        viewModel.getReserveALectureHistList().observe(getViewLifecycleOwner(), joinReserveALectures -> {
             //-----
             itemAdapter.submitList(joinReserveALectures);
             Log1.d(TAG, "joinReserveALectures size :" + joinReserveALectures.size());
@@ -84,6 +84,7 @@ public class ReservationHistoryUserFragment extends Fragment {
                         Log1.d(TAG, "----------> hasEnd incomplete");
                         // incomplete
                         holder.itemReserveBinding.reserveDateLyt.setVisibility(View.VISIBLE);
+                        holder.itemReserveBinding.cancelButton.setVisibility(View.VISIBLE);
                         //----
                         holder.itemReserveBinding.itemStartTime.setText(String.format("%s %s", getDate(), item.getReserveStartTime()));
                         holder.itemReserveBinding.itemEndTime.setText(String.format("%s %s", getDate(), item.getReserveEndTime()));
@@ -116,7 +117,7 @@ public class ReservationHistoryUserFragment extends Fragment {
         }
     }
 
-    class ReserveHVHolder extends RecyclerView.ViewHolder {
+    static class ReserveHVHolder extends RecyclerView.ViewHolder {
         RowItemReserveHistoryBinding itemReserveBinding;
 
         public ReserveHVHolder(@NonNull RowItemReserveHistoryBinding itemReserveBinding) {

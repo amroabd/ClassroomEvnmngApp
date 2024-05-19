@@ -86,11 +86,7 @@ android:orientation="vertical"
                 android:layout_height="wrap_content"
                 android:text="@string/lbl_lighting"
                 android:layout_width="match_parent"/>
-            <CheckBox
-                android:id="@+id/smokeDetector"
-                android:layout_height="wrap_content"
-                android:text="@string/label_smokedetector"
-                android:layout_width="match_parent"/>
+
             <CheckBox
                 android:id="@+id/aC"
                 android:layout_height="wrap_content"

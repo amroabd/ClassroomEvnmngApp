@@ -18,7 +18,7 @@ public interface ScheduleDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<ScheduleEntity> entities);
 
-    @Query("SELECT * FROM Schedules WHERE ScheduleID = :scheduleId")
+    @Query("SELECT * FROM Schedules WHERE id = :scheduleId")
     ScheduleEntity getScheduleById(int scheduleId);
 
     @Query("SELECT * FROM Schedules")

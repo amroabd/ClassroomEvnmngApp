@@ -2,25 +2,35 @@ package com.is.classroomevnmngapp.data.source.local.entities;
 
 import androidx.room.ColumnInfo;
 
+import com.google.gson.annotations.SerializedName;
+
 public class BaseEntity {
-    @ColumnInfo(name = "IsActive")
+    @SerializedName("is_active")
+    @ColumnInfo(name = "is_active")
     protected int isActive;
 
-    @ColumnInfo(name = "StatusUpload")
+
+    @SerializedName("status_upload")
+    @ColumnInfo(name = "status_upload")
     protected int statusUpload;
 
-    @ColumnInfo(name = "StatusSync")
+    @SerializedName("status_sync")
+    @ColumnInfo(name = "status_sync")
     protected int statusSync;
 
 
-    @ColumnInfo(name = "UserIDFk",defaultValue = "0")
+    @SerializedName("user_id_fk")
+    @ColumnInfo(name = "user_id_fk", defaultValue = "0")
     protected int userIdFk;
 
-
-    @ColumnInfo(defaultValue = "CURRENT_TIMESTAMP")
+    @SerializedName("create_date")
+    @ColumnInfo(name = "create_date", defaultValue = "CURRENT_TIMESTAMP")
     String createdDateTime;
-    @ColumnInfo(defaultValue = "CURRENT_TIMESTAMP")
+
+    @SerializedName("update_date")
+    @ColumnInfo(name = "update_date", defaultValue = "CURRENT_TIMESTAMP")
     String lastModifiedDateTime;
+
     @ColumnInfo(defaultValue = "('Created at' || CURRENT_TIMESTAMP)")
     public String notice;
 
@@ -74,7 +84,6 @@ public class BaseEntity {
     public void setStatusSync(int statusSync) {
         this.statusSync = statusSync;
     }
-
 
 
     public int getUserIdFk() {

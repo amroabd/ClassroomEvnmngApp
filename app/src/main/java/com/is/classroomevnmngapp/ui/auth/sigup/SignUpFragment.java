@@ -58,23 +58,32 @@ public class SignUpFragment extends Fragment {
                 final String password = ConvertData.to2String(signupBinding.passwordEditText);
                 final String phone = ConvertData.to2String(signupBinding.phoneEditText);
                 final String email = ConvertData.to2String(signupBinding.emailEditText);
+                int type=SharePerf.getInstance(getContext()).getTypeUser();
 
-                final SignUpRequest sign = new SignUpRequest(username, password, email, phone);
+                final SignUpRequest sign = new SignUpRequest(username, password, email, phone,type);
 
                 progressDialog = ProgressDialog.show(getContext(),
                         getString(R.string.title_progress),
                         getString(R.string.message_progresss));
 
+                //EVENT : START SEND REQUEST BY USER
                 viewModel.sendSigUpRequest(sign, new SignUpCallback() {
                     @Override
                     public void onSuccess(SigUpResponse response) {
                         if (progressDialog != null && progressDialog.isShowing())
                             progressDialog.dismiss();
-                        SharePerf.getInstance(getContext()).addUserShare(username,password,email,phone);
 
-                        setDialogCallback(getContext(), new CustomDialog.NoteAlertDialogFactory(onValidateViews::onFollow),
-                                "Title :" + response.getCode(),
-                                        "Message :" + response.getData());
+                         if (response.getCode().equals("Success")) {
+                             SharePerf.getInstance(getContext()).addUserShare(username, password, email, phone);
+
+                             setDialogCallback(getContext(), new CustomDialog.NoteAlertDialogFactory(onValidateViews::onFollow),
+                                     "Title :" + response.getCode(),
+                                     String.format("Message :%s,ID :%s", response.getData(), response.getID()));
+                             return;
+                         }
+                        //problem
+                        setDialogCallback(getContext(), new CustomDialog.ErrorAlertDialogFactory(() -> {
+                        }), response.getCode(), "Waring :" + response.toString());
                     }
 
                     @Override
@@ -96,8 +105,7 @@ public class SignUpFragment extends Fragment {
         public boolean onValidInput(int role) {
             return Validator.isNotEmptyEditText(signupBinding.usernameEditText, "Require Enter username.!!")
                     && Validator.isNotEmptyEditText(signupBinding.emailEditText, "Require Enter email.!!")
-                    && Validator.isNotEmptyEditText(signupBinding.passwordEditText, "Require Enter password.!!")
-                    && Validator.isNotEmptyEditText(signupBinding.phoneEditText, "Require Enter phone.!!");
+                    && Validator.isNotEmptyEditText(signupBinding.passwordEditText, "Require Enter password.!!");
         }
 
         @Override

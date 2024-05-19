@@ -3,10 +3,14 @@ package com.is.classroomevnmngapp.ui.auth.login;
 import androidx.lifecycle.ViewModel;
 
 import com.is.classroomevnmngapp.ui.auth.login.data.LoginRepository;
+import com.is.classroomevnmngapp.ui.auth.login.data.LoginRequest;
 
 public class LoginViewModel extends ViewModel {
-  LoginRepository LoginRepository;
+  LoginRepository loginRepository;
 
+  public LoginViewModel() {
+    loginRepository = new LoginRepository();
+  }
 
   //  private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
 
@@ -20,17 +24,10 @@ public class LoginViewModel extends ViewModel {
         return loginResult;
     }
 */
-    public void sendLoginRequest(String username, String password, LoginCallback callback) {
-       /* // can be launched in a separate asynchronous job
-        Result<LoggedInUser> result = loginRepository.login(username, password);
+    public void sendLoginRequest(LoginRequest loginRequest, LoginCallback callback) {
+      loginRepository.login(loginRequest,callback);
+     }
 
-        if (result instanceof Result.Success) {
-            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
-        } else {
-            loginResult.setValue(new LoginResult(R.string.login_failed));
-        }
-   */ }
 
 
 

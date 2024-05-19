@@ -9,16 +9,16 @@ public class ProfessorEntity extends BaseEntity{
     @PrimaryKey(autoGenerate = true)
     private int localId;
 
-    @ColumnInfo(name = "ProfessorID")
+    @ColumnInfo(name = "id")
     private int professorId;
 
-    @ColumnInfo(name = "Name")
+    @ColumnInfo(name = "name")
     private String name;
 
-    @ColumnInfo(name = "ContactInfo")
+    @ColumnInfo(name = "contact_info")
     private String contactInfo;
 
-    @ColumnInfo(name = "DepartmentIDFK")
+    @ColumnInfo(name = "depart_id_fk")
     private int departmentIdFK;
 
     //---------------

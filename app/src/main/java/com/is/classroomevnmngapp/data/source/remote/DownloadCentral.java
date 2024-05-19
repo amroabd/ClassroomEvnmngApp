@@ -3,19 +3,19 @@ package com.is.classroomevnmngapp.data.source.remote;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import com.is.classroomevnmngapp.data.source.local.entities.HelperEntity;
+import com.is.classroomevnmngapp.data.source.local.entities.LectureHallEntity;
+import com.is.classroomevnmngapp.data.source.local.entities.ReservationEntity;
 import com.is.classroomevnmngapp.data.source.remote.api.ApiService;
 import com.is.classroomevnmngapp.data.source.remote.api.RestClient;
 import com.is.classroomevnmngapp.utils.Log1;
-import com.is.classroomevnmngapp.utils.executor.AppExecutor;
 
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
 
 import java.util.List;
 
-import okhttp3.OkHttpClient;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,84 +28,77 @@ public class DownloadCentral {
 
     public DownloadCentral(Context context) {
         this.mContext = context;
-        this.apiService= RestClient.getInstance().getApiService();
+        this.apiService = RestClient.getInstance().getApiService();
     }
 
-    @SafeVarargs
-    public final void downAllHeaderData1(DownloadCallback<JSONArray>... backDownVolley) {
-        //----------------------------------------
-        OkHttpClient client = new OkHttpClient();
 
-        String url = "https://host/api/v1/Helper/HeaderData";
+    @SuppressLint("NewApi")
+    private void request(@NotNull Call<?> headerCall) {
+        Log1.w(TAG, "request:" + headerCall.request().toString());
+        Log1.w(TAG, "host:" + headerCall.request().url().host());
+        Log1.w(TAG, "encodedPath:" + headerCall.request().url().encodedPath());
+        //Log1.w(TAG,"redact:"+ headerCall.request().url().redact());
+        Log1.w(TAG, "headers:" + headerCall.request().headers().toString());
+    }
 
-        okhttp3.Request request = new okhttp3.Request.Builder().url(url).build();
+    private void PrintEvent(String msg) {
+        Log1.PrintFileEvent(TAG, msg);
+        Log1.d(TAG, msg);
+    }
 
-            AppExecutor.getInstance().diskIO().execute(() -> {
-                try {
-                okhttp3.Response response = client.newCall(request).execute();
+    private void PrintError(String msg) {
+        Log1.PrintFileError(TAG, msg);
+    }
+
+    @NotNull
+    private String getRespError(@NotNull String d) {
+        return d.substring(0, d.lastIndexOf("url"));
+    }
+
+    //==================base handle for each task download
+    @NotNull
+    private <T> Callback<T> mResponseCallback(Long lId, String title, DownloadCallback<T> callback) {
+        return new Callback<T>() {
+            @Override
+            public void onResponse(@NotNull Call<T> call, @NonNull Response<T> response) {
                 if (response.isSuccessful()) {
-                    ResponseBody responseBody = response.body();
-                    if (responseBody != null) {
-                        String data = responseBody.string();
-
-                        System.out.println(data);
+                    if (response.body() != null) {
+                        PrintEvent(String.format("1-onSuccess-> result %s :%s", title, response.body().toString()));
+                        callback.onSuccess(response.body());
+                        return;
                     }
-                } else {
-                    //
-                    System.out.println("Error:حدث خطأ في الاستجابة, " + response.code() + " " + response.toString());
+                    PrintError(String.format("2-onResponse-> " + title + ":Empty response body - %s", response.toString()));
+                    callback.onError(getRespError(response.toString()));
+                    return;
                 }
-            } catch (Exception e) {
-                // حدث خطأ في الطلب
-                e.printStackTrace();
+                PrintError(String.format("3-onResponse -> %s: unsuccessful Response  - %s", title, getRespError(response.toString())));
+                callback.onError(String.format("3-onResponse -> %s unsuccessful Response - %s", title, getRespError(response.toString())));
             }
-            });
 
-
+            @Override
+            public void onFailure(@NotNull Call<T> call, @NotNull Throwable t) {
+                PrintError(String.format("4-onFailure-> %s : request failed - %s", title, t.toString()));
+                callback.onError(String.format("4-onFailure-> %s%s", title, t.toString()));
+            }
+        };
     }
+
+    private <T> void downloadData(String title, @NonNull Call<T> call, DownloadCallback<T> callback) {
+        long defaultID=9;
+        call.enqueue(mResponseCallback(defaultID, title, callback));
+    }
+   //==================
 
     /***
      * 1-down data main menu
      * @param callBackDown return list main menu to callback for save in db
      */
     public void downAllHeaderData(DownloadCallback<List<HelperEntity.MainMenu>> callBackDown) {
-        //downAllHeaderData1();
         //------------------
         final Call<List<HelperEntity.MainMenu>> headerCall = apiService.getHeaderData();
         //request(headerCall);
-        headerCall.enqueue(new Callback<List<HelperEntity.MainMenu>>() {
-            @Override
-            public void onResponse(@NotNull Call<List<HelperEntity.MainMenu>> call, @NotNull Response<List<HelperEntity.MainMenu>> response) {
-                if (response.isSuccessful()) {
-                    Log1.PrintFileEvent(TAG, "1-onSuccess-> result1MainMenu :" + (response.body() != null ? response.body().toString() : null));
-                    callBackDown.onSuccess(response.body());
-                    return;
-                }
-                //Log1.PrintFileError(TAG, "2-onResponse-> MainMenu:Empty response body - " + response.toString());
-                callBackDown.onError(getResp(response.toString()));
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<List<HelperEntity.MainMenu>> call, @NotNull Throwable t) {
-                Log1.PrintFileError(TAG, "3-onFailure-> MainMenu: request failed - " + t.toString());
-                callBackDown.onError("onFailure-> MainMenu: request failed - " + t.toString());
-            }
-        });
+        downloadData("MainMenu", headerCall, callBackDown);
     }
-    @NotNull
-    private String getResp(@NotNull String d){
-        return d.substring(0,d.lastIndexOf("url"));
-    }
-
-    @SuppressLint("NewApi")
-    private void request(@NotNull  Call<?> headerCall ) {
-        Log1.w(TAG,"request:"+ headerCall.request().toString());
-        Log1.w(TAG,"host:"+ headerCall.request().url().host());
-        Log1.w(TAG,"encodedPath:"+ headerCall.request().url().encodedPath());
-        //Log1.w(TAG,"redact:"+ headerCall.request().url().redact());
-        Log1.w(TAG,"headers:"+headerCall.request().headers().toString());
-        //Log1.w(TAG,"cacheControl:"+ headerCall.request().cacheControl().maxAgeSeconds()+","+headerCall.request().cacheControl().minFreshSeconds());
-    }
-
 
     /***
      * 2-down data sub menu
@@ -114,28 +107,20 @@ public class DownloadCentral {
     public void downAllSubHeaderData(DownloadCallback<List<HelperEntity.SubMenu>> callbackDown) {
         //------------------
         Call<List<HelperEntity.SubMenu>> subHeaderCall = apiService.getSubHeaderData();
-        subHeaderCall.enqueue(new Callback<List<HelperEntity.SubMenu>>() {
-            @Override
-            public void onResponse(@NotNull Call<List<HelperEntity.SubMenu>> call, @NotNull Response<List<HelperEntity.SubMenu>> response) {
-                if (response.isSuccessful()) {
-                    Log1.d(TAG, "onSuccess:");
-                    //Log1.PrintFileEvent(TAG, "onSuccess-> resultSubMenu :" + (response.body() != null ? response.body().toString() : null));
-                    callbackDown.onSuccess(response.body());
-                    return;
-                }
-                Log1.PrintFileError(TAG, "onResponse-> SubMenu :Empty response body - " + response.toString());
-                callbackDown.onError(getResp(response.toString()));
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<List<HelperEntity.SubMenu>> call, @NotNull Throwable t) {
-                Log1.PrintFileError(TAG, "onFailure-> SubMenu : request failed - " + t.toString());
-                callbackDown.onError(t.toString());
-            }
-        });
+        downloadData("SubMenu", subHeaderCall, callbackDown);
     }
 
+    public void downLoadLectureHalls(DownloadCallback<List<LectureHallEntity>> callback) {
+        //------------------
+        Call<List<LectureHallEntity>> subHeaderCall = apiService.getLectureHallsData();
+        downloadData("LectureHall", subHeaderCall, callback);
+    }
 
+    public void downLoadReservations(DownloadCallback<List<ReservationEntity>> callback) {
+        //------------------
+        Call<List<ReservationEntity>> subHeaderCall = apiService.getReservationsData();
+        downloadData("Reservations", subHeaderCall, callback);
+    }
 
 
 }

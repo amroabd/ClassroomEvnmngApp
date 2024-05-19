@@ -5,37 +5,50 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
-@Entity(tableName = "LectureHalls")
+@Entity(tableName = "LectureHalls",indices = {@Index(value = {"id"},unique = true)})
+
 public class LectureHallEntity extends BaseEntity {
     @PrimaryKey(autoGenerate = true)
     private int localId;
 
-    @ColumnInfo(name = "LectureHallID")
+
+    @SerializedName("id")
+    @ColumnInfo(name = "id")
     private int lectureHallId;
 
-    @ColumnInfo(name = "UniversityIDFK")
+    @SerializedName("univ_id_fk")
+    @ColumnInfo(name = "univ_id_fk")
     private int universityIdFK;
-    @ColumnInfo(name = "Title")
+
+    @SerializedName("name")
+    @ColumnInfo(name = "name")
     private String title;
 
-    @ColumnInfo(name = "Capacity")
+    @SerializedName("capacity")
+    @ColumnInfo(name = "capacity")
     private int capacity;
 
-    @ColumnInfo(name = "HasProjector")
+    @SerializedName("has_projector")
+    @ColumnInfo(name = "has_projector")
     private int hasProjector;
 
-    @ColumnInfo(name = "LightingStatus")
+    @SerializedName("lighting_status")
+    @ColumnInfo(name = "lighting_status")
     private int lightingStatus;
+
+    @SerializedName("ac_status")
+    @ColumnInfo(name = "ac_status")
+    private int acStatus;
 
     @ColumnInfo(name = "SmokeDetector")
     private String smokeDetector;
-
-    @ColumnInfo(name = "ACStatus")
-    private int acStatus;
 
     // SETTER AND GETTER
 
@@ -143,5 +156,25 @@ public class LectureHallEntity extends BaseEntity {
     @Override
     public int hashCode() {
         return Objects.hash(localId, lectureHallId, title, capacity);
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "LectureHallEntity{" +
+                "localId=" + localId +
+                ", lectureHallId=" + lectureHallId +
+                ", universityIdFK=" + universityIdFK +
+                ", title='" + title + '\'' +
+                ", capacity=" + capacity +
+                ", hasProjector=" + hasProjector +
+                ", lightingStatus=" + lightingStatus +
+                ", acStatus=" + acStatus +
+                ", smokeDetector='" + smokeDetector + '\'' +
+                ", statusUpload=" + statusUpload +
+                ", userIdFk=" + userIdFk +
+                ", createdDateTime='" + createdDateTime + '\'' +
+                ", lastModifiedDateTime='" + lastModifiedDateTime + '\'' +
+                "} " + super.toString();
     }
 }

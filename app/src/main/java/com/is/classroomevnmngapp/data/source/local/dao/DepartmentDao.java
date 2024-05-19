@@ -18,7 +18,7 @@ public interface DepartmentDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<DepartmentEntity> entities);
 
-    @Query("SELECT * FROM Departments WHERE DepartmentID = :departmentId")
+    @Query("SELECT * FROM Departments WHERE id = :departmentId")
     DepartmentEntity getDepartmentById(int departmentId);
 
     @Query("SELECT * FROM Departments")

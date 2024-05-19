@@ -34,6 +34,7 @@ public class Log1 {
     public static void PrintFileEvent(String tag, String msg) {
       //  if (isDebug1)
        LogManager.getInstance().log_event_app3(tag + " " + msg);
+       d(tag,msg);
     }
 
     public static void PrintFileError(String tag, String msg) {

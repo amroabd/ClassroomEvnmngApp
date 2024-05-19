@@ -13,13 +13,18 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.is.classroomevnmngapp.R;
 import com.is.classroomevnmngapp.databinding.FragmentUserHomeBinding;
+import com.is.classroomevnmngapp.ui.user.reservations.ReservationUserViewModel;
+
+import java.util.Locale;
 
 public class UserHomeFragment extends Fragment {
 
     private UserHomeViewModel userHomeViewModel;
+    private ReservationUserViewModel viewModel;
     FragmentUserHomeBinding userHomeBinding;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        viewModel = new ViewModelProvider(this).get(ReservationUserViewModel.class);
         userHomeViewModel = new ViewModelProvider(this).get(UserHomeViewModel.class);
         userHomeBinding=FragmentUserHomeBinding.inflate(inflater);
 
@@ -36,15 +41,15 @@ public class UserHomeFragment extends Fragment {
         userHomeBinding.settingIcon.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.zoom_in));
 
         //
-        userHomeBinding.classRoomsCard.setOnClickListener(view1 -> {
-            classRooms();
-        });
-        userHomeBinding.reserveRoomCard.setOnClickListener(view1 -> {
-            reserveRoom();
-        });
-        userHomeBinding.settingCard.setOnClickListener(view1 -> {
-            setting();
-        });
+        userHomeBinding.classRoomsCard.setOnClickListener(view1 -> classRooms());
+        userHomeBinding.reserveRoomCard.setOnClickListener(view1 -> reserveRoom());
+        userHomeBinding.settingCard.setOnClickListener(view1 -> setting());
+        //----------
+        detail();
+    }
+
+    private void detail(){
+        userHomeBinding.reserveRoomCounts.setText(String.format(Locale.ENGLISH,"%d", viewModel.getReservedCount()));
 
     }
 

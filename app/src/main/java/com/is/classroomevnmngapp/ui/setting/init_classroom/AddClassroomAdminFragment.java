@@ -69,7 +69,6 @@ public class AddClassroomAdminFragment extends Fragment {
 
         entity.setHasProjector((addClassroomBinding.projector.isChecked() ? 1 : 0));
         entity.setLightingStatus((addClassroomBinding.lighting.isChecked() ? 1 : 0));
-        entity.setSmokeDetector((addClassroomBinding.smokeDetector.isChecked() ? "1" : "0"));
         entity.setAcStatus((addClassroomBinding.aC.isChecked() ? 1 : 0));
 
         //----

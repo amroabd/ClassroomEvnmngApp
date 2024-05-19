@@ -75,7 +75,7 @@
                     android:textColor="@color/main_color_500"
                     android:textSize="12sp"
                     app:elevation="0dp"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:icon="@drawable/ic_cancel"
                     app:iconSize="18dp"
                     app:iconTint="@color/my_app_on_error"
@@ -88,6 +88,7 @@
             android:id="@+id/reserveDateLyt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:orientation="vertical">
 
             <TextView

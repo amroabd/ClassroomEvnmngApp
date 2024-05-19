@@ -19,7 +19,7 @@ public interface ControllerDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<ControllerEntity> entities);
 
-    @Query("SELECT * FROM Controllers WHERE ControllerID = :controllerId")
+    @Query("SELECT * FROM Controllers WHERE id = :controllerId")
     ControllerEntity getControllerById(int controllerId);
 
     @Query("SELECT * FROM Controllers")

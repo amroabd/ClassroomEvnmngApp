@@ -1,5 +1,6 @@
 package com.is.classroomevnmngapp.ui.auth.login;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,10 +20,12 @@ import com.is.classroomevnmngapp.R;
 import com.is.classroomevnmngapp.UserMainActivity;
 import com.is.classroomevnmngapp.databinding.FragmentAuthLoginBinding;
 import com.is.classroomevnmngapp.ui.AdminMainActivity;
+import com.is.classroomevnmngapp.ui.auth.login.data.LoginRequest;
 import com.is.classroomevnmngapp.ui.auth.login.data.LoginResponse;
 import com.is.classroomevnmngapp.utils.ConvertData;
 import com.is.classroomevnmngapp.utils.SharePerf;
 import com.is.classroomevnmngapp.utils.Validator;
+import com.is.classroomevnmngapp.utils.widget.custom.CustomDialog;
 
 import static com.is.classroomevnmngapp.utils.SharePerf.TYPE_ACCOUNT_ADMIN;
 import static com.is.classroomevnmngapp.utils.SharePerf.TYPE_ACCOUNT_USER;
@@ -33,6 +36,7 @@ public class LoginFragment extends Fragment {
 
     FragmentAuthLoginBinding loginBinding;
     LoginViewModel viewModel;
+    ProgressDialog progressDialog;
 
 
     @Nullable
@@ -96,28 +100,50 @@ public class LoginFragment extends Fragment {
 
         String username = ConvertData.to2String(loginBinding.usernameEditText);
         String password = ConvertData.to2String(loginBinding.passwordEditText);
+        int type = SharePerf.getInstance(getContext()).getTypeUser();
+        LoginRequest loginRequest = new LoginRequest(username, password, type);
 
-        viewModel.sendLoginRequest(username, password, new LoginCallback() {
+        progressDialog = ProgressDialog.show(getContext(),
+                getString(R.string.label_BodyTitle_login),
+                getString(R.string.label_body_msg_login));
+
+        viewModel.sendLoginRequest(loginRequest, new LoginCallback() {
             @Override
             public void onSuccess(LoginResponse response) {
-                SharePerf.getInstance(getContext()).addUserLogin(response.getUserId(), username, password);
-                SharePerf.getInstance(getContext()).addTypeUser(response.getUserType());
-                //---start activity
-                if (response.getUserType() == TYPE_ACCOUNT_ADMIN) {
-                    startActivity(new Intent(getContext(), AdminMainActivity.class));
-                } else if (response.getUserType() == TYPE_ACCOUNT_USER) {
-                    startActivity(new Intent(getContext(), UserMainActivity.class));
+
+                if (progressDialog != null && progressDialog.isShowing())
+                    progressDialog.dismiss();
+
+                if (response.getCode().equals("Success")) {
+                    setDialogCallback(getContext(), new CustomDialog.NoteAlertDialogFactory(() -> {
+                        SharePerf.getInstance(getContext()).addUserLogin(response.getUserId(), username, password);
+                        SharePerf.getInstance(getContext()).addTypeUser(type);
+                        //---start activity
+                        if (type == TYPE_ACCOUNT_ADMIN) {
+                            startActivity(new Intent(getContext(), AdminMainActivity.class));
+                        } else if (type == TYPE_ACCOUNT_USER) {
+                            startActivity(new Intent(getContext(), UserMainActivity.class));
+                        }
+                    }), response.getCode(),"Success LoggedIn."+ response.getUserId());
+                    return;
                 }
+
+                setDialogCallback(getContext(), new ErrorAlertDialogFactory(() -> {
+
+                }), "", "Warning :" + response.toString());
+
             }
 
             @Override
             public void onFailure(Throwable t) {
+                if (progressDialog != null && progressDialog.isShowing())
+                    progressDialog.dismiss();
                 setDialogCallback(getContext(), new ErrorAlertDialogFactory(() -> {
 
                 }), "", "Err :" + t.toString());
             }
         });
-         if (SharePerf.getInstance(getContext()).isLoggedIn()) {
+     /*    if (SharePerf.getInstance(getContext()).isLoggedIn()) {
              if (SharePerf.getInstance(getContext()).getTypeUser() == TYPE_ACCOUNT_ADMIN) {
                  startActivity(new Intent(getContext(), AdminMainActivity.class));
              } else if (SharePerf.getInstance(getContext()).getTypeUser() == TYPE_ACCOUNT_USER) {
@@ -127,7 +153,7 @@ public class LoginFragment extends Fragment {
              setDialogCallback(getContext(), new ErrorAlertDialogFactory(() -> {
 
              }), "", "Err :" + "بيانات تسجيل الدخول غير صحيح ,<br>تاكد من ان لديك حساب سابق او انشى حساب جديد.!!! ");
-         }
+         }*/
     }
 
 }

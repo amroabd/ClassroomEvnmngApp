@@ -95,6 +95,7 @@ public class ReservationAddUserFragment extends BaseFragment {
         //------
         int id = (int) viewModel.addReservation(entity);
         if (id > 0) {
+            viewModel.uploadData();
             ToastUtil1.showToast(getContext(), "Success in Added data Reservation to db.!");
             NavHostFragment.findNavController(ReservationAddUserFragment.this).popBackStack();
         } else {

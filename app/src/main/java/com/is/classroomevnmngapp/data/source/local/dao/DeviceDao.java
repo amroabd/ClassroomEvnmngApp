@@ -17,7 +17,7 @@ public interface DeviceDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<DeviceEntity> entities);
 
-    @Query("SELECT * FROM Devices WHERE DeviceID = :deviceId")
+    @Query("SELECT * FROM Devices WHERE id = :deviceId")
     DeviceEntity getDeviceById(int deviceId);
 
     @Query("SELECT * FROM Devices")

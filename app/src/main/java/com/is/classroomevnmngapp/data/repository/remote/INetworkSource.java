@@ -1,4 +1,6 @@
-package com.is.classroomevnmngapp.data.repository;
+package com.is.classroomevnmngapp.data.repository.remote;
 
-public interface IBaseRepository {
+public interface INetworkSource {
+    void downloadData();
+    void uploadingData();
 }

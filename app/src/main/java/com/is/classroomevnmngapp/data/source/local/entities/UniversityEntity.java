@@ -8,9 +8,9 @@ import androidx.room.PrimaryKey;
 public class UniversityEntity {
     @PrimaryKey(autoGenerate = true)
     private final int universityId;
-    @ColumnInfo(name = "Name")
+    @ColumnInfo(name = "name")
     private final String name;
-    @ColumnInfo(name = "Location")
+    @ColumnInfo(name = "location")
     private final String location;
 
     public UniversityEntity(int universityId, String name, String location) {

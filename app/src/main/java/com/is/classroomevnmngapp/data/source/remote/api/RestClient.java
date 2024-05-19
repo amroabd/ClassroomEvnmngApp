@@ -10,7 +10,7 @@ public class RestClient {
 
     private RestClient() {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(ApiService.BaseURL)
-                .addConverterFactory(GsonConverterFactory.create()).build();
+                .addConverterFactory(GsonConverterFactory.create(/*gson*/)).build();
         apiService = retrofit.create(ApiService.class);
     }
 
@@ -22,5 +22,7 @@ public class RestClient {
     public ApiService getApiService(){
         return apiService;
     }
+
+
 
 }

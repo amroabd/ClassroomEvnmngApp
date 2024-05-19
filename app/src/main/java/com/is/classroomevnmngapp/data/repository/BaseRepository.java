@@ -11,6 +11,8 @@ import androidx.sqlite.db.SupportSQLiteQuery;
 import com.is.classroomevnmngapp.data.source.local.AppDatabase;
 import com.is.classroomevnmngapp.data.source.local.dao.BaseDao;
 import com.is.classroomevnmngapp.data.source.local.entities.BaseEntity;
+import com.is.classroomevnmngapp.data.source.remote.DownloadCentral;
+import com.is.classroomevnmngapp.data.source.remote.UploadCentral;
 import com.is.classroomevnmngapp.utils.DateUtils;
 import com.is.classroomevnmngapp.utils.Log1;
 import com.is.classroomevnmngapp.utils.SharePerf;
@@ -31,11 +33,18 @@ public class BaseRepository {
     protected final AppDatabase mDb;
     protected final SharePerf mSharePerf;
 
+    protected DownloadCentral mDownloadCentral;
+    protected UploadCentral mUploadCentral;
+
     public BaseRepository(Context context) {
         Log1.d(TAG,"=========>BaseRep(context)<===========");
         mDb = AppDatabase.getInstance(context.getApplicationContext());
         mBaseDao = mDb.mainMenuDao();
         mSharePerf=SharePerf.getInstance(context.getApplicationContext());
+        //-------------
+        mDownloadCentral=new DownloadCentral(context.getApplicationContext());
+        mUploadCentral=new UploadCentral();
+        //-------------
     }
 
 

@@ -9,16 +9,16 @@ public class DeviceEntity {
 
     @PrimaryKey(autoGenerate = true)
     private int localId;
-    @ColumnInfo(name = "DeviceID")
+    @ColumnInfo(name = "id")
     private int deviceId;
 
-    @ColumnInfo(name = "ControllerIDFK")
+    @ColumnInfo(name = "controll_id_fk")
     private int controllerIdFK;
 
-    @ColumnInfo(name = "Type")
+    @ColumnInfo(name = "type_id")
     private String type;
 
-    @ColumnInfo(name = "Status")
+    @ColumnInfo(name = "status")
     private int status;
 
     //--------------------

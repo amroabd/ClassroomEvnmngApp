@@ -10,19 +10,19 @@ public class ScheduleEntity extends BaseEntity {
     @PrimaryKey(autoGenerate = true)
     private int localId;
 
-    @ColumnInfo(name = "ScheduleID")
+    @ColumnInfo(name = "id")
     private int scheduleId;
 
-    @ColumnInfo(name = "LectureHallIDFK")
+    @ColumnInfo(name = "lecture_hall_id_fk")
     private int lectureHallIdFK;
 
-    @ColumnInfo(name = "ProfessorIDFK")
+    @ColumnInfo(name = "professor_id_fk")
     private int professorIdFK;
 
-    @ColumnInfo(name = "StartTime")
+    @ColumnInfo(name = "start_time")
     private String startTime;
 
-    @ColumnInfo(name = "EndTime")
+    @ColumnInfo(name = "end_time")
     private String endTime;
 
 

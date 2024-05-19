@@ -26,7 +26,7 @@
     <string name="cat_navigation_rail_remove_nav_item">remove</string>
     <string name="cat_navigation_rail_increment_badge_number">increment badge number</string>
     <string name="label_BodyTitle_login">تسجيل الدخول</string>
-    <string name="label_body_msg_login">تسجيل الدخول نظام ادارة بيئة التعليمية</string>
+    <string name="label_body_msg_login">جاري التحقق تسجيل الدخول نظام ادارة بيئة التعليمية.</string>
     <string name="label_body_msg1">إنشاء حساب في نظام ادارة بيئة الفصول <br />
         الدراسية التي تعمل بتقنية إنترنت الأشياء </string>
     <string name="label_email_or_username">اسم المستخدم / البريد الإلكتروني</string>

@@ -9,13 +9,13 @@ public class DepartmentEntity {
     @PrimaryKey(autoGenerate = true)
     private int localId;
 
-    @ColumnInfo(name = "DepartmentID")
+    @ColumnInfo(name = "id")
     private int departmentId;
 
-    @ColumnInfo(name = "Name")
+    @ColumnInfo(name = "name")
     private String name;
 
-    @ColumnInfo(name = "UniversityIDFK")
+    @ColumnInfo(name = "univ_id_fk")
     private int universityIdFK;
 
     public int getLocalId() {

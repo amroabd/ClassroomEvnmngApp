@@ -8,11 +8,11 @@ import androidx.lifecycle.AndroidViewModel;
 import com.is.classroomevnmngapp.data.repository.LectureHallRepository;
 import com.is.classroomevnmngapp.data.repository.remote.NetworkProviderRepository;
 
-public class RemoteProviderViewModel extends AndroidViewModel {
+public class NetworkProviderViewModel extends AndroidViewModel {
 
     private final NetworkProviderRepository sNetworkProviderRepository;
 
-    public RemoteProviderViewModel(@NonNull Application application) {
+    public NetworkProviderViewModel(@NonNull Application application) {
         super(application);
         sNetworkProviderRepository =new NetworkProviderRepository();
     }

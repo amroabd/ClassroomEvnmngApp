@@ -52,7 +52,7 @@ public class LogManager {
 
     }
     public void log_event_app3(String txt){
-        String namefile = FILE_NAME3+ "_" + simpleDateFormat1.format(new Date())+".is";
+        String namefile = FILE_NAME3+ "_" + simpleDateFormat1.format(new Date())+".log";
         try {
             File path = new File(GlobalData.F.path_Full_Event_Folder);
             if (!path.exists())

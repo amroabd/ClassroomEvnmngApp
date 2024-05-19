@@ -19,7 +19,7 @@ public interface ProfessorDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<ProfessorEntity> entities);
 
-    @Query("SELECT * FROM Professors WHERE ProfessorID = :professorId")
+    @Query("SELECT * FROM Professors WHERE id = :professorId")
     ProfessorEntity getProfessorById(int professorId);
 
 

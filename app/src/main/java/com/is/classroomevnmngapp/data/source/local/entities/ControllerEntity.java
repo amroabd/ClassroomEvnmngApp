@@ -10,16 +10,16 @@ public class ControllerEntity  extends BaseEntity{
     @PrimaryKey(autoGenerate = true)
     private int localId;
 
-    @ColumnInfo(name = "ControllerID")
+    @ColumnInfo(name = "id")
     private int controllerId;
 
-    @ColumnInfo(name = "LectureHallIDFK")
+    @ColumnInfo(name = "lecture_hall_id_fk")
     private int lectureHallIdFK;
 
-    @ColumnInfo(name = "Type")
+    @ColumnInfo(name = "type")
     private String type;
 
-    @ColumnInfo(name = "IPAddress")
+    @ColumnInfo(name = "iP_address")
     private String ipAddress;
 
     //----------------

@@ -25,6 +25,14 @@ public class ReservationUserViewModel extends AndroidViewModel {
         return sReservationRepository.getReserveALectureList();
     }
 
+    public LiveData<PagedList<JoinReserveALecture>> getReserveALectureHistList() {
+        return sReservationRepository.getReserveALectureHistList();
+    }
+
+    public int getReservedCount(){
+       return sReservationRepository.getReservedCount();
+    }
+
 
     public long addReservation(ReservationEntity entity) {
         return sReservationRepository.insertReservation(entity);
@@ -32,6 +40,10 @@ public class ReservationUserViewModel extends AndroidViewModel {
 
     public void updateReservation(int id, int status) {
         sReservationRepository.updateReserveStatus(id, status);
+    }
+
+    public void uploadData(){
+        sReservationRepository.uploadingData();
     }
 
 }

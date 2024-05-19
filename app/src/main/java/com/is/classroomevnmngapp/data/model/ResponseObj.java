@@ -3,22 +3,40 @@ package com.is.classroomevnmngapp.data.model;
 import com.google.gson.annotations.SerializedName;
 
 public class ResponseObj {
-    @SerializedName("data")
-    private final String data;
-    @SerializedName("code")
+    private int lId;
+    @SerializedName("Data")
+    private final String servId;
+    @SerializedName("Code")
     private final String code;
 
 
-    public String getData() {
-        return data;
+    public String getServId() {
+        return servId;
     }
 
     public String getCode() {
         return code;
     }
 
+    public int getlId() {
+        return lId;
+    }
+
     public ResponseObj(String data, String code) {
-        this.data = data;
+        this.servId = data;
         this.code = code;
+    }
+
+    public void setlId(int lId) {
+        this.lId = lId;
+    }
+
+    @Override
+    public String toString() {
+        return "ResponseObj{" +
+                "lId=" + lId +
+                ", servId='" + servId + '\'' +
+                ", code='" + code + '\'' +
+                '}';
     }
 }

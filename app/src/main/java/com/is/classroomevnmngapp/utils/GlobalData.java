@@ -39,8 +39,8 @@ public class GlobalData {
         public static final String path_Full_DB_Folder=storageExternal+ROOT_FOLDER_APP+DB_FOLDER_APP;
         public static final String path_Full_vm_Folder=storageExternal+ROOT_FOLDER_APP+ VM_FOLDER_APP;
         public static final String path_Full_Log_Folder=storageExternal+ROOT_FOLDER_APP+LOG_FOLDER_APP;
-        public static final String path_Full_Error_Folder=storageExternal+ROOT_FOLDER_APP+LOG_FOLDER_APP+ERROR_log_FOLDER_APP;
-        public static final String path_Full_Event_Folder=storageExternal+ROOT_FOLDER_APP+LOG_FOLDER_APP+EVENT_log_FOLDER_APP;
+        public static final String path_Full_Error_Folder=p();//storageExternal+ROOT_FOLDER_APP+LOG_FOLDER_APP+ERROR_log_FOLDER_APP;
+        public static final String path_Full_Event_Folder=p();//storageExternal+ROOT_FOLDER_APP+LOG_FOLDER_APP+EVENT_log_FOLDER_APP;
 
         public static void generatedFoldersApp(){
             createFolder(path_Full_Files_Folder);

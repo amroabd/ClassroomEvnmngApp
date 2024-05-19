@@ -1,11 +1,13 @@
 package com.is.classroomevnmngapp.view_model;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.is.classroomevnmngapp.data.repository.LectureHallRepository;
+import com.is.classroomevnmngapp.data.repository.ReservationRepository;
 import com.is.classroomevnmngapp.data.repository.remote.NetworkProviderRepository;
 
 public class NetworkProviderViewModel extends AndroidViewModel {
@@ -18,11 +20,16 @@ public class NetworkProviderViewModel extends AndroidViewModel {
     }
 
 
-    public void downloadDataLecture(){
-        sNetworkProviderRepository.downloadData(LectureHallRepository.getInstance(null));
+    public void downloadDataLecture(Context context){
+        sNetworkProviderRepository.downloadData(LectureHallRepository.getInstance(context));
     }
-    public void uploadingDataLecture(){
-        sNetworkProviderRepository.uploadingData(LectureHallRepository.getInstance(null));
+
+    public void downloadDataReservation(Context context){
+        sNetworkProviderRepository.downloadData(ReservationRepository.getInstance(context));
+    }
+
+    public void uploadingDataReservation(Context context){
+        sNetworkProviderRepository.uploadingData(ReservationRepository.getInstance(context));
     }
 
 }

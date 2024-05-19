@@ -17,7 +17,7 @@ public class ReservationEntity extends BaseEntity {
     @PrimaryKey(autoGenerate = true)
     private int localId;
 
-    @SerializedName("id")
+    @SerializedName("Id")
     @ColumnInfo(name = "id")
     private int reserveId;
 

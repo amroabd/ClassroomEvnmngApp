@@ -8,7 +8,7 @@ import androidx.sqlite.db.SimpleSQLiteQuery;
 import com.is.classroomevnmngapp.data.source.local.dao.HelperDao;
 import com.is.classroomevnmngapp.data.source.local.entities.HelperEntity;
 import com.is.classroomevnmngapp.data.source.remote.DownloadCallback;
-import com.is.classroomevnmngapp.data.source.remote.DownloadCentral;
+import com.is.classroomevnmngapp.data.source.remote.DownloadClient;
 import com.is.classroomevnmngapp.data.source.remote.InsertResultDownloadState;
 import com.is.classroomevnmngapp.utils.executor.AppExecutor;
 import com.is.classroomevnmngapp.utils.spinner.ListSpinner;
@@ -32,7 +32,7 @@ public final class HelperRepository extends BaseRepository {
     protected final HelperDao.MainMenu mainMenuDao;
     private final HelperDao.SubMenu subMenuDao;
 
-    private final DownloadCentral mDownloadCentral;
+    private final DownloadClient mDownloadClient;
 
     //-----------
 
@@ -41,7 +41,7 @@ public final class HelperRepository extends BaseRepository {
         mainMenuDao = mDb.mainMenuDao();
         subMenuDao = mDb.subMenuDao();
 
-        mDownloadCentral = new DownloadCentral(context);
+        mDownloadClient = new DownloadClient(context);
         //-----
         //insertDefault();
         if (getCount("id",NAME_INIT_SUB_MENU)<=0) {
@@ -101,7 +101,7 @@ public final class HelperRepository extends BaseRepository {
 
     //=========================================================================
     public void downMainMenu(InsertResultDownloadState<String> resultState) {
-        mDownloadCentral.downAllHeaderData(new DownloadCallback<List<HelperEntity.MainMenu>>() {
+        mDownloadClient.downAllHeaderData(new DownloadCallback<List<HelperEntity.MainMenu>>() {
             @Override
             public void onSuccess(List<HelperEntity.MainMenu> tList) {
                 AtomicInteger count = new AtomicInteger();
@@ -125,7 +125,7 @@ public final class HelperRepository extends BaseRepository {
 
     //2--------------------
     public void downSubMenu(InsertResultDownloadState<String> resultState) {
-        mDownloadCentral.downAllSubHeaderData(new DownloadCallback<List<HelperEntity.SubMenu>>() {
+        mDownloadClient.downAllSubHeaderData(new DownloadCallback<List<HelperEntity.SubMenu>>() {
             @Override
             public void onSuccess(List<HelperEntity.SubMenu> tList) {
                 Log.d(TAG, "Insert all row in table subMenus");

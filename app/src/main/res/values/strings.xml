@@ -119,5 +119,7 @@
     <string name="label_hint_name_classroom">ادخل اسم القاعة</string>
     <string name="label_avail_classroom">حالة توفر القاعة</string>
     <string name="label_message_sure">Sure process The Reservation</string>
+    <string name="title_change_pass">change password</string>
+    <string name="message_change_pass">verify send change passowrd .</string>
 
 </resources>

@@ -40,6 +40,7 @@ public class Log1 {
     public static void PrintFileError(String tag, String msg) {
         //if (isDebug1)
        LogManager.getInstance().log_errors_logs(tag + " " + msg);
+       e(tag,msg);
     }
 
 }

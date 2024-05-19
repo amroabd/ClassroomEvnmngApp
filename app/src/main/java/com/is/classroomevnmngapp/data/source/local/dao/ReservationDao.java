@@ -16,7 +16,7 @@ import java.util.List;
 public interface ReservationDao {
 
     @Query("UPDATE Reservations " +
-            "SET reserve_status=:status " +
+            "SET reserve_status=:status ,status_upload=0 " +
             "WHERE id=:id")
     void updateReserveStatus(long id, int status);
 
@@ -50,7 +50,7 @@ public interface ReservationDao {
     ReservationEntity getReservationById(int reserveId);
 
 
-    @Query("SELECT * FROM Reservations WHERE status_upload=0 ")
+    @Query("SELECT * FROM Reservations WHERE status_upload=0 LIMIT 5 ")
     List<ReservationEntity> getAll();
 
     @Query("SELECT COUNT(localId) FROM Reservations WHERE reserve_status=1 ")

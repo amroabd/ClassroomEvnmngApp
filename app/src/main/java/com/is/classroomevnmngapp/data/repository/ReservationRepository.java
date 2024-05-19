@@ -49,16 +49,17 @@ public final class ReservationRepository extends BaseRepository implements INetw
 
     @Override
     public void downloadData() {
-        mDownloadCentral.downLoadReservations(new DownloadCallback<List<ReservationEntity>>() {
+        mDownloadClient.downLoadReservations(new DownloadCallback<List<ReservationEntity>>() {
             @Override
             public void onSuccess(List<ReservationEntity> tList) {
                 //save result from remote to db local
-                insertAll(tList);
+                Log.d(TAG, String.format("insert list data return from server size: %s", tList.size()));
+                AppExecutor.getInstance().diskIO().execute(() -> insertAll(tList));
             }
 
             @Override
             public void onError(String error) {
-
+                Log.e(TAG, String.format("onError : %s", error));
             }
         });
     }

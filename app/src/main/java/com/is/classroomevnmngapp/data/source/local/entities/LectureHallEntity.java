@@ -19,7 +19,7 @@ public class LectureHallEntity extends BaseEntity {
     private int localId;
 
 
-    @SerializedName("id")
+    @SerializedName("Id")
     @ColumnInfo(name = "id")
     private int lectureHallId;
 
@@ -31,7 +31,7 @@ public class LectureHallEntity extends BaseEntity {
     @ColumnInfo(name = "name")
     private String title;
 
-    @SerializedName("capacity")
+    @SerializedName("captacity")
     @ColumnInfo(name = "capacity")
     private int capacity;
 

@@ -8,6 +8,7 @@ import com.is.classroomevnmngapp.ui.auth.login.data.LoginRequest;
 import com.is.classroomevnmngapp.ui.auth.login.data.LoginResponse;
 import com.is.classroomevnmngapp.ui.auth.sigup.data.SigUpResponse;
 import com.is.classroomevnmngapp.ui.auth.sigup.data.SignUpRequest;
+import com.is.classroomevnmngapp.ui.setting.change_pass.data.ChangePassRequest;
 
 import java.util.List;
 
@@ -31,6 +32,8 @@ public interface ApiService {
     @POST("auth/signup.php")
     Call<SigUpResponse> signUp(@Body SignUpRequest signupRequest);
 
+    @POST("auth/change_pass.php")
+    Call<ResponseObj> change_pass(@Body ChangePassRequest user);
     //====================================Helper
     @Headers("Cache-Control: max-age=600000")
     @GET("Helper/HeaderData")
@@ -42,23 +45,23 @@ public interface ApiService {
     //====================================base
 
     //-1----------------------
-    @POST("LectureHall/Create")
+    @POST("LectureHall/Create.php")
     Call<ResponseObj> createLectureHall(@Body LectureHallEntity entity);
 
-    @POST("LectureHall/Update")
+    @POST("LectureHall/Update.php")
     Call<ResponseObj> updateLectureHall(@Body LectureHallEntity entity);
 
-    @GET("LectureHall/List")
+    @GET("LectureHall/List.php")
     Call<List<LectureHallEntity>> getLectureHallsData();
 
     //-2----------------------
-    @POST("Reservation/Create")
+    @POST("Reservation/Create.php")
     Call<ResponseObj> createReservation(@Body ReservationEntity entity);
 
-    @POST("Reservation/Update")
+    @POST("Reservation/Update.php")
     Call<ResponseObj> updateReservation(@Body ReservationEntity entity);
 
-    @GET("Reservation/List")
+    @GET("Reservation/List.php")
     Call<List<ReservationEntity>> getReservationsData();
 
 }

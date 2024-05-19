@@ -49,16 +49,17 @@ public final class LectureHallRepository extends BaseRepository implements INetw
 
     @Override
     public void downloadData() {
-        mDownloadCentral.downLoadLectureHalls(new DownloadCallback<List<LectureHallEntity>>() {
+        mDownloadClient.downLoadLectureHalls(new DownloadCallback<List<LectureHallEntity>>() {
             @Override
             public void onSuccess(List<LectureHallEntity> tList) {
                //here : insert list data return from server
-                Log.d(TAG, String.format("insert list data return from server : %s", tList));
+                Log.d(TAG, String.format("insert list data return from server size: %s", tList.size()));
+                AppExecutor.getInstance().diskIO().execute(() -> insertAll(tList));
             }
 
             @Override
             public void onError(String error) {
-
+                Log.e(TAG, String.format("onError : %s", error));
             }
         });
     }

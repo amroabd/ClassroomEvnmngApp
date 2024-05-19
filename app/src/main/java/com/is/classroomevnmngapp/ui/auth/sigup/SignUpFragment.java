@@ -114,6 +114,7 @@ public class SignUpFragment extends Fragment {
                 startActivity(new Intent(getContext(), AdminMainActivity.class));
             } else if (SharePerf.getInstance(getContext()).getTypeUser() == TYPE_ACCOUNT_USER) {
                 startActivity(new Intent(getContext(), UserMainActivity.class));
+
             }
             //startActivity(new Intent(getActivity(), UserMainActivity.class));
         }

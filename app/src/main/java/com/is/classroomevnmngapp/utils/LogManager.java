@@ -41,7 +41,7 @@ public class LogManager {
     }
 
     public void log_errors_logs(String txt){
-        String namefile = FILE_NAME2+ "_" + simpleDateFormat1.format(new Date())+".is";
+        String namefile = FILE_NAME2+ "_" + simpleDateFormat1.format(new Date())+".log";
         try {
             File path = new File(GlobalData.F.path_Full_Error_Folder);
             if (!path.exists())

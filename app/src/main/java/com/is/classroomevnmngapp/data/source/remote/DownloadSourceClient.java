@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import com.is.classroomevnmngapp.data.source.local.entities.HelperEntity;
 import com.is.classroomevnmngapp.data.source.local.entities.LectureHallEntity;
 import com.is.classroomevnmngapp.data.source.local.entities.ReservationEntity;
+import com.is.classroomevnmngapp.data.source.local.entities.UserEntity;
 import com.is.classroomevnmngapp.data.source.remote.api.ApiService;
 import com.is.classroomevnmngapp.data.source.remote.api.RestClient;
 import com.is.classroomevnmngapp.utils.Log1;
@@ -120,6 +121,12 @@ public class DownloadClient {
         //------------------
         Call<List<ReservationEntity>> listCall = apiService.getReservationsData();
         downloadData("Reservations", listCall, callback);
+    }
+
+    public void downLoadUsers(DownloadCallback<List<UserEntity>> callback) {
+        //------------------
+        Call<List<UserEntity>> listCall = apiService.getUsersData();
+        downloadData("Users", listCall, callback);
     }
 
 

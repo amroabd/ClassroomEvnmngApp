@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.is.classroomevnmngapp.data.model.ResponseObj;
 import com.is.classroomevnmngapp.data.source.local.entities.ReservationEntity;
+import com.is.classroomevnmngapp.data.source.local.entities.UserEntity;
 import com.is.classroomevnmngapp.data.source.remote.api.ApiService;
 import com.is.classroomevnmngapp.data.source.remote.api.RestClient;
 import com.is.classroomevnmngapp.utils.Log1;
@@ -21,11 +22,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UploadCentral {
+public class UploadingClient {
     private static final String TAG = "UploadCentral";
     private final ApiService apiService;
 
-    public UploadCentral() {
+    public UploadingClient() {
         this.apiService= RestClient.getInstance().getApiService();
     }
 
@@ -118,6 +119,14 @@ public class UploadCentral {
             uploadData(entity.getLocalId(),"Reservations", subHeaderCall, callback);
         }
     }
+
+    public void uploadUser(List<UserEntity> entities, UploadCallback<ResponseObj> callback){
+        for (UserEntity entity:entities){
+            Call<ResponseObj> subHeaderCall = apiService.updateUser(entity);
+            uploadData(entity.getLocalId(),"User", subHeaderCall, callback);
+        }
+    }
+
 
 
 }

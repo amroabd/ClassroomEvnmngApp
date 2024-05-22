@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 
 import com.is.classroomevnmngapp.data.repository.LectureHallRepository;
 import com.is.classroomevnmngapp.data.repository.ReservationRepository;
+import com.is.classroomevnmngapp.data.repository.remote.INetworkSource;
 import com.is.classroomevnmngapp.data.repository.remote.NetworkProviderRepository;
 
 public class NetworkProviderViewModel extends AndroidViewModel {
@@ -30,6 +31,11 @@ public class NetworkProviderViewModel extends AndroidViewModel {
 
     public void uploadingDataReservation(Context context){
         sNetworkProviderRepository.uploadingData(ReservationRepository.getInstance(context));
+    }
+
+    //inject any object implement to INetworkSource
+    public void downloadData(@NonNull INetworkSource iNetworkSource){
+        sNetworkProviderRepository.downloadData(iNetworkSource);
     }
 
 }

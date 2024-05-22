@@ -1,6 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:tag="layout/adapter_notification_0"
+    app:layout_constraintTop_toBottomOf="@id/top_clyt"
+    android:layout_gravity="center_vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_alarm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/bg_main"
+        android:backgroundTint="@color/main_color_100"
+        android:orientation="horizontal"
+        android:translationZ="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:targetApi="lollipop">
+
+        <ImageView
+            android:id="@+id/img_notification"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="18dp"
+            android:src="@drawable/ic_notifications_black_24dp"
+            android:tint="@color/main_color_500"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_circle"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="-8dp"
+            android:background="@drawable/ic_circle"
+            android:visibility="visible"
+            app:layout_constraintStart_toEndOf="@+id/img_notification"
+            app:layout_constraintTop_toTopOf="@+id/img_notification" />
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="messages"
+            android:textColor="@color/colorBlack2E"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/img_notification"
+            app:layout_constraintTop_toTopOf="@+id/img_notification" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
+            android:text="content"
+            android:textColor="@color/colorBlack99"
+            android:textSize="13sp"
+
+            app:layout_constraintStart_toStartOf="@+id/tv_message"
+            app:layout_constraintTop_toBottomOf="@+id/tv_message" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

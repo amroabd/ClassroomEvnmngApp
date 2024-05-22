@@ -24,7 +24,6 @@ import com.is.classroomevnmngapp.utils.Log1;
 import com.is.classroomevnmngapp.utils.widget.custom.CustomDialog;
 
 import static com.is.classroomevnmngapp.data.model.JoinReserveALecture.DIFF_CALLBACK;
-import static com.is.classroomevnmngapp.utils.DateUtils.getDate;
 import static com.is.classroomevnmngapp.utils.constant.KeyExtra.KEY_EXTRA_LECTURE_ID;
 
 public class ReservationListUserFragment extends Fragment {
@@ -88,8 +87,8 @@ public class ReservationListUserFragment extends Fragment {
                         // incomplete
                         holder.itemReserveBinding.reserveDateLyt.setVisibility(View.VISIBLE);
                         //----
-                        holder.itemReserveBinding.itemStartTime.setText(String.format("%s %s", getDate(), item.getReserveStartTime()));
-                        holder.itemReserveBinding.itemEndTime.setText(String.format("%s %s", getDate(), item.getReserveEndTime()));
+                        holder.itemReserveBinding.itemStartTime.setText(String.format(" %s",  item.getReserveStartTime()));
+                        holder.itemReserveBinding.itemEndTime.setText(String.format("%s", item.getReserveEndTime()));
                         holder.itemReserveBinding.statImageView.setImageTintList(ColorStateList.valueOf(R.color.success_100));
                     } else {
                         // at status complete time reserve, here update status in db

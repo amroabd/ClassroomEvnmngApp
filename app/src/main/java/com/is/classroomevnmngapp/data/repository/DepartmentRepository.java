@@ -5,16 +5,16 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
-import com.is.classroomevnmngapp.data.source.local.dao.DepartmentDao;
 import com.is.classroomevnmngapp.data.source.local.entities.DepartmentEntity;
 import com.is.classroomevnmngapp.utils.executor.AppExecutor;
+import com.is.classroomevnmngapp.utils.spinner.ListSpinner;
 
 import java.util.List;
 
 import static com.is.classroomevnmngapp.utils.constant.NameTableConst.NAME_DEPARTMENTS;
 
 
-public final class DepartmentRepository extends BaseRepository implements DepartmentDao {
+public final class DepartmentRepository extends BaseRepository  {
     private static final String TAG = DepartmentRepository.class.getSimpleName();
 
     public DepartmentRepository(Context context) {
@@ -44,13 +44,26 @@ public final class DepartmentRepository extends BaseRepository implements Depart
 
 
     public int getCount() {
-        return getCount("departmentId",NAME_DEPARTMENTS);
+        return getCount("id",NAME_DEPARTMENTS);
        // return mDb.departmentDao().getCount();
     }
 
 
     public int deleteAllRecords() {
-        return mDb.departmentDao().deleteAllRecords();
+        return delete(NAME_DEPARTMENTS,null);
+        //return mDb.departmentDao().deleteAllRecords();
+    }
+
+    /***
+     *  list data
+     * @param callback return result data
+     */
+    public void getSpinnerListDepartment( GetResultCallback<List<ListSpinner>> callback) {
+        AppExecutor.getInstance().diskIO().execute(() -> {
+            List<ListSpinner> list = mDb.departmentDao().loadAsSpinnerData();
+            Log.d(TAG, "ListSpinner:" + list.size());
+            AppExecutor.getInstance().mainThread().execute(() -> callback.onResult(list));
+        });
     }
 
 

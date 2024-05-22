@@ -48,15 +48,16 @@ public class ConfigSensorsAdminFragment extends Fragment {
         sensorsBinding.classroomSpinner.setOnItemClickListener((adapterView, view1, position, l) -> {
             Log1.d(TAG, "classroomSpinner.setOnItemClickListener :" + ((ListSpinner) adapterView.getItemAtPosition(position)).getIdSpinnerS());
             classId = ((ListSpinner) adapterView.getItemAtPosition(position)).getIdSpinnerS();
-            ToastUtil1.showToast(getContext(), "item :" + ((ListSpinner) adapterView.getItemAtPosition(position)));
+            ToastUtil1.showToast(getContext(), "item :" + adapterView.getItemAtPosition(position));
             classroomSpinnerAdapter.setSelectedIndex(position);
         });
 
         sensorsBinding.sensorSpinner.setOnItemClickListener((adapterView, view1, position, l) -> {
             Log1.d(TAG, "sensorSpinner.setOnItemClickListener :" + ((ListSpinner) adapterView.getItemAtPosition(position)).getIdSpinnerS());
             sensorId = ((ListSpinner) adapterView.getItemAtPosition(position)).getIdSpinnerS();
-            ToastUtil1.showToast(getContext(), "item :" + ((ListSpinner) adapterView.getItemAtPosition(position)));
-            classroomSpinnerAdapter.setSelectedIndex(position);
+            ToastUtil1.showToast(getContext(), "item :" + adapterView.getItemAtPosition(position));
+            sensorSpinnerAdapter.setSelectedIndex(position);
+
         });
 
     }
@@ -95,7 +96,7 @@ public class ConfigSensorsAdminFragment extends Fragment {
 
             viewModel.addConfigSensor(entity);
 
-            Log1.d(TAG, "classId :" + classId + ",sensorId :" + sensorId);
+            Log1.d(TAG, "classId :" + classId + ",sensorId :" + sensorId+":"+sensorSpinnerAdapter.getId_s(sensorSpinnerAdapter.getSelectedIndex()));
             //-------------
             viewModel.sendConfigSensorRequest(classId, sensorId);
         } catch (Exception e) {

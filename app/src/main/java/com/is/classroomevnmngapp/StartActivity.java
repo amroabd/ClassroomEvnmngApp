@@ -8,21 +8,23 @@ import android.view.animation.AnimationUtils;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.is.classroomevnmngapp.data.repository.GetResultCallback;
+import com.is.classroomevnmngapp.data.repository.ReservationRepository;
 import com.is.classroomevnmngapp.databinding.ActivityStartBinding;
 import com.is.classroomevnmngapp.ui.AdminMainActivity;
 import com.is.classroomevnmngapp.utils.SharePerf;
-import com.is.classroomevnmngapp.view_model.NetworkProviderViewModel;
+import com.is.classroomevnmngapp.view_model.RemoteProcessorViewModel;
 
 import static com.is.classroomevnmngapp.utils.SharePerf.TYPE_ACCOUNT_ADMIN;
 import static com.is.classroomevnmngapp.utils.SharePerf.TYPE_ACCOUNT_USER;
 
-public class StartActivity extends AppCompatActivity {
+public class StartActivity extends AppCompatActivity  implements  GetResultCallback {
    ActivityStartBinding startBinding;
-   NetworkProviderViewModel networkProviderViewModel;
+   RemoteProcessorViewModel remoteProcessorViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         networkProviderViewModel=new ViewModelProvider(this).get(NetworkProviderViewModel.class);
+         remoteProcessorViewModel =new ViewModelProvider(this).get(RemoteProcessorViewModel.class);
         if (SharePerf.getInstance(this).isLoggedIn()) {
             if (SharePerf.getInstance(this).getTypeUser() == TYPE_ACCOUNT_ADMIN) {
                 startActivity(new Intent(this, AdminMainActivity.class));
@@ -59,7 +61,14 @@ public class StartActivity extends AppCompatActivity {
     }
 
     void testNetwork(){
-        startBinding.downLecture.setOnClickListener(view -> networkProviderViewModel.uploadingDataReservation(getBaseContext()));
-        startBinding.downReserve.setOnClickListener(view -> networkProviderViewModel.downloadDataReservation(getBaseContext()));
+        startBinding.downLecture.setOnClickListener(view ->
+                remoteProcessorViewModel.uploadingData(ReservationRepository.getInstance(this),this));
+        startBinding.downReserve.setOnClickListener(view ->
+                remoteProcessorViewModel.downloadData(ReservationRepository.getInstance(this), this));
+    }
+
+    @Override
+    public void onResult(Object o) {
+
     }
 }

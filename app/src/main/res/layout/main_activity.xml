@@ -10,7 +10,6 @@
     tools:context=".MainActivity">
     <com.google.android.material.navigationrail.NavigationRailView
         android:id="@+id/cat_navigation_rail"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

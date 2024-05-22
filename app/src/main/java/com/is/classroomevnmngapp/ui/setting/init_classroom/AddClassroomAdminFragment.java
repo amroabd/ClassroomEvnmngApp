@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.is.classroomevnmngapp.R;
+import com.is.classroomevnmngapp.data.repository.GetResultCallback;
 import com.is.classroomevnmngapp.data.source.local.entities.LectureHallEntity;
 import com.is.classroomevnmngapp.databinding.FragmentAdminAddClassroomBinding;
 import com.is.classroomevnmngapp.utils.ConvertData;
@@ -19,7 +20,7 @@ import com.is.classroomevnmngapp.utils.ToastUtil1;
 import com.is.classroomevnmngapp.utils.Validator;
 import com.is.classroomevnmngapp.utils.widget.custom.CustomDialog;
 
-public class AddClassroomAdminFragment extends Fragment {
+public class AddClassroomAdminFragment extends Fragment implements GetResultCallback {
     private ClassRoomViewModel viewModel;
     private FragmentAdminAddClassroomBinding addClassroomBinding;
 
@@ -76,11 +77,18 @@ public class AddClassroomAdminFragment extends Fragment {
 
         //---check if success insert
         if (id > 0) {
+            viewModel.uploadData(this);
             ToastUtil1.showToast(requireContext(), "Success added new Record.");
             NavHostFragment.findNavController(AddClassroomAdminFragment.this).popBackStack();
         } else {
             ToastUtil1.showToastFail(requireContext(), "Failed added new Record.!!!");
         }
 
+    }
+
+    @Override
+    public void onResult(Object o) {
+        if (isVisible())
+        ToastUtil1.showToast(requireActivity().getApplicationContext(), (String) o);
     }
 }

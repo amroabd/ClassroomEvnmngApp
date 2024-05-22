@@ -1,37 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="5.0"
-    tools:context=".ui.setting.init_classroom.ClassRoomListFragment">
+    tools:context=".ui.user.reservations.ReservationAddUserFragment">
 
-    <LinearLayout
-        android:id="@+id/headLyt"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <!-- حقل حساب المستخدم -->
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/purple_500"
-            android:textStyle="bold"
 
-            android:fontFamily="@font/cairo_black"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:text="@string/label_reserve_room" />
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/editsLyt"
-        android:layout_weight="2.0"
         android:background="@drawable/bg_content10_lyt"
         android:elevation="2dp"
         android:layout_width="match_parent"
@@ -39,6 +19,7 @@ android:orientation="vertical"
         android:layout_margin="@dimen/_5sdp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:padding="16dp"
         tools:targetApi="lollipop">
 
         <TextView
@@ -53,87 +34,97 @@ android:orientation="vertical"
             android:text="@string/label_input_data_fields" />
         <!-- حقل اسم المستخدم -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/cairo_semibold"
-                android:paddingHorizontal="8dp"
+                android:padding="8dp"
                 android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
                 android:text="@string/username"/>
-            <EditText
+
+            <TextView
                 android:id="@+id/usernameEditText"
                 android:layout_width="wrap_content"
-                android:background="@drawable/edit_text_background"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="15"
                 android:layout_marginVertical="@dimen/_10sdp"
+                android:background="@drawable/edit_text_background"
+                android:ems="15"
+                android:gravity="center_vertical"
                 android:hint="@string/username_hint"
-                tools:ignore="Autofill" />
+                android:textAlignment="textStart"
+                android:visibility="gone"
+                tools:ignore="Autofill,RtlCompat" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/userSpinnertLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:hint="يرجى اختيار  اسم المستخدم"
+                app:startIconTint="@color/main_color_500">
+                <AutoCompleteTextView
+                    android:id="@+id/userSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:editable="false"
+                    tools:ignore="LabelFor" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="18dp"
+                android:background="@color/colorMeLine"/>
         </LinearLayout>
 
 
         <!-- حقل تاريخ الحجز -->
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/cairo_semibold"
+                android:layout_marginTop="8dp"
                 android:paddingHorizontal="8dp"
                 android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
                 android:text="@string/label_reservation_date"/>
+
             <TextView
                 android:id="@+id/dateEditText"
-                android:ems="19"
-                android:layout_width="wrap_content"
-                android:background="@drawable/edit_text_background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/_10sdp"
-                android:gravity="center"
+                android:drawableStart="@android:drawable/ic_menu_day"
+                android:gravity="center|start"
+                android:hint="@string/label_reservation_date"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="18dp"
                 android:textColor="@color/main_color_500"
                 android:textStyle="bold"
-                android:layout_height="wrap_content"
-                android:hint="@string/label_reservation_date"
                 tools:ignore="Autofill" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="18dp"
+                android:background="@color/colorMeLine"/>
         </LinearLayout>
 
         <!-- حقل وقت الحجز -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/cairo_semibold"
-                android:paddingHorizontal="8dp"
-                android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-                android:text="@string/label_reservation_time"/>
-            <EditText
-                android:id="@+id/timeEditText"
-                android:layout_marginVertical="@dimen/_10sdp"
-                android:layout_width="wrap_content"
-                android:ems="15"
-                android:inputType="time"
-                android:background="@drawable/edit_text_background"
-                android:layout_height="wrap_content"
-                android:hint="@string/label_reservation_time"
-                tools:ignore="Autofill" />
-        </LinearLayout>
+
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/_15sdp"
-            android:paddingHorizontal="@dimen/_15sdp"
+            android:paddingHorizontal="@dimen/_1sdp"
             android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
@@ -154,7 +145,7 @@ android:orientation="vertical"
                     android:fontFamily="@font/cairo_semibold"
                     android:paddingHorizontal="8dp"
                     android:layout_weight="1"
-                    android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+                    android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
                     android:text="يبدا من فترة "/>
                 <Spinner
                     android:id="@+id/startTimeSpinner"
@@ -164,6 +155,11 @@ android:orientation="vertical"
                     android:entries="@array/periods_time"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="18dp"
+                android:background="@color/colorMeLine"/>
             <LinearLayout
                 android:gravity="center"
                 android:layout_width="match_parent"
@@ -175,7 +171,7 @@ android:orientation="vertical"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/cairo_semibold"
                     android:paddingHorizontal="8dp"
-                    android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+                    android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
                     android:text="تنتهي عند فترة "/>
                 <Spinner
                     android:id="@+id/endTimeSpinner"
@@ -185,6 +181,11 @@ android:orientation="vertical"
                     android:entries="@array/periods_time"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="18dp"
+                android:background="@color/colorMeLine"/>
         </LinearLayout>
 
         <!-- زر حجز القاعة -->

@@ -57,4 +57,39 @@
     <color name="sweet_dialog_bg_color">#FFFFFF</color>
     <color name="sweet_dialog_bg_color_dark">#E6222222</color>
 
+
+    <!--default color only not using-->
+    <color name="colorGray">#858585</color>
+    <color name="colorGrayF1">#f1f6f7</color>
+    <color name="colorGreenOK">#7ac143</color>
+    <color name="colorLight">#eaf7ed</color>
+    <color name="colorMe66">#666666</color>
+    <color name="colorMeLine">#e6eaeb</color>
+    <color name="colorName">#3e464c</color>
+    <color name="colorOrange">#ff9300</color>
+    <color name="colorPrimary">#54a880</color>
+    <color name="colorPrimaryDark">#54a880</color>
+    <color name="colorPrimaryText">#2e2e2e</color>
+    <color name="colorRanking">#f8f8f8</color>
+    <color name="colorRed">#ff3b30</color>
+    <color name="colorSign">#d3dee6</color>
+    <color name="mainBG">#ffffff</color>
+    <color name="colorAccentLight">#000000</color>
+    <color name="colorBlack2E">#2e2e2e</color>
+    <color name="colorBlack33">#333333</color>
+    <color name="colorBlack3D">#3d3d3d</color>
+    <color name="colorBlack66">#666666</color>
+    <color name="colorBlack90">#909090</color>
+    <color name="colorBlack99">#999999</color>
+    <color name="colorBlackCC">#cccccc</color>
+    <color name="colorBlackD1">#d1d1d1</color>
+    <color name="colorBlackDA">#54a880</color>
+    <color name="colorBlackED">#ededed</color>
+    <color name="colorBlackF3">#edf2f3</color>
+    <color name="colorBlackF5">#f5f5f5</color>
+    <color name="colorCode">#e4e9eb</color>
+    <color name="codeBlack2E">#2e2e2e</color>
+    <color name="codeBlack2E2">#2e2e2e</color>
+    <color name="blackF5">#F5F5F5</color>
+
 </resources>

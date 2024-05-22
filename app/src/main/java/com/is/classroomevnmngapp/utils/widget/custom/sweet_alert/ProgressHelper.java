@@ -25,7 +25,7 @@ public class ProgressHelper {
         mToSpin = true;
         mSpinSpeed = 0.75f;
         mBarWidth = ctx.getResources().getDimensionPixelSize(R.dimen.common_circle_width1) + 1;
-        mBarColor = ctx.getResources().getColor(R.color.is_success_stroke_color);
+        mBarColor = ctx.getResources().getColor(R.color.orange_s_500);
         mRimWidth = 0;
         mRimColor = 0x00000000;
         mIsInstantProgress = false;

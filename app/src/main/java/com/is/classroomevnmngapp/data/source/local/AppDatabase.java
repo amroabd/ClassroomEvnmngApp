@@ -58,7 +58,7 @@ import org.jetbrains.annotations.NotNull;
 public abstract class AppDatabase extends RoomDatabase {
 
     protected static final int START_VERSION = 1;
-    protected static final int END_VERSION = 3;
+    protected static final int END_VERSION = 4;
     //------------------
     private static final String TAG = AppDatabase.class.getSimpleName();
     private static final Object LOCK = new Object();

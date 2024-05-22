@@ -1,6 +1,10 @@
 package com.is.classroomevnmngapp.data.model;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
+
+import org.jetbrains.annotations.Contract;
 
 public class ResponseObj {
     private int lId;
@@ -9,8 +13,21 @@ public class ResponseObj {
     @SerializedName("Code")
     private final String code;
 
+    public ResponseObj(String data, String code) {
+        this.servId = data;
+        this.code = code;
+    }
 
-    public String getServId() {
+    @NonNull
+    @Contract(value = "_ -> new", pure = true)
+    public static ResponseObj newInstance(String data){
+        return new ResponseObj(data,"");
+    }
+
+
+
+
+    public String getServeId() {
         return servId;
     }
 
@@ -22,15 +39,11 @@ public class ResponseObj {
         return lId;
     }
 
-    public ResponseObj(String data, String code) {
-        this.servId = data;
-        this.code = code;
-    }
-
     public void setlId(int lId) {
         this.lId = lId;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "ResponseObj{" +

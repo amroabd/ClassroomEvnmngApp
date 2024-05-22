@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo;
 import com.google.gson.annotations.SerializedName;
 
 public class BaseEntity {
+
     @SerializedName("is_active")
     @ColumnInfo(name = "is_active")
     protected int isActive;

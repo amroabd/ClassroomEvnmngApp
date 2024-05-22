@@ -5,22 +5,29 @@ import android.view.Menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.is.classroomevnmngapp.MyApplication;
 import com.is.classroomevnmngapp.R;
+import com.is.classroomevnmngapp.data.repository.GetResultCallback;
+import com.is.classroomevnmngapp.data.repository.LectureHallRepository;
+import com.is.classroomevnmngapp.data.repository.UserRepository;
+import com.is.classroomevnmngapp.view_model.RemoteProcessorViewModel;
 
 import java.util.Objects;
 
-public class AdminMainActivity extends AppCompatActivity {
-
+public class AdminMainActivity extends AppCompatActivity implements GetResultCallback {
+    private RemoteProcessorViewModel remoteProcessorViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_main);
+        remoteProcessorViewModel =new ViewModelProvider(this).get(RemoteProcessorViewModel.class);
         setupToolbar();
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -43,7 +50,13 @@ public class AdminMainActivity extends AppCompatActivity {
                 toolbar.setTitle(R.string.label_setting);
             }
         });
+
+        //sync user from remote
+        remoteProcessorViewModel.downloadData(new UserRepository(this), this);
+        remoteProcessorViewModel.downloadData( LectureHallRepository.getInstance(this), this);
+        //remoteProcessorViewModel.downloadData( ReservationRepository.getInstance(this), this);
     }
+
     Toolbar toolbar;
 
     protected void setupToolbar() {
@@ -64,5 +77,10 @@ public class AdminMainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.user_menu,menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onResult(Object o) {
+        MyApplication.getInstance().popupWindow(toolbar,o,this);
     }
 }

@@ -2,9 +2,15 @@ package com.is.classroomevnmngapp.utils.widget.custom;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 import com.is.classroomevnmngapp.R;
+import com.is.classroomevnmngapp.utils.widget.custom.sweet_alert.ProgressHelper;
 import com.is.classroomevnmngapp.utils.widget.custom.sweet_alert.SweetAlertDialog;
+import com.is.classroomevnmngapp.utils.widget.custom.sweet_alert.progress.ProgressWheel0;
 
 
 public class CustomDialog {
@@ -62,12 +68,13 @@ public class CustomDialog {
     }
 
     interface Alert {
-        void showAlertRender(Context context, String... msg);
+        void showAlertRender(Context context, String... message);
 
         default void hidAlert() {
         }
     }
 
+    //this : product that implement to base
     static class ErrorAlert extends ParamsEntry implements Alert {
         private final OnDialogListener alertDialog;
 
@@ -81,11 +88,11 @@ public class CustomDialog {
         @Override
         public void showAlertRender(Context context, String... msg) {
             checkReceivesMessage(context, msg);
-  /*          new SweetAlertDialog(context*//*,SweetAlertDialog.ERROR_TYPE*//*).setTitleText(getTitle())
+            /*          new SweetAlertDialog(context*//*,SweetAlertDialog.ERROR_TYPE*//*).setTitleText(getTitle())
                     .setContentText(String.format("<font color='#F27474'>%s</font>", getMsg())).show();*/
 
             SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(context).setTitleText(getTitle())
-            .setContentText(String.format("<font color='#F27474'>%s</font>", getMsg()))
+                    .setContentText(String.format("<font color='#F27474'>%s</font>", getMsg()))
                     .setConfirmButton(context.getString(R.string.ok), sweetAlertDialog1 -> {
                         alertDialog.onAccept();
                         sweetAlertDialog1.cancel();
@@ -100,10 +107,10 @@ public class CustomDialog {
         }
     }
 
-    static class NoteAlert extends ParamsEntry implements Alert {
+    static class NotifyAlert extends ParamsEntry implements Alert {
         private final OnDialogListener alertDialog;
 
-        public NoteAlert(OnDialogListener alertDialog) {
+        public NotifyAlert(OnDialogListener alertDialog) {
             super();
             this.alertDialog = alertDialog;
         }
@@ -112,7 +119,8 @@ public class CustomDialog {
         public void showAlertRender(Context context, String... msg) {
             checkReceivesMessage(context, msg);
 
-            SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(context).setTitleText(getTitle()).setContentText(getMsg())
+            SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(context)
+                    .setTitleText(getTitle()).setContentText(getMsg())
                     .setConfirmButton(context.getString(R.string.ok), sweetAlertDialog1 -> {
                         alertDialog.onAccept();
                         sweetAlertDialog1.cancel();
@@ -123,7 +131,7 @@ public class CustomDialog {
             });
             sweetAlertDialog.setCancelable(false);
             sweetAlertDialog.show();
-            System.out.println("ErrorAlert");
+            System.out.println("NotifyAlert");
         }
     }
 
@@ -168,12 +176,13 @@ public class CustomDialog {
         public void showAlertRender(Context context, String... msg) {
             checkReceivesMessage(context, msg);
             SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(context,
-                    SweetAlertDialog.WARNING_TYPE).setTitleText(getTitle()).setContentText(getMsg())
-                    .setConfirmText("<font color='#FFFFFF'>" + context.getString(R.string.sure) + "</font>")
+                    SweetAlertDialog.WARNING_TYPE).setTitleText(getTitle()).setContentText(getMsg());
+
+            sweetAlertDialog.setConfirmText("<font color='#FFFFFF'>" + context.getString(R.string.sure) + "</font>")
                     .setConfirmClickListener(sDialog -> {
                         //change dialog style upon confirm 1{
                         alertDialog.onAccept();
-                        sDialog.setTitleText("Successful !")
+                        sDialog.setTitleText(" Successfully. !")
                                 .setContentText(context.getString(R.string.ok_success))
                                 .setConfirmText(context.getString(R.string.ok))
                                 .setConfirmClickListener(sweetAlertDialog12 -> {
@@ -182,11 +191,11 @@ public class CustomDialog {
                                     alertDialog.onFinish();
                                 })
                                 .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
-                    })
-                    .setCancelText(context.getString(R.string.cancel))
+                    });
+            sweetAlertDialog.setCancelText(context.getString(R.string.cancel))
                     .setCancelClickListener(sDialog -> {
                         //sDialog.dismissWithAnimation();
-                        sDialog.setTitleText("No !")
+                        sDialog.setTitleText(context.getString(android.R.string.cancel))
                                 .setContentText(context.getString(R.string.cancel_err))
                                 .setConfirmText(context.getString(R.string.ok))
                                 .setConfirmClickListener(sweetAlertDialog1 -> {
@@ -194,8 +203,6 @@ public class CustomDialog {
                                     sDialog.dismissWithAnimation();
                                     alertDialog.onCancel();
                                 }).changeAlertType(SweetAlertDialog.ERROR_TYPE);
-
-                        //sweetErrorMessage3();
                     });
             sweetAlertDialog.setOnKeyListener((dialog, keyCode, event) -> {
                 dialog.cancel();
@@ -229,12 +236,21 @@ public class CustomDialog {
             res_id_msg = R.string.label_text_progress_notify;
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public void showAlertRender(Context context, String... msg) {
             checkReceivesMessage(context, msg);
             sweetAlertDialog = new SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE);
-            sweetAlertDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-            sweetAlertDialog.setTitleText(getTitle()).setContentText("<font color='#60bf04'>" + getMsg() + "</font>");
+            ProgressHelper progressHelper= sweetAlertDialog.getProgressHelper();
+            progressHelper .setBarColor(Color.parseColor("#FF9800"));
+           // progressHelper.setSpinSpeed(0.15F);
+           // progressHelper.setInstantProgress(0.4F);
+            progressHelper.setRimColor(Color.LTGRAY);
+            progressHelper.setRimWidth(12);
+            progressHelper.setProgressWheel(new ProgressWheel0(context));
+            sweetAlertDialog//.setTitleText(getTitle())
+                    .setContentText("<font color='#1A70B9'>" + getMsg() + "</font>");
+
             sweetAlertDialog.setCancelable(false);
             sweetAlertDialog.show();
         }
@@ -246,23 +262,24 @@ public class CustomDialog {
     }
 
 
-    class DialogBaseProvider{
-        Class<?>sAClass;
+ /*   class DialogBaseProvider {
+        Class<?> sAClass;
 
         public DialogBaseProvider(Class<?> sAClass) {
             this.sAClass = sAClass;
         }
 
-    }
+    }*/
+
     //=================================
     //Factory
     abstract static class DialogFactory {
         /* protected final OnDialogListener alertDialog;
-
          public DialogBase(OnDialogListener alertDialog) {
              this.alertDialog = alertDialog;
          }*/
         Alert alert;
+
         /***
          * method factory Is implemented in sub class
          * @return new instance object any subclass from Alert
@@ -303,7 +320,7 @@ public class CustomDialog {
 
         @Override
         Alert createAlert() {
-            return new NoteAlert(alertDialog);
+            return new NotifyAlert(alertDialog);
         }
     }
 
@@ -322,10 +339,10 @@ public class CustomDialog {
 
     public static class SureAlertDialogFactory extends DialogFactory {
         private final OnDialogListener dialogListener;
-        private  static SureAlertDialogFactory sInstance;
+        private static SureAlertDialogFactory sInstance;
 
         public static SureAlertDialogFactory getsInstance(OnDialogListener alertDialog) {
-            if (sInstance==null)sInstance=new SureAlertDialogFactory(alertDialog);
+            if (sInstance == null) sInstance = new SureAlertDialogFactory(alertDialog);
             return sInstance;
         }
 
@@ -345,10 +362,19 @@ public class CustomDialog {
         Alert createAlert() {
             return new SuccessAlert();
         }
+
     }
 
     public static class ProgressAlertDialogFactory extends DialogFactory {
-        public ProgressAlertDialogFactory() {
+        private static ProgressAlertDialogFactory instance;
+
+        public static ProgressAlertDialogFactory getInstance() {
+            synchronized (ProgressAlertDialogFactory.class) {
+                if (instance == null) {
+                    instance = new ProgressAlertDialogFactory();
+                }
+            }
+            return instance;
         }
 
         @Override
@@ -358,10 +384,9 @@ public class CustomDialog {
     }
     //==================================
 
-    public static void setDialogCallback(Context context, DialogFactory dialog, String... msg) {
+    public static void setDialogCallback(Context context, @NonNull DialogFactory dialog, String... msg) {
         dialog.showDialog(context, msg);
         //final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-
     }
 
 }

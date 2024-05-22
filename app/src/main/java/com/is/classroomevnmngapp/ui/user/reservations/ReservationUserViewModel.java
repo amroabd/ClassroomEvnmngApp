@@ -7,19 +7,36 @@ import androidx.lifecycle.LiveData;
 import androidx.paging.PagedList;
 
 import com.is.classroomevnmngapp.data.model.JoinReserveALecture;
+import com.is.classroomevnmngapp.data.repository.GetResultCallback;
+import com.is.classroomevnmngapp.data.repository.LectureHallRepository;
 import com.is.classroomevnmngapp.data.repository.ReservationRepository;
+import com.is.classroomevnmngapp.data.repository.UserRepository;
 import com.is.classroomevnmngapp.data.source.local.entities.ReservationEntity;
+import com.is.classroomevnmngapp.utils.spinner.ListSpinner;
+
+import java.util.List;
 
 public class ReservationUserViewModel extends AndroidViewModel {
 
+    private final ReservationRepository sReservationRepository;
 
-    private ReservationRepository sReservationRepository;
+    private final LectureHallRepository sLectureHallRepository;
+    private final UserRepository sUserRepository;
 
     public ReservationUserViewModel(Application application) {
         super(application);
         sReservationRepository = ReservationRepository.getInstance(application);
+        sLectureHallRepository=LectureHallRepository.getInstance(application);
+        sUserRepository=new UserRepository(application);
     }
 
+    public void loadAsSpinnerDataLecture(GetResultCallback<List<ListSpinner>> getResultCallback){
+        sLectureHallRepository.loadAsSpinnerDataLecture(getResultCallback);
+    }
+
+    public void loadAsSpinnerDataUser(GetResultCallback<List<ListSpinner>> getResultCallback){
+        sUserRepository.loadAsSpinnerDataUser(getResultCallback);
+    }
 
     public LiveData<PagedList<JoinReserveALecture>> getReserveALectureList() {
         return sReservationRepository.getReserveALectureList();
@@ -42,8 +59,8 @@ public class ReservationUserViewModel extends AndroidViewModel {
         sReservationRepository.updateReserveStatus(id, status);
     }
 
-    public void uploadData(){
-        sReservationRepository.uploadingData();
+    public void uploadData(GetResultCallback resultCallback){
+        sReservationRepository.uploadingData(resultCallback);
     }
 
 }

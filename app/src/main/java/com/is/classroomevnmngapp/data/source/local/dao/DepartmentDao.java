@@ -6,8 +6,10 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.RoomWarnings;
 
 import com.is.classroomevnmngapp.data.source.local.entities.DepartmentEntity;
+import com.is.classroomevnmngapp.utils.spinner.ListSpinner;
 
 import java.util.List;
 
@@ -29,4 +31,9 @@ public interface DepartmentDao {
 
     @Query("DELETE FROM Departments")
     int deleteAllRecords();
+
+    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
+    @Query("SELECT id AS idSpinnerS,name AS nameSpinner" +
+            " FROM Departments ")
+    List<ListSpinner> loadAsSpinnerData();
 }

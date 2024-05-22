@@ -18,7 +18,6 @@ public class LectureHallEntity extends BaseEntity {
     @PrimaryKey(autoGenerate = true)
     private int localId;
 
-
     @SerializedName("Id")
     @ColumnInfo(name = "id")
     private int lectureHallId;

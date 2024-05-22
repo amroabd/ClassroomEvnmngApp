@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import com.is.classroomevnmngapp.MyApplication;
 import com.is.classroomevnmngapp.R;
 import com.is.classroomevnmngapp.UserMainActivity;
 import com.is.classroomevnmngapp.databinding.FragmentAuthLoginBinding;
@@ -80,7 +81,7 @@ public class LoginFragment extends Fragment {
         //----------------
         loginBinding.passwordEditText.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                login();
+                validInputLogin();
             }
             return false;
         });
@@ -90,29 +91,30 @@ public class LoginFragment extends Fragment {
     }
 
     private void validInputLogin() {
-        if (Validator.isUserNameValid(loginBinding.usernameEditText)
-                && !Validator.emptyEditText(loginBinding.passwordEditText, getString(R.string.invalid_password))) {
+        if (Validator.isUserNameValid(loginBinding.usernameEditText) && !Validator.emptyEditText(loginBinding.passwordEditText, getString(R.string.invalid_password))) {
             login();
         }
     }
 
     private void login() {
+        if (MyApplication.isNotConnectedNetToast(requireContext()))return;
 
         String username = ConvertData.to2String(loginBinding.usernameEditText);
         String password = ConvertData.to2String(loginBinding.passwordEditText);
         int type = SharePerf.getInstance(getContext()).getTypeUser();
         LoginRequest loginRequest = new LoginRequest(username, password, type);
 
-        progressDialog = ProgressDialog.show(getContext(),
+        CustomDialog.setDialogCallback(requireContext(), CustomDialog.ProgressAlertDialogFactory.getInstance(),
                 getString(R.string.label_BodyTitle_login),
                 getString(R.string.label_body_msg_login));
+
+        //progressDialog = ProgressDialog.show(getContext(), getString(R.string.label_BodyTitle_login), getString(R.string.label_body_msg_login));
 
         viewModel.sendLoginRequest(loginRequest, new LoginCallback() {
             @Override
             public void onSuccess(LoginResponse response) {
-
-                if (progressDialog != null && progressDialog.isShowing())
-                    progressDialog.dismiss();
+                CustomDialog.ProgressAlertDialogFactory.getInstance().hidden();
+                //if (progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
 
                 if (response.getCode().equals("Success")) {
                     setDialogCallback(getContext(), new CustomDialog.NoteAlertDialogFactory(() -> {
@@ -136,24 +138,13 @@ public class LoginFragment extends Fragment {
 
             @Override
             public void onFailure(Throwable t) {
-                if (progressDialog != null && progressDialog.isShowing())
-                    progressDialog.dismiss();
+                //if (progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+                CustomDialog.ProgressAlertDialogFactory.getInstance().hidden();
                 setDialogCallback(getContext(), new ErrorAlertDialogFactory(() -> {
 
                 }), "", "Err :" + t.toString());
             }
         });
-     /*    if (SharePerf.getInstance(getContext()).isLoggedIn()) {
-             if (SharePerf.getInstance(getContext()).getTypeUser() == TYPE_ACCOUNT_ADMIN) {
-                 startActivity(new Intent(getContext(), AdminMainActivity.class));
-             } else if (SharePerf.getInstance(getContext()).getTypeUser() == TYPE_ACCOUNT_USER) {
-                 startActivity(new Intent(getContext(), UserMainActivity.class));
-             }
-         }else {
-             setDialogCallback(getContext(), new ErrorAlertDialogFactory(() -> {
-
-             }), "", "Err :" + "بيانات تسجيل الدخول غير صحيح ,<br>تاكد من ان لديك حساب سابق او انشى حساب جديد.!!! ");
-         }*/
     }
 
 }

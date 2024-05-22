@@ -20,7 +20,7 @@ import retrofit2.Response;
 
 public class ChangePassRepository {
     private static final String TAG = "ChangePassRepository";
-    ApiService apiService;
+     private final ApiService apiService;
 
     public ChangePassRepository() {
         this.apiService = RestClient.getInstance().getApiService();

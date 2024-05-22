@@ -3,8 +3,6 @@ package com.is.classroomevnmngapp.data.model;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.is.classroomevnmngapp.data.source.local.entities.LectureHallEntity;
-
 import java.util.Objects;
 
 public class JoinReserveALecture {

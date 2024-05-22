@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import com.is.classroomevnmngapp.data.source.local.dao.ControllerDao;
 import com.is.classroomevnmngapp.data.source.local.entities.ControllerEntity;
 import com.is.classroomevnmngapp.utils.executor.AppExecutor;
+import com.is.classroomevnmngapp.utils.spinner.ListSpinner;
 
 import java.util.List;
 
@@ -51,11 +52,24 @@ public class ControllerRepository extends BaseRepository {
     }
 
     public int getCount() {
-       return getCount("controllerId",NAME_CONTROLLERS);
+       return getCount("id",NAME_CONTROLLERS);
        // return controllerDao.getCount();
     }
 
     public int deleteAllRecords() {
-        return controllerDao.deleteAllRecords();
+        return delete(NAME_CONTROLLERS,null);
+        //return controllerDao.deleteAllRecords();
+    }
+
+    /***
+     *  list data
+     * @param callback return result data
+     */
+    public void getSpinnerListController( GetResultCallback<List<ListSpinner>> callback) {
+        AppExecutor.getInstance().diskIO().execute(() -> {
+            List<ListSpinner> list = controllerDao.loadAsSpinnerData();
+            Log.d(TAG, "ListSpinner:" + list.size());
+            AppExecutor.getInstance().mainThread().execute(() -> callback.onResult(list));
+        });
     }
 }

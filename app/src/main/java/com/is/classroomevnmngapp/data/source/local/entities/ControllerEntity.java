@@ -5,6 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 @Entity(tableName = "Controllers")
 public class ControllerEntity  extends BaseEntity{
     @PrimaryKey(autoGenerate = true)
@@ -12,6 +14,10 @@ public class ControllerEntity  extends BaseEntity{
 
     @ColumnInfo(name = "id")
     private int controllerId;
+
+    @SerializedName("name")
+    private String name;
+
 
     @ColumnInfo(name = "lecture_hall_id_fk")
     private int lectureHallIdFK;
@@ -24,6 +30,14 @@ public class ControllerEntity  extends BaseEntity{
 
     //----------------
 
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public int getLocalId() {
         return localId;

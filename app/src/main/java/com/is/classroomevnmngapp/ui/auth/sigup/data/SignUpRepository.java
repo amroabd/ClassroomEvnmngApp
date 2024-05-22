@@ -51,10 +51,11 @@ public class SignUpRepository {
     }
 
     public void signUp(SignUpRequest signUpRequest, SignUpCallback callback){
-        signUp(signUpRequest,callback);
+        signUpRequest(signUpRequest,callback);
+
     }
 
-    public void signUp0(SignUpRequest signUpRequest, SignUpCallback callback) {
+    public void signUpRequest(SignUpRequest signUpRequest, SignUpCallback callback) {
         // method sends the SignUpRequest object to the server and returns a Call<SigUpResponse> object.
         Call<SigUpResponse> sigUpResponseCall = apiService.signUp(signUpRequest);
         requestBody(sigUpResponseCall);

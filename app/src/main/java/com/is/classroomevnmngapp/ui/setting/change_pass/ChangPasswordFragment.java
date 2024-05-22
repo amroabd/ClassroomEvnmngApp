@@ -62,7 +62,7 @@ public class ChangPasswordFragment extends Fragment {
                         if (response.getCode().equals("Success")){
                             setDialogCallback(getContext(), new CustomDialog.NoteAlertDialogFactory(onValidateViews::onFollow),
                                     "Title :" + response.getCode(),
-                                    String.format("Message :%s,Data :%s", response.getCode(), response.getServId()));
+                                    String.format("Message :%s,Data :%s", response.getCode(), response.getServeId()));
                             return;
                         }
                         //problem

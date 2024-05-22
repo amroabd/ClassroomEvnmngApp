@@ -52,7 +52,7 @@
             android:text="@string/welcome"
             android:ems="10"
             android:gravity="end"
-            android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
             android:textColor="?colorOnSecondary" />
 
         <TextView
@@ -86,7 +86,7 @@
             android:layout_marginVertical="@dimen/_15sdp"
             android:background="@drawable/edit_text_background"
             android:drawableStart="@drawable/ic_user_circle_24"
-            android:ems="10"
+            android:ems="15"
             android:hint="@string/username" />
         <EditText
             android:layout_width="wrap_content"
@@ -95,7 +95,7 @@
             android:drawablePadding="8dp"
             android:background="@drawable/edit_text_background"
             android:drawableStart="@drawable/password24px"
-            android:ems="10"
+            android:ems="15"
             android:hint="@string/label_password" />
         <Button
             android:id="@+id/loginButton"
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/cairo_semibold"
             android:textStyle="bold"
-            android:ems="8"
+            android:ems="10"
             android:layout_marginVertical="@dimen/_15sdp"
             android:backgroundTint="@color/orange_s_500"
             android:textAppearance="@style/TextAppearance.AppCompat.Button"

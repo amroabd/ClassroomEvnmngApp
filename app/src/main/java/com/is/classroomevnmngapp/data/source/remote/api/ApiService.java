@@ -3,7 +3,9 @@ package com.is.classroomevnmngapp.data.source.remote.api;
 import com.is.classroomevnmngapp.data.model.ResponseObj;
 import com.is.classroomevnmngapp.data.source.local.entities.HelperEntity;
 import com.is.classroomevnmngapp.data.source.local.entities.LectureHallEntity;
+import com.is.classroomevnmngapp.data.source.local.entities.ProfessorEntity;
 import com.is.classroomevnmngapp.data.source.local.entities.ReservationEntity;
+import com.is.classroomevnmngapp.data.source.local.entities.UserEntity;
 import com.is.classroomevnmngapp.ui.auth.login.data.LoginRequest;
 import com.is.classroomevnmngapp.ui.auth.login.data.LoginResponse;
 import com.is.classroomevnmngapp.ui.auth.sigup.data.SigUpResponse;
@@ -43,6 +45,10 @@ public interface ApiService {
     Call<List<HelperEntity.SubMenu>> getSubHeaderData();
 
     //====================================base
+    @POST("auth/Update.php")
+    Call<ResponseObj> updateUser(@Body UserEntity entity);
+    @GET("auth/List.php")
+    Call<List<UserEntity>> getUsersData();
 
     //-1----------------------
     @POST("LectureHall/Create.php")
@@ -63,6 +69,17 @@ public interface ApiService {
 
     @GET("Reservation/List.php")
     Call<List<ReservationEntity>> getReservationsData();
+
+
+    //-3----------------------
+    @POST("Professor/Create.php")
+    Call<ResponseObj> createProfessor(@Body ProfessorEntity entity);
+
+    @POST("Professor/Update.php")
+    Call<ResponseObj> updateProfessor(@Body ProfessorEntity entity);
+
+    @GET("Professor/List.php")
+    Call<List<ProfessorEntity>> getProfessorsData();
 
 }
 

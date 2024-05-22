@@ -21,13 +21,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DownloadClient {
-    private static final String TAG = DownloadClient.class.getSimpleName();
+public class DownloadSourceClient {
+    private static final String TAG = DownloadSourceClient.class.getSimpleName();
     //private final Context mContext;
     private final ApiService apiService;
 
 
-    public DownloadClient(Context context) {
+    public DownloadSourceClient(Context context) {
         //this.mContext = context;
         this.apiService = RestClient.getInstance().getApiService();
     }

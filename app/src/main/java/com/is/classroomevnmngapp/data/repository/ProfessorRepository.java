@@ -8,13 +8,14 @@ import androidx.lifecycle.LiveData;
 import com.is.classroomevnmngapp.data.source.local.dao.ProfessorDao;
 import com.is.classroomevnmngapp.data.source.local.entities.ProfessorEntity;
 import com.is.classroomevnmngapp.utils.executor.AppExecutor;
+import com.is.classroomevnmngapp.utils.spinner.ListSpinner;
 
 import java.util.List;
 
 import static com.is.classroomevnmngapp.utils.constant.NameTableConst.NAME_PROFESSORS;
 
 
-public final class ProfessorRepository extends BaseRepository implements ProfessorDao {
+public final class ProfessorRepository extends BaseRepository  {
     private static final String TAG = ProfessorRepository.class.getSimpleName();
     private static ProfessorRepository instance;
     private final ProfessorDao professorDao;
@@ -60,8 +61,23 @@ public final class ProfessorRepository extends BaseRepository implements Profess
 
 
     public int deleteAllRecords() {
-        return professorDao.deleteAllRecords();
+        return delete(NAME_PROFESSORS,null);
+        //return professorDao.deleteAllRecords();
     }
+
+    /***
+     *  list data
+     * @param callback return result data
+     */
+    public void getSpinnerListProfessor( GetResultCallback<List<ListSpinner>> callback) {
+        AppExecutor.getInstance().diskIO().execute(() -> {
+            List<ListSpinner> list = professorDao.loadAsSpinnerData();
+            Log.d(TAG, "ListSpinner:" + list.size());
+            AppExecutor.getInstance().mainThread().execute(() -> callback.onResult(list));
+        });
+    }
+
+
 
 
 }

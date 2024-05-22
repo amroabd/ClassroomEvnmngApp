@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.paging.PagedList;
 
+import com.is.classroomevnmngapp.data.repository.GetResultCallback;
 import com.is.classroomevnmngapp.data.repository.LectureHallRepository;
 import com.is.classroomevnmngapp.data.source.local.entities.LectureHallEntity;
 
@@ -20,11 +21,15 @@ public class ClassRoomViewModel extends AndroidViewModel {
 
 
     public LiveData<PagedList<LectureHallEntity>> getAllLectureHall(){
-       return sLectureHallRepository.getAllData();
+       return sLectureHallRepository.getAllHallEntityFactory();
     }
 
     public int addLectureHall(LectureHallEntity entity) {
       return (int) sLectureHallRepository.insertLectureHall(entity);
+    }
+
+    public void uploadData(GetResultCallback resultCallback){
+        sLectureHallRepository.uploadingData(resultCallback);
     }
 
 }

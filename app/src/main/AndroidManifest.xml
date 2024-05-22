@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClassroomEvnmngApp">
 
-        <activity android:name=".StartActivity">
+        <activity android:name=".StartActivity" android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -42,8 +42,9 @@
             &ndash;&gt;
         </activity>-->
 
-        <activity android:name=".UserMainActivity" />
-        <activity android:name=".ui.AdminMainActivity" android:configChanges="colorMode" android:windowSoftInputMode="adjustNothing" />
+        <activity android:name=".UserMainActivity" android:launchMode="singleTask" />
+        <activity android:name=".ui.AdminMainActivity" android:launchMode="singleTask"
+            android:configChanges="colorMode" android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".ui.onboarding.OnboardingActivity">
          <!--   <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,12 +52,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>-->
         </activity>
-        <activity android:name=".AuthMainActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".AuthMainActivity" android:launchMode="singleTask" />
+        <activity android:name=".MainActivity" android:launchMode="singleTask" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+
+
     </application>
 
 </manifest>

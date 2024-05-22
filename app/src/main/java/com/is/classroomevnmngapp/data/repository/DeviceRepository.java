@@ -8,13 +8,14 @@ import androidx.lifecycle.LiveData;
 import com.is.classroomevnmngapp.data.source.local.dao.DeviceDao;
 import com.is.classroomevnmngapp.data.source.local.entities.DeviceEntity;
 import com.is.classroomevnmngapp.utils.executor.AppExecutor;
+import com.is.classroomevnmngapp.utils.spinner.ListSpinner;
 
 import java.util.List;
 
 import static com.is.classroomevnmngapp.utils.constant.NameTableConst.NAME_DEVICES;
 
 
-public final class DeviceRepository extends BaseRepository implements DeviceDao {
+public final class DeviceRepository extends BaseRepository  {
     private static final String TAG = DeviceRepository.class.getSimpleName();
     private static DeviceRepository instance;
     private final DeviceDao deviceDao;
@@ -54,14 +55,27 @@ public final class DeviceRepository extends BaseRepository implements DeviceDao 
 
 
     public int getCount() {
-        return getCount("deviceId", NAME_DEVICES);
+        return getCount("id", NAME_DEVICES);
         // return mDb.departmentDao().getCount();
     }
 
 
     public int deleteAllRecords() {
-        return deviceDao.deleteAllRecords();
+        return delete(NAME_DEVICES,null);
+        //return deviceDao.deleteAllRecords();
     }
 
+
+    /***
+     *  list data
+     * @param callback return result data
+     */
+    public void getSpinnerListDevice( GetResultCallback<List<ListSpinner>> callback) {
+        AppExecutor.getInstance().diskIO().execute(() -> {
+            List<ListSpinner> list = deviceDao.loadAsSpinnerData();
+            Log.d(TAG, "ListSpinner:" + list.size());
+            AppExecutor.getInstance().mainThread().execute(() -> callback.onResult(list));
+        });
+    }
 
 }

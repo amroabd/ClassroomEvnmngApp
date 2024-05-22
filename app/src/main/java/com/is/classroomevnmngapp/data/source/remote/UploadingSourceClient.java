@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;
 
 import com.is.classroomevnmngapp.data.model.ResponseObj;
+import com.is.classroomevnmngapp.data.source.local.entities.LectureHallEntity;
 import com.is.classroomevnmngapp.data.source.local.entities.ReservationEntity;
 import com.is.classroomevnmngapp.data.source.local.entities.UserEntity;
 import com.is.classroomevnmngapp.data.source.remote.api.ApiService;
@@ -22,11 +23,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UploadingClient {
+public class UploadingSourceClient {
     private static final String TAG = "UploadCentral";
     private final ApiService apiService;
 
-    public UploadingClient() {
+    public UploadingSourceClient() {
         this.apiService= RestClient.getInstance().getApiService();
     }
 
@@ -109,11 +110,19 @@ public class UploadingClient {
 
     //===========tasks =========================================
 
-    public  <T>  void uploadLectureHall(UploadCallback<T> callback){
+    public  void uploadLectureHall(@NonNull List<LectureHallEntity> entities, UploadCallback<ResponseObj> callback){
         //------------------
-
+        for (LectureHallEntity entity:entities){
+            Call<ResponseObj> subHeaderCall = apiService.createLectureHall(entity);
+            uploadData(entity.getLocalId(),"LectureHall", subHeaderCall, callback);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
-    public void uploadReservation(List<ReservationEntity> entities,UploadCallback<ResponseObj> callback){
+    public void uploadReservation(@NonNull List<ReservationEntity> entities, UploadCallback<ResponseObj> callback){
         for (ReservationEntity entity:entities){
             Call<ResponseObj> subHeaderCall = apiService.createReservation(entity);
             uploadData(entity.getLocalId(),"Reservations", subHeaderCall, callback);

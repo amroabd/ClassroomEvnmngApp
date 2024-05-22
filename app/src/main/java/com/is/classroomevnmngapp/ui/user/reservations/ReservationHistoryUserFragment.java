@@ -20,7 +20,6 @@ import com.is.classroomevnmngapp.utils.DateUtils;
 import com.is.classroomevnmngapp.utils.Log1;
 
 import static com.is.classroomevnmngapp.data.model.JoinReserveALecture.DIFF_CALLBACK;
-import static com.is.classroomevnmngapp.utils.DateUtils.getDate;
 
 
 public class ReservationHistoryUserFragment extends Fragment {
@@ -86,8 +85,8 @@ public class ReservationHistoryUserFragment extends Fragment {
                         holder.itemReserveBinding.reserveDateLyt.setVisibility(View.VISIBLE);
                         holder.itemReserveBinding.cancelButton.setVisibility(View.VISIBLE);
                         //----
-                        holder.itemReserveBinding.itemStartTime.setText(String.format("%s %s", getDate(), item.getReserveStartTime()));
-                        holder.itemReserveBinding.itemEndTime.setText(String.format("%s %s", getDate(), item.getReserveEndTime()));
+                        holder.itemReserveBinding.itemStartTime.setText(String.format(" %s", item.getReserveStartTime()));
+                        holder.itemReserveBinding.itemEndTime.setText(String.format("%s", item.getReserveEndTime()));
                         holder.itemReserveBinding.cancelButton.setOnClickListener(view -> {
                             viewModel.updateReservation(item.getReserveId(), 0);
                         });

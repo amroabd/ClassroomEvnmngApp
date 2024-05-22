@@ -10,7 +10,7 @@ import androidx.paging.PagedList;
 
 import com.is.classroomevnmngapp.data.model.JoinReserveALecture;
 import com.is.classroomevnmngapp.data.model.ResponseObj;
-import com.is.classroomevnmngapp.data.repository.remote.INetworkSource;
+import com.is.classroomevnmngapp.data.repository.remote.IRemoteDataSource;
 import com.is.classroomevnmngapp.data.source.local.dao.ReservationDao;
 import com.is.classroomevnmngapp.data.source.local.entities.ReservationEntity;
 import com.is.classroomevnmngapp.data.source.remote.DownloadCallback;
@@ -29,12 +29,12 @@ import java.util.concurrent.TimeoutException;
 import static com.is.classroomevnmngapp.utils.constant.NameTableConst.NAME_RESERVATIONS;
 
 
-public final class ReservationRepository extends BaseRepository implements INetworkSource {
+public final class ReservationRepository extends BaseRepository implements IRemoteDataSource {
     private static final String TAG = ReservationRepository.class.getSimpleName();
     private static ReservationRepository instance;
     private final ReservationDao dao;
 
-    private ReservationRepository(Context context) {
+    public ReservationRepository(Context context) {
         super(context);
         Log.d(TAG, String.format("getInstance:Creating new instance %s", TAG));
         dao = mDb.reservationDao();
@@ -48,8 +48,8 @@ public final class ReservationRepository extends BaseRepository implements INetw
     }
 
     @Override
-    public void downloadData() {
-        mDownloadClient.downLoadReservations(new DownloadCallback<List<ReservationEntity>>() {
+    public void downloadData(GetResultCallback<ResponseObj> resultCallback) {
+        mDownloadSourceClient.downLoadReservations(new DownloadCallback<List<ReservationEntity>>() {
             @Override
             public void onSuccess(List<ReservationEntity> tList) {
                 //save result from remote to db local
@@ -65,17 +65,22 @@ public final class ReservationRepository extends BaseRepository implements INetw
     }
 
     @Override
-    public void uploadingData() {
+    public void uploadingData(GetResultCallback<ResponseObj> resultCallback) {
         AppExecutor.getInstance().diskIO().execute(() ->
-                mUploadCentral.uploadReservation(getAll(), new UploadCallback<ResponseObj>() {
+                mUploadingSourceClient.uploadReservation(getAll(), new UploadCallback<ResponseObj>() {
                     @Override
                     public void onSuccess(ResponseObj obj) {
-                        updateStatusUpload(obj.getlId(), Long.parseLong(obj.getServId()), 1);
+                        updateStatusUpload(obj.getlId(), Long.parseLong(obj.getServeId()), 1);
+                        if (resultCallback!=null){
+                            resultCallback.onResult((obj));
+                        }
                     }
 
                     @Override
                     public void onError(String error) {
-
+                        if (resultCallback!=null){
+                            resultCallback.onResult(new ResponseObj(error,"error"));
+                        }
                     }
                 }));
 
@@ -148,7 +153,8 @@ public final class ReservationRepository extends BaseRepository implements INetw
 
 
     public int deleteAllRecords() {
-        return dao.deleteAllRecords();
+        return delete(NAME_RESERVATIONS,null);
+        //return dao.deleteAllRecords();
     }
 
     /***
@@ -157,7 +163,7 @@ public final class ReservationRepository extends BaseRepository implements INetw
     @NonNull
     public LiveData<PagedList<JoinReserveALecture>> getReserveALectureList() {
         return new LivePagedListBuilder<>(dao.getReserveALectureList(), configPagedList())
-                .setFetchExecutor(Executors.newSingleThreadExecutor()).build();
+              /*  .setFetchExecutor(Executors.newSingleThreadExecutor())*/.build();
     }
 
 

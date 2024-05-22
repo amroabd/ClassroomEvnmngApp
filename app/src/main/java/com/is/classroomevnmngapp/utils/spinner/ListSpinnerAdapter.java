@@ -37,6 +37,10 @@ public class ListSpinnerAdapter extends ArrayAdapter<ListSpinner> {
         selectedIndex = -1;
     }
 
+    public int getSelectedIndex() {
+        return selectedIndex;
+    }
+
     public void setSelectedIndex(int position) {
         selectedIndex = position;
         notifyDataSetChanged();

@@ -1,18 +1,23 @@
 package com.is.classroomevnmngapp.data.source.local.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
-import com.is.classroomevnmngapp.utils.DateUtils;
+
+import java.util.Objects;
 
 
-@Entity(tableName = "Reservations", foreignKeys = @ForeignKey(entity = LectureHallEntity.class,
-        parentColumns = "id",
-        childColumns = "lecture_hall_id_fk",
-        onUpdate = ForeignKey.CASCADE))
+@Entity(tableName = "Reservations",
+        indices = @Index(value = {"lecture_hall_id_fk", "reserve_start_time", "reserve_status"}, unique = true),
+        foreignKeys = @ForeignKey(entity = LectureHallEntity.class,
+                parentColumns = "id",
+                childColumns = "lecture_hall_id_fk",
+                onUpdate = ForeignKey.CASCADE))
 public class ReservationEntity extends BaseEntity {
     @PrimaryKey(autoGenerate = true)
     private int localId;
@@ -53,7 +58,7 @@ public class ReservationEntity extends BaseEntity {
     }
 
     public void setReserveEndTime(String reserveEndTime) {
-        this.reserveEndTime = String.format("%s %s", DateUtils.getDate(), reserveEndTime);
+        this.reserveEndTime = reserveEndTime;
     }
 
     public int getLectureHallIdFk() {
@@ -109,6 +114,46 @@ public class ReservationEntity extends BaseEntity {
     }
 
     public void setReserveStartTime(String reserveStartTime) {
-        this.reserveStartTime = String.format("%s %s", DateUtils.getDate(), reserveStartTime);
+        this.reserveStartTime = reserveStartTime;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ReservationEntity)) return false;
+        ReservationEntity entity = (ReservationEntity) o;
+        return localId == entity.localId &&
+                reserveId == entity.reserveId &&
+                lectureHallIdFk == entity.lectureHallIdFk &&
+                reserveStatus == entity.reserveStatus &&
+                reserveUsername.equals(entity.reserveUsername) &&
+                reserveDate.equals(entity.reserveDate) &&
+                reserveStartTime.equals(entity.reserveStartTime) &&
+                reserveEndTime.equals(entity.reserveEndTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(localId, reserveId, lectureHallIdFk, reserveUsername, reserveDate, reserveStartTime, reserveEndTime, reserveStatus);
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "ReservationEntity{" +
+                "localId=" + localId +
+                ", reserveId=" + reserveId +
+                ", lectureHallIdFk=" + lectureHallIdFk +
+                ", reserveUsername='" + reserveUsername + '\'' +
+                ", reserveDate='" + reserveDate + '\'' +
+                ", reserveStartTime='" + reserveStartTime + '\'' +
+                ", reserveEndTime='" + reserveEndTime + '\'' +
+                ", reserveStatus=" + reserveStatus +
+                ", isActive=" + isActive +
+                ", statusUpload=" + statusUpload +
+                ", userIdFk=" + userIdFk +
+                ", createdDateTime='" + createdDateTime + '\'' +
+                ", lastModifiedDateTime='" + lastModifiedDateTime + '\'' +
+                "} " + super.toString();
     }
 }

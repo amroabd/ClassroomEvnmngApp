@@ -11,6 +11,8 @@ public class DeviceEntity {
     private int localId;
     @ColumnInfo(name = "id")
     private int deviceId;
+    @ColumnInfo(name = "name")
+    private String name;
 
     @ColumnInfo(name = "controll_id_fk")
     private int controllerIdFK;
@@ -22,6 +24,15 @@ public class DeviceEntity {
     private int status;
 
     //--------------------
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public int getLocalId() {
         return localId;

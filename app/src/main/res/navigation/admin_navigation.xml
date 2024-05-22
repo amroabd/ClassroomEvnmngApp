@@ -13,9 +13,24 @@
         android:name="com.is.classroomevnmngapp.ui.admin.check_device.CheckDeviceAdminFragment"
         android:id="@+id/navigation_admin_check_device"/>
 
-    <fragment  tools:layout="@layout/fragment_admin_add_schedule"
-        android:name="com.is.classroomevnmngapp.ui.admin.schedule.AddScheduleAdminFragment"
-        android:id="@+id/navigation_admin_add_schedule"/>
+    <fragment  tools:layout="@layout/fragment_user_reserve_list"
+        android:name="com.is.classroomevnmngapp.ui.user.reservations.ReservationListUserFragment"
+        android:id="@+id/navigation_admin_add_schedule">
+        <action
+            android:id="@+id/action_reserve_listFragment_to_reserveFragment"
+            app:destination="@id/navigation_user_reservation"
+            app:enterAnim="@anim/animate_slide_up_enter"
+            app:exitAnim="@anim/animate_slide_up_exit"
+            app:popEnterAnim="@anim/animate_slide_up_enter"
+            app:popExitAnim="@anim/animate_slide_up_exit"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/navigation_user_reservation_list"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_user_reservation"
+        android:name="com.is.classroomevnmngapp.ui.user.reservations.ReservationAddUserFragment"
+        tools:layout="@layout/fragment_user_reservation" />
 
     <fragment  tools:layout="@layout/fragment_admin_config_sensors"
         android:name="com.is.classroomevnmngapp.ui.admin.config_sensor.ConfigSensorsAdminFragment"

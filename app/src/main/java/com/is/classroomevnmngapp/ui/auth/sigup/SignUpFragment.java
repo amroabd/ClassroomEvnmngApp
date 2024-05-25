@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.is.classroomevnmngapp.R;
-import com.is.classroomevnmngapp.UserMainActivity;
+import com.is.classroomevnmngapp.ui.UserMainActivity;
 import com.is.classroomevnmngapp.databinding.FragmentAuthSignupBinding;
 import com.is.classroomevnmngapp.ui.AdminMainActivity;
 import com.is.classroomevnmngapp.ui.auth.sigup.data.SigUpResponse;

@@ -7,9 +7,9 @@ import android.view.LayoutInflater;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.is.classroomevnmngapp.AuthMainActivity;
+import com.is.classroomevnmngapp.ui.AuthMainActivity;
 import com.is.classroomevnmngapp.R;
-import com.is.classroomevnmngapp.UserMainActivity;
+import com.is.classroomevnmngapp.ui.UserMainActivity;
 import com.is.classroomevnmngapp.databinding.OnboardingFragmentBinding;
 import com.is.classroomevnmngapp.ui.AdminMainActivity;
 import com.is.classroomevnmngapp.utils.SharePerf;

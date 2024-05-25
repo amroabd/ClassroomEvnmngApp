@@ -49,12 +49,20 @@ public final class ReservationRepository extends BaseRepository implements IRemo
 
     @Override
     public void downloadData(GetResultCallback<ResponseObj> resultCallback) {
+
         mDownloadSourceClient.downLoadReservations(new DownloadCallback<List<ReservationEntity>>() {
             @Override
             public void onSuccess(List<ReservationEntity> tList) {
                 //save result from remote to db local
                 Log.d(TAG, String.format("insert list data return from server size: %s", tList.size()));
-                AppExecutor.getInstance().diskIO().execute(() -> insertAll(tList));
+                AppExecutor.getInstance().diskIO().execute(() -> {
+                    try {
+                        Thread.sleep(1000);
+                        syncReservation(tList);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
             }
 
             @Override
@@ -71,19 +79,43 @@ public final class ReservationRepository extends BaseRepository implements IRemo
                     @Override
                     public void onSuccess(ResponseObj obj) {
                         updateStatusUpload(obj.getlId(), Long.parseLong(obj.getServeId()), 1);
-                        if (resultCallback!=null){
+                        if (resultCallback != null) {
                             resultCallback.onResult((obj));
                         }
                     }
 
                     @Override
                     public void onError(String error) {
-                        if (resultCallback!=null){
-                            resultCallback.onResult(new ResponseObj(error,"error"));
+                        if (resultCallback != null) {
+                            resultCallback.onResult(new ResponseObj(error, "error"));
                         }
                     }
                 }));
 
+    }
+
+    private void syncReservation(List<ReservationEntity> remoteReserves) {
+        List<ReservationEntity> localReserves = getAll();
+
+        for (ReservationEntity remoteRes : remoteReserves) {
+            ReservationEntity localRes = findReserveById(localReserves, remoteRes.getReserveId());
+
+            if (localRes == null) {
+                if (remoteRes.getLectureHallIdFk()==0)remoteRes.setLectureHallIdFk(1);
+                dao.insertReservation(remoteRes);
+            } else if (!localRes.equals(remoteRes)) {
+                dao.update(remoteRes);
+            }
+        }
+    }
+
+    private ReservationEntity findReserveById(List<ReservationEntity> entities, int id) {
+        for (ReservationEntity entity : entities) {
+            if (entity.getReserveId() == id) {
+                return entity;
+            }
+        }
+        return null;
     }
 
 
@@ -153,7 +185,7 @@ public final class ReservationRepository extends BaseRepository implements IRemo
 
 
     public int deleteAllRecords() {
-        return delete(NAME_RESERVATIONS,null);
+        return delete(NAME_RESERVATIONS, null);
         //return dao.deleteAllRecords();
     }
 
@@ -163,7 +195,7 @@ public final class ReservationRepository extends BaseRepository implements IRemo
     @NonNull
     public LiveData<PagedList<JoinReserveALecture>> getReserveALectureList() {
         return new LivePagedListBuilder<>(dao.getReserveALectureList(), configPagedList())
-              /*  .setFetchExecutor(Executors.newSingleThreadExecutor())*/.build();
+                /*  .setFetchExecutor(Executors.newSingleThreadExecutor())*/.build();
     }
 
 

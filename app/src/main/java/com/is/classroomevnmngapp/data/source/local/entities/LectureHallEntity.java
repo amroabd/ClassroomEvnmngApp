@@ -146,7 +146,7 @@ public class LectureHallEntity extends BaseEntity {
         if (this == o) return true;
         if (!(o instanceof LectureHallEntity)) return false;
         LectureHallEntity entity = (LectureHallEntity) o;
-        return localId == entity.localId &&
+        return  //localId == entity.localId &&
                 lectureHallId == entity.lectureHallId &&
                 capacity == entity.capacity &&
                 title.equals(entity.title);
@@ -154,7 +154,7 @@ public class LectureHallEntity extends BaseEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(localId, lectureHallId, title, capacity);
+        return Objects.hash(/*localId,*/ lectureHallId, title, capacity);
     }
 
     @NonNull

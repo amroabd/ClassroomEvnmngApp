@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Transaction;
+import androidx.room.Update;
 
 import com.is.classroomevnmngapp.data.model.JoinReserveALecture;
 import com.is.classroomevnmngapp.data.source.local.entities.ReservationEntity;
@@ -25,6 +26,8 @@ public interface ReservationDao {
             "WHERE localId=:localID")
     void updateStatusUpload(long localID, long centerID, int upload);
 
+    @Update
+    void update(ReservationEntity reservationEntity);
 //---------------------------------------------
     @Insert
     Long insertReservation(ReservationEntity reservationEntity);

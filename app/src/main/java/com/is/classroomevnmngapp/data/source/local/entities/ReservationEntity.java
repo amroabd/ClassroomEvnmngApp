@@ -13,7 +13,7 @@ import java.util.Objects;
 
 
 @Entity(tableName = "Reservations",
-        indices = @Index(value = {"lecture_hall_id_fk", "reserve_start_time", "reserve_status"}, unique = true),
+        indices = @Index(value = {"lecture_hall_id_fk", "reserve_start_time", "reserve_status"}),
         foreignKeys = @ForeignKey(entity = LectureHallEntity.class,
                 parentColumns = "id",
                 childColumns = "lecture_hall_id_fk",

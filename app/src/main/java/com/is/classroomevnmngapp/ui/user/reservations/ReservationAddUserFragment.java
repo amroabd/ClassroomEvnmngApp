@@ -147,7 +147,7 @@ public class ReservationAddUserFragment extends BaseFragment implements GetResul
 
     @Override
     public void onResult(Object o) {
-        ToastUtil1.showToast(getContext(), (String) o);
+        ToastUtil1.showToast(getContext(), o.toString());
         //MyApplication.getInstance().popupWindow(reservationBinding.getRoot(),o,requireActivity());
         //NavHostFragment.findNavController(ReservationAddUserFragment.this).popBackStack();
     }

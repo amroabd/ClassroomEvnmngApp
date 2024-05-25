@@ -12,6 +12,8 @@ import com.is.classroomevnmngapp.data.repository.GetResultCallback;
 import com.is.classroomevnmngapp.data.repository.ReservationRepository;
 import com.is.classroomevnmngapp.databinding.ActivityStartBinding;
 import com.is.classroomevnmngapp.ui.AdminMainActivity;
+import com.is.classroomevnmngapp.ui.AuthMainActivity;
+import com.is.classroomevnmngapp.ui.UserMainActivity;
 import com.is.classroomevnmngapp.utils.SharePerf;
 import com.is.classroomevnmngapp.view_model.RemoteProcessorViewModel;
 

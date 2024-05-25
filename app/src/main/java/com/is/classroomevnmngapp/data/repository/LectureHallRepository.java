@@ -21,6 +21,7 @@ import com.is.classroomevnmngapp.utils.spinner.ListSpinner;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -105,8 +106,12 @@ public final class LectureHallRepository extends BaseRepository implements IRemo
         for (LectureHallEntity remoteLectureHall : remoteLectureHalls) {
             LectureHallEntity localLectureHall = findLectureHallById(localLectureHalls, remoteLectureHall.getLectureHallId());
             if (localLectureHall == null) {
+                Log1.d(TAG, MessageFormat.format("syncLectureHall-> insert(), remoteLectureHall :{0}", remoteLectureHall));
                 lectureHallDao.insertLectureHall(remoteLectureHall);
             } else if (!localLectureHall.equals(remoteLectureHall)) {
+                Log1.d(TAG, MessageFormat.format("syncLectureHall-> update(), remoteLectureHall :{0}", remoteLectureHall));
+                //data return from remote server have not local id,here do add
+                remoteLectureHall.setLocalId(localLectureHall.getLocalId());
                 lectureHallDao.update(remoteLectureHall);
             }
         }
@@ -114,9 +119,12 @@ public final class LectureHallRepository extends BaseRepository implements IRemo
     }
 
     @Nullable
-    private LectureHallEntity findLectureHallById(@NonNull List<LectureHallEntity> entities, int id) {
+    private LectureHallEntity findLectureHallById(@NonNull List<LectureHallEntity> entities, int remoteId) {
         for (LectureHallEntity entity : entities) {
-            if (entity.getLectureHallId() == id) {
+            //compare remote id with id that in local table
+            // if found already return record local corresponded
+            if (entity.getLectureHallId() == remoteId) {
+                Log1.d(TAG, MessageFormat.format("findLectureHallById()-> corresponded , localLectureHall :{0}", entity));
                 return entity;
             }
         }

@@ -1,14 +1,8 @@
 package com.is.classroomevnmngapp;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.PopupWindow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.multidex.MultiDex;
@@ -62,18 +56,5 @@ public class MyApplication extends Application {
         }), "تسجيل خروج", "هل انت متاكد من تسجيل خروج ");
     }
 
-    public void popupWindow(View ancherView,Object data,Context context) {
-        LayoutInflater layoutInflater = (LayoutInflater) context.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        @SuppressLint("InflateParams") View popView = layoutInflater.inflate(R.layout.custom_notify, null);
-        //---
-        TextView textView=popView.findViewById(R.id.tv_content);
-        PopupWindow popupWindow = new PopupWindow(popView, ancherView.getWidth(), ancherView.getHeight(), false);
-        popupWindow.showAtLocation(ancherView, Gravity.TOP, 0, 0);
-        popupWindow.setAnimationStyle(R.animator.shr_next_button_state_list_anim);
-         textView.setText(String.format("%s", data));
-
-        popView.setOnClickListener(view -> popupWindow.dismiss());
-
-    }
 
 }

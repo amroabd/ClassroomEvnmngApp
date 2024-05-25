@@ -20,6 +20,7 @@ import com.is.classroomevnmngapp.utils.spinner.ListSpinner;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
@@ -103,8 +104,12 @@ public class UserRepository extends BaseRepository implements IRemoteDataSource 
         for (UserEntity remoteUser : remoteUsers) {
             UserEntity localUser = findUserById(localUsers, remoteUser.getUserId());
             if (localUser == null) {
+                Log1.d(TAG, MessageFormat.format("syncUsers-> insertUser(remoteUser), remoteUser :{0}", remoteUser));
                 userDao.insertUser(remoteUser);
             } else if (!localUser.equals(remoteUser)) {
+                Log1.d(TAG, MessageFormat.format("syncUsers-> update(remoteUser), remoteUser :{0}", remoteUser));
+                //data return from remote server have not local id,there do add here
+                remoteUser.setLocalId(localUser.getLocalId());
                 userDao.update(remoteUser);
             }
         }
@@ -158,7 +163,7 @@ public class UserRepository extends BaseRepository implements IRemoteDataSource 
         return userDao.deleteAllRecords();
     }
 
-    public  int getCountAsUploadStatus(int status) {
+    public int getCountAsUploadStatus(int status) {
         int count = 0;
         mExecutorService = Executors.newSingleThreadExecutor();
         Callable<Integer> integerCallable = () -> userDao.getCountAsUploadStatus(status);
@@ -169,7 +174,7 @@ public class UserRepository extends BaseRepository implements IRemoteDataSource 
             e.printStackTrace();
         } finally {
             shutdown(mExecutorService);
-            Log.d(TAG, String.format("getCountAsUploadStatus-> COUNT:%d",  count));
+            Log.d(TAG, String.format("getCountAsUploadStatus-> COUNT:%d", count));
         }
         return count;
     }

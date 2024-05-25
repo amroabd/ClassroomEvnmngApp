@@ -18,7 +18,7 @@ import androidx.navigation.Navigation;
 
 import com.is.classroomevnmngapp.MyApplication;
 import com.is.classroomevnmngapp.R;
-import com.is.classroomevnmngapp.UserMainActivity;
+import com.is.classroomevnmngapp.ui.UserMainActivity;
 import com.is.classroomevnmngapp.databinding.FragmentAuthLoginBinding;
 import com.is.classroomevnmngapp.ui.AdminMainActivity;
 import com.is.classroomevnmngapp.ui.auth.login.data.LoginRequest;

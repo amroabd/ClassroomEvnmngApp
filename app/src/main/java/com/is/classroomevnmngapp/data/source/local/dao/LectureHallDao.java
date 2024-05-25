@@ -23,7 +23,7 @@ public interface LectureHallDao {
             "WHERE localId=:localID")
     void updateStatusUpload(long localID, long centerID, int upload);
     @Update
-    Long update(LectureHallEntity lectureHallEntity);
+    void update(LectureHallEntity lectureHallEntity);
 
     @Delete
     void delete(LectureHallEntity lectureHallEntity);

@@ -10,6 +10,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-feature android:name="android.hardware.camera"
+        android:required="false" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -42,7 +45,7 @@
             &ndash;&gt;
         </activity>-->
 
-        <activity android:name=".UserMainActivity" android:launchMode="singleTask" />
+        <activity android:name=".ui.UserMainActivity" android:launchMode="singleTask" />
         <activity android:name=".ui.AdminMainActivity" android:launchMode="singleTask"
             android:configChanges="colorMode" android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".ui.onboarding.OnboardingActivity">
@@ -52,8 +55,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>-->
         </activity>
-        <activity android:name=".AuthMainActivity" android:launchMode="singleTask" />
-        <activity android:name=".MainActivity" android:launchMode="singleTask" />
+        <activity android:name=".ui.AuthMainActivity" android:launchMode="singleTask" />
+        <activity android:name=".test.MainActivity" android:launchMode="singleTask" />
 
         <meta-data
             android:name="preloaded_fonts"

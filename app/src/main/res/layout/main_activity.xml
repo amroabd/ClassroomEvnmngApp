@@ -7,7 +7,7 @@
     android:layoutDirection="ltr"
     android:orientation="horizontal"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MainActivity">
+    tools:context=".test.MainActivity">
     <com.google.android.material.navigationrail.NavigationRailView
         android:id="@+id/cat_navigation_rail"
         android:layout_width="wrap_content"
@@ -22,5 +22,5 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity" />
+        tools:context=".test.MainActivity" />
 </LinearLayout>

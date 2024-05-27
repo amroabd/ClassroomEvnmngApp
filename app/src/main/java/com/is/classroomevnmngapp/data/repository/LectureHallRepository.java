@@ -98,6 +98,7 @@ public final class LectureHallRepository extends BaseRepository implements IRemo
                     @Override
                     public void onSuccess(ResponseObj obj) {
                         AppExecutor.getInstance().diskIO().execute(() ->
+
                                 lectureHallDao.updateStatusUpload(obj.getlId(), Long.parseLong(obj.getServeId()), 1));
                         notifyToUI(resultCallback, obj);
                     }

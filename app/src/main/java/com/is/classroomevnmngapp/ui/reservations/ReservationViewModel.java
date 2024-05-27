@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.paging.PagedList;
 
 import com.is.classroomevnmngapp.data.model.JoinReserveALecture;
+import com.is.classroomevnmngapp.data.model.ResponseObj;
 import com.is.classroomevnmngapp.data.repository.GetResultCallback;
 import com.is.classroomevnmngapp.data.repository.LectureHallRepository;
 import com.is.classroomevnmngapp.data.repository.ReservationRepository;
@@ -67,16 +68,11 @@ public class ReservationViewModel extends AndroidViewModel {
         sReservationRepository.updateReserveStatus(id, status);
     }
 
-    public void uploadData(GetResultCallback resultCallback){
+    public void uploadData(GetResultCallback<ResponseObj> resultCallback){
         sReservationRepository.uploadingData(resultCallback);
     }
 
-    private GetResultCallback mGetResultCallback=new GetResultCallback() {
-        @Override
-        public void onResult(Object o) {
 
-        }
-    };
 
 
 }

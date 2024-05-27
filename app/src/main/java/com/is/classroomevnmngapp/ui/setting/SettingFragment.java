@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.is.classroomevnmngapp.MyApplication;
+import com.is.classroomevnmngapp.ApplicationMVVM;
 import com.is.classroomevnmngapp.R;
 import com.is.classroomevnmngapp.databinding.FragmentUserSettingBinding;
 import com.is.classroomevnmngapp.utils.SharePerf;
@@ -41,7 +41,7 @@ public class SettingFragment extends Fragment {
         settingBinding.changePasswordBtn.setOnClickListener(view1 ->
                 Navigation.findNavController(view1).navigate(R.id.navigation_change_pass));
         //-----------------------
-        MyApplication myApplication= (MyApplication) getActivity().getApplicationContext();
-        settingBinding.logoutBtn.setOnClickListener(view1 -> myApplication.logout(requireContext()));
+        ApplicationMVVM applicationMVVM = (ApplicationMVVM) getActivity().getApplicationContext();
+        settingBinding.logoutBtn.setOnClickListener(view1 -> applicationMVVM.logout(requireContext()));
     }
 }

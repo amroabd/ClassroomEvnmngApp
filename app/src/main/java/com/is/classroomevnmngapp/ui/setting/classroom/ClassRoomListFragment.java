@@ -1,4 +1,4 @@
-package com.is.classroomevnmngapp.ui.setting.init_classroom;
+package com.is.classroomevnmngapp.ui.setting.classroom;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.is.classroomevnmngapp.R;
 import com.is.classroomevnmngapp.data.source.local.entities.LectureHallEntity;
-import com.is.classroomevnmngapp.databinding.FragmentUserClassroomBinding;
+import com.is.classroomevnmngapp.databinding.FragmentListClassroomBinding;
 import com.is.classroomevnmngapp.databinding.RowItemClassroomBinding;
 import com.is.classroomevnmngapp.utils.Log1;
 
@@ -27,11 +27,11 @@ import static com.is.classroomevnmngapp.data.source.local.entities.LectureHallEn
 public class ClassRoomListFragment extends Fragment {
     private static final String TAG = "ClassRoomListFragment";
     private ClassRoomViewModel viewModel;
-    FragmentUserClassroomBinding classroomBinding;
+    FragmentListClassroomBinding classroomBinding;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(ClassRoomViewModel.class);
-             classroomBinding=FragmentUserClassroomBinding.inflate(inflater);
+             classroomBinding=FragmentListClassroomBinding.inflate(inflater);
 
 
         return classroomBinding.getRoot();

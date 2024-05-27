@@ -1,4 +1,4 @@
-package com.is.classroomevnmngapp.ui.setting.init_classroom;
+package com.is.classroomevnmngapp.ui.setting.classroom;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,19 +14,19 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.is.classroomevnmngapp.R;
 import com.is.classroomevnmngapp.data.repository.GetResultCallback;
 import com.is.classroomevnmngapp.data.source.local.entities.LectureHallEntity;
-import com.is.classroomevnmngapp.databinding.FragmentAdminAddClassroomBinding;
+import com.is.classroomevnmngapp.databinding.FragmentAddClassroomBinding;
 import com.is.classroomevnmngapp.utils.ConvertData;
 import com.is.classroomevnmngapp.utils.ToastUtil1;
 import com.is.classroomevnmngapp.utils.Validator;
 import com.is.classroomevnmngapp.utils.widget.custom.CustomDialog;
 
-public class AddClassroomAdminFragment extends Fragment implements GetResultCallback {
+public class ClassroomAddFragment extends Fragment implements GetResultCallback {
     private ClassRoomViewModel viewModel;
-    private FragmentAdminAddClassroomBinding addClassroomBinding;
+    private FragmentAddClassroomBinding addClassroomBinding;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(ClassRoomViewModel.class);
-        addClassroomBinding = FragmentAdminAddClassroomBinding.inflate(inflater);
+        addClassroomBinding = FragmentAddClassroomBinding.inflate(inflater);
 
         viewModel.getAllLectureHall().observe(getViewLifecycleOwner(), dataList -> {
 
@@ -79,7 +79,7 @@ public class AddClassroomAdminFragment extends Fragment implements GetResultCall
         if (id > 0) {
             viewModel.uploadData(this);
             ToastUtil1.showToast(requireContext(), "Success added new Record.");
-            NavHostFragment.findNavController(AddClassroomAdminFragment.this).popBackStack();
+            NavHostFragment.findNavController(ClassroomAddFragment.this).popBackStack();
         } else {
             ToastUtil1.showToastFail(requireContext(), "Failed added new Record.!!!");
         }

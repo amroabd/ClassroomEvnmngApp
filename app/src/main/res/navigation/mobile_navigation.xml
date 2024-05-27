@@ -12,13 +12,13 @@
 
     <fragment
         android:id="@+id/navigation_user_classroom"
-        android:name="com.is.classroomevnmngapp.ui.setting.init_classroom.ClassRoomListFragment"
-        tools:layout="@layout/fragment_user_classroom" />
+        android:name="com.is.classroomevnmngapp.ui.setting.classroom.ClassRoomListFragment"
+        tools:layout="@layout/fragment_list_classroom" />
 
     <fragment
         android:id="@+id/navigation_user_reservation_list"
-        android:name="com.is.classroomevnmngapp.ui.user.reservations.ReservationListUserFragment"
-        tools:layout="@layout/fragment_user_reserve_list">
+        android:name="com.is.classroomevnmngapp.ui.reservations.ReservationListFragment"
+        tools:layout="@layout/fragment_list_reservation">
         <action
             android:id="@+id/action_reserve_listFragment_to_reserveFragment"
             app:destination="@id/navigation_user_reservation"
@@ -32,13 +32,13 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_user_reservation"
-        android:name="com.is.classroomevnmngapp.ui.user.reservations.ReservationAddUserFragment"
-        tools:layout="@layout/fragment_user_reservation" />
+        android:name="com.is.classroomevnmngapp.ui.reservations.ReservationAddFragment"
+        tools:layout="@layout/fragment_add_reservation" />
 
     <fragment
         android:id="@+id/navigation_user_reservation_history"
-        android:name="com.is.classroomevnmngapp.ui.user.reservations.ReservationHistoryUserFragment"
-        tools:layout="@layout/fragment_user_reserve_history" />
+        android:name="com.is.classroomevnmngapp.ui.reservations.ReservationHistoryListFragment"
+        tools:layout="@layout/fragment_list_reserve_history" />
 
 
     <fragment

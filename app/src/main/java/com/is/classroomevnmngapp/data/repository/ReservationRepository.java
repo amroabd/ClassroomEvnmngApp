@@ -18,6 +18,8 @@ import com.is.classroomevnmngapp.data.source.remote.UploadCallback;
 import com.is.classroomevnmngapp.utils.Log1;
 import com.is.classroomevnmngapp.utils.executor.AppExecutor;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -75,7 +77,7 @@ public final class ReservationRepository extends BaseRepository implements IRemo
     @Override
     public void uploadingData(GetResultCallback<ResponseObj> resultCallback) {
         AppExecutor.getInstance().diskIO().execute(() ->
-                mUploadingSourceClient.uploadReservation(getAll(), new UploadCallback<ResponseObj>() {
+                mUploadingSourceClient.uploadReservation(dao.getDataAsLimit(5), new UploadCallback<ResponseObj>() {
                     @Override
                     public void onSuccess(ResponseObj obj) {
                         updateStatusUpload(obj.getlId(), Long.parseLong(obj.getServeId()), 1);
@@ -94,22 +96,27 @@ public final class ReservationRepository extends BaseRepository implements IRemo
 
     }
 
-    private void syncReservation(List<ReservationEntity> remoteReserves) {
-        List<ReservationEntity> localReserves = getAll();
-
-        for (ReservationEntity remoteRes : remoteReserves) {
-            ReservationEntity localRes = findReserveById(localReserves, remoteRes.getReserveId());
+    private synchronized void syncReservation(@NonNull List<ReservationEntity> remoteEntityList) {
+        //fetch data from local source
+        List<ReservationEntity> localEntityList = getDataAll();
+        // check each item  return from remote
+        // and compare (remote.id==local.id ) if not found in local  :do new insert,
+        //or if found in local but in some fields difference :do update
+        for (ReservationEntity remoteRes : remoteEntityList) {
+            ReservationEntity localRes = findReserveById(localEntityList, remoteRes.getReserveId());
 
             if (localRes == null) {
-                if (remoteRes.getLectureHallIdFk()==0)remoteRes.setLectureHallIdFk(1);
+                if (remoteRes.getLectureHallIdFk() == 0) remoteRes.setLectureHallIdFk(1);
                 dao.insertReservation(remoteRes);
             } else if (!localRes.equals(remoteRes)) {
+                remoteRes.setReserveId(localRes.getReserveId());
                 dao.update(remoteRes);
             }
         }
     }
 
-    private ReservationEntity findReserveById(List<ReservationEntity> entities, int id) {
+    @Nullable
+    private ReservationEntity findReserveById(@NonNull List<ReservationEntity> entities, int id) {
         for (ReservationEntity entity : entities) {
             if (entity.getReserveId() == id) {
                 return entity;
@@ -157,8 +164,8 @@ public final class ReservationRepository extends BaseRepository implements IRemo
     }
 
 
-    public List<ReservationEntity> getAll() {
-        return dao.getAll();
+    public List<ReservationEntity> getDataAll() {
+        return dao.getDataAll();
     }
 
 

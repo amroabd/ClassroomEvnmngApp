@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.is.classroomevnmngapp.MyApplication;
+import com.is.classroomevnmngapp.ApplicationMVVM;
 import com.is.classroomevnmngapp.R;
 import com.is.classroomevnmngapp.ui.UserMainActivity;
 import com.is.classroomevnmngapp.databinding.FragmentAuthLoginBinding;
@@ -97,7 +97,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void login() {
-        if (MyApplication.isNotConnectedNetToast(requireContext()))return;
+        if (ApplicationMVVM.isNotConnectedNetToast(requireContext()))return;
 
         String username = ConvertData.to2String(loginBinding.usernameEditText);
         String password = ConvertData.to2String(loginBinding.passwordEditText);

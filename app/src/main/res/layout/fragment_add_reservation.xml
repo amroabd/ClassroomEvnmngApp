@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="5.0"
-    tools:context=".ui.user.reservations.ReservationAddUserFragment">
+    tools:context=".ui.reservations.ReservationAddFragment">
 
 
 

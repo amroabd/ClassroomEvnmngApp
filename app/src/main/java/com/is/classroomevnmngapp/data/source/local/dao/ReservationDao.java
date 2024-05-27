@@ -52,9 +52,11 @@ public interface ReservationDao {
     @Query("SELECT * FROM Reservations WHERE id = :reserveId")
     ReservationEntity getReservationById(int reserveId);
 
+    @Query("SELECT * FROM Reservations WHERE status_upload=0 LIMIT :limit ")
+    List<ReservationEntity> getDataAsLimit(int limit);
 
-    @Query("SELECT * FROM Reservations WHERE status_upload=0 LIMIT 5 ")
-    List<ReservationEntity> getAll();
+    @Query("SELECT * FROM Reservations  ")
+    List<ReservationEntity> getDataAll();
 
     @Query("SELECT COUNT(localId) FROM Reservations WHERE reserve_status=1 ")
     int getReservedCount();

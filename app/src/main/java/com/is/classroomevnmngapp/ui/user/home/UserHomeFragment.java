@@ -13,18 +13,18 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.is.classroomevnmngapp.R;
 import com.is.classroomevnmngapp.databinding.FragmentUserHomeBinding;
-import com.is.classroomevnmngapp.ui.user.reservations.ReservationUserViewModel;
+import com.is.classroomevnmngapp.ui.reservations.ReservationViewModel;
 
 import java.util.Locale;
 
 public class UserHomeFragment extends Fragment {
 
     private UserHomeViewModel userHomeViewModel;
-    private ReservationUserViewModel viewModel;
+    private ReservationViewModel viewModel;
     FragmentUserHomeBinding userHomeBinding;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        viewModel = new ViewModelProvider(this).get(ReservationUserViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ReservationViewModel.class);
         userHomeViewModel = new ViewModelProvider(this).get(UserHomeViewModel.class);
         userHomeBinding=FragmentUserHomeBinding.inflate(inflater);
 

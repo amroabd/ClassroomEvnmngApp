@@ -1,4 +1,4 @@
-package com.is.classroomevnmngapp.ui.user.reservations;
+package com.is.classroomevnmngapp.ui.reservations;
 
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.is.classroomevnmngapp.R;
 import com.is.classroomevnmngapp.data.model.JoinReserveALecture;
-import com.is.classroomevnmngapp.databinding.FragmentUserReserveListBinding;
+import com.is.classroomevnmngapp.databinding.FragmentListReservationBinding;
 import com.is.classroomevnmngapp.databinding.RowItemReserveBinding;
 import com.is.classroomevnmngapp.utils.DateUtils;
 import com.is.classroomevnmngapp.utils.Log1;
@@ -26,15 +26,15 @@ import com.is.classroomevnmngapp.utils.widget.custom.CustomDialog;
 import static com.is.classroomevnmngapp.data.model.JoinReserveALecture.DIFF_CALLBACK;
 import static com.is.classroomevnmngapp.utils.constant.KeyExtra.KEY_EXTRA_LECTURE_ID;
 
-public class ReservationListUserFragment extends Fragment {
+public class ReservationListFragment extends Fragment {
     private static final String TAG = "ReservationListUserFrag";
-    private ReservationUserViewModel viewModel;
-    private FragmentUserReserveListBinding reserveListBinding;
+    private ReservationViewModel viewModel;
+    private FragmentListReservationBinding reserveListBinding;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log1.d(TAG,"onCreateView()");
-        viewModel = new ViewModelProvider(this).get(ReservationUserViewModel.class);
-        reserveListBinding = FragmentUserReserveListBinding.inflate(inflater, container, false);
+        viewModel = new ViewModelProvider(this).get(ReservationViewModel.class);
+        reserveListBinding = FragmentListReservationBinding.inflate(inflater, container, false);
         //
         return reserveListBinding.getRoot();
     }

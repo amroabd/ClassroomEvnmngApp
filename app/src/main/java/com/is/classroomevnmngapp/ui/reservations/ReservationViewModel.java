@@ -1,4 +1,4 @@
-package com.is.classroomevnmngapp.ui.user.reservations;
+package com.is.classroomevnmngapp.ui.reservations;
 
 import android.app.Application;
 
@@ -16,14 +16,14 @@ import com.is.classroomevnmngapp.utils.spinner.ListSpinner;
 
 import java.util.List;
 
-public class ReservationUserViewModel extends AndroidViewModel {
+public class ReservationViewModel extends AndroidViewModel {
 
     private final ReservationRepository sReservationRepository;
 
     private final LectureHallRepository sLectureHallRepository;
     private final UserRepository sUserRepository;
 
-    public ReservationUserViewModel(Application application) {
+    public ReservationViewModel(Application application) {
         super(application);
         sReservationRepository = ReservationRepository.getInstance(application);
         sLectureHallRepository=LectureHallRepository.getInstance(application);
@@ -62,5 +62,13 @@ public class ReservationUserViewModel extends AndroidViewModel {
     public void uploadData(GetResultCallback resultCallback){
         sReservationRepository.uploadingData(resultCallback);
     }
+
+    private GetResultCallback mGetResultCallback=new GetResultCallback() {
+        @Override
+        public void onResult(Object o) {
+
+        }
+    };
+
 
 }

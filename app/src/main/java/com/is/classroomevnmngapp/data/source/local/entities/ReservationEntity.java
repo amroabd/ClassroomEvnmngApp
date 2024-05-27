@@ -122,7 +122,7 @@ public class ReservationEntity extends BaseEntity {
         if (this == o) return true;
         if (!(o instanceof ReservationEntity)) return false;
         ReservationEntity entity = (ReservationEntity) o;
-        return localId == entity.localId &&
+        return  //localId == entity.localId &&
                 reserveId == entity.reserveId &&
                 lectureHallIdFk == entity.lectureHallIdFk &&
                 reserveStatus == entity.reserveStatus &&
@@ -134,7 +134,8 @@ public class ReservationEntity extends BaseEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(localId, reserveId, lectureHallIdFk, reserveUsername, reserveDate, reserveStartTime, reserveEndTime, reserveStatus);
+        return Objects.hash(localId, reserveId, lectureHallIdFk, reserveUsername,
+                reserveDate, reserveStartTime, reserveEndTime, reserveStatus);
     }
 
     @NonNull

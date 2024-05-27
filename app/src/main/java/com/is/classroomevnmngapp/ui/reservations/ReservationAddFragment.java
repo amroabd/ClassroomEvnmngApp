@@ -1,4 +1,4 @@
-package com.is.classroomevnmngapp.ui.user.reservations;
+package com.is.classroomevnmngapp.ui.reservations;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,12 +8,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.is.classroomevnmngapp.ApplicationMVVM;
 import com.is.classroomevnmngapp.R;
 import com.is.classroomevnmngapp.data.repository.GetResultCallback;
 import com.is.classroomevnmngapp.data.source.local.entities.ReservationEntity;
-import com.is.classroomevnmngapp.databinding.FragmentUserReservationBinding;
+import com.is.classroomevnmngapp.databinding.FragmentAddReservationBinding;
 import com.is.classroomevnmngapp.ui.BaseFragment;
 import com.is.classroomevnmngapp.utils.ConvertData;
 import com.is.classroomevnmngapp.utils.DateUtils;
@@ -31,11 +33,11 @@ import static com.is.classroomevnmngapp.utils.SharePerf.TYPE_ACCOUNT_USER;
 import static com.is.classroomevnmngapp.utils.constant.KeyExtra.KEY_EXTRA_LECTURE_ID;
 import static com.is.classroomevnmngapp.utils.widget.custom.CustomDialog.setDialogCallback;
 
-public class ReservationAddUserFragment extends BaseFragment implements GetResultCallback {
+public class ReservationAddFragment extends BaseFragment implements GetResultCallback {
     private static final String TAG = "ReservationUserFragment";
 
-    private ReservationUserViewModel viewModel;
-    private FragmentUserReservationBinding reservationBinding;
+    private ReservationViewModel viewModel;
+    private FragmentAddReservationBinding reservationBinding;
 
     private ListSpinnerAdapter userSpinnerAdapter;
     private List<ListSpinner> userSpinners;
@@ -53,9 +55,9 @@ public class ReservationAddUserFragment extends BaseFragment implements GetResul
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log1.d(TAG, "onCreateView()");
-        viewModel = new ViewModelProvider(this).get(ReservationUserViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ReservationViewModel.class);
 
-        reservationBinding = FragmentUserReservationBinding.inflate(inflater, container, false);
+        reservationBinding = FragmentAddReservationBinding.inflate(inflater, container, false);
 
         return reservationBinding.getRoot();
     }
@@ -137,18 +139,25 @@ public class ReservationAddUserFragment extends BaseFragment implements GetResul
         //------
         int id = (int) viewModel.addReservation(entity);
         if (id > 0) {
-            viewModel.uploadData(this);
-            ToastUtil1.showToast(getContext(), "Success in Added data Reservation to db.!");
-           NavHostFragment.findNavController(ReservationAddUserFragment.this).popBackStack();
+            ToastUtil1.showToast(getContext(), String.format("Success in Added data Reservation to db.! ,id :%s", id));
+
+            if (ApplicationMVVM.isConnectedNet(requireContext())) viewModel.uploadData(this);
+            else getNavController().popBackStack();
+
         } else {
             ToastUtil1.showToastFail(getContext(), "Fail in Added data Reservation to db.!");
         }
     }
 
     @Override
-    public void onResult(Object o) {
-        ToastUtil1.showToast(getContext(), o.toString());
+    public void onResult(@NonNull Object o) {
+        ToastUtil1.showToast(getActivity().getApplicationContext(), o.toString());
         //MyApplication.getInstance().popupWindow(reservationBinding.getRoot(),o,requireActivity());
-        //NavHostFragment.findNavController(ReservationAddUserFragment.this).popBackStack();
+        getNavController();
+    }
+
+    @NonNull
+    private NavController getNavController(){
+        return NavHostFragment.findNavController(ReservationAddFragment.this);
     }
 }

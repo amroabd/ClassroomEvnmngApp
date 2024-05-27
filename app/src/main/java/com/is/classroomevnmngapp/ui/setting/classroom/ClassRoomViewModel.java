@@ -1,4 +1,4 @@
-package com.is.classroomevnmngapp.ui.setting.init_classroom;
+package com.is.classroomevnmngapp.ui.setting.classroom;
 
 import android.app.Application;
 

@@ -13,8 +13,8 @@ import com.is.classroomevnmngapp.utils.widget.custom.CustomDialog;
 
 import static com.is.classroomevnmngapp.utils.widget.custom.CustomDialog.setDialogCallback;
 
-public class MyApplication extends Application {
-    public static  MyApplication instance;
+public class ApplicationMVVM extends Application {
+    public static ApplicationMVVM instance;
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
@@ -22,8 +22,8 @@ public class MyApplication extends Application {
 
     }
 
-    public static MyApplication getInstance() {
-        if (instance==null)instance=new MyApplication();
+    public static ApplicationMVVM getInstance() {
+        if (instance==null)instance=new ApplicationMVVM();
         return instance;
     }
 

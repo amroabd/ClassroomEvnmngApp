@@ -1,4 +1,4 @@
-package com.is.classroomevnmngapp.ui.user.reservations;
+package com.is.classroomevnmngapp.ui.reservations;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -14,7 +14,7 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.is.classroomevnmngapp.data.model.JoinReserveALecture;
-import com.is.classroomevnmngapp.databinding.FragmentUserReserveHistoryBinding;
+import com.is.classroomevnmngapp.databinding.FragmentListReserveHistoryBinding;
 import com.is.classroomevnmngapp.databinding.RowItemReserveHistoryBinding;
 import com.is.classroomevnmngapp.utils.DateUtils;
 import com.is.classroomevnmngapp.utils.Log1;
@@ -22,14 +22,14 @@ import com.is.classroomevnmngapp.utils.Log1;
 import static com.is.classroomevnmngapp.data.model.JoinReserveALecture.DIFF_CALLBACK;
 
 
-public class ReservationHistoryUserFragment extends Fragment {
+public class ReservationHistoryListFragment extends Fragment {
     private static final String TAG = "ReservationHistoryUserF";
-    private ReservationUserViewModel viewModel;
-    FragmentUserReserveHistoryBinding classroomBinding;
+    private ReservationViewModel viewModel;
+    FragmentListReserveHistoryBinding classroomBinding;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        viewModel = new ViewModelProvider(this).get(ReservationUserViewModel.class);
-             classroomBinding=FragmentUserReserveHistoryBinding.inflate(inflater);
+        viewModel = new ViewModelProvider(this).get(ReservationViewModel.class);
+             classroomBinding=FragmentListReserveHistoryBinding.inflate(inflater);
 
         return classroomBinding.getRoot();
     }

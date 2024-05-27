@@ -1,6 +1,7 @@
 package com.is.classroomevnmngapp.data.repository;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import static com.is.classroomevnmngapp.utils.constant.NameTableConst.NAME_RESERVATIONS;
+import static com.is.classroomevnmngapp.utils.constant.ParamsStatus.UPLOAD_STATUS_ONN;
 
 
 public final class ReservationRepository extends BaseRepository implements IRemoteDataSource {
@@ -51,8 +53,17 @@ public final class ReservationRepository extends BaseRepository implements IRemo
 
     @Override
     public void downloadData(GetResultCallback<ResponseObj> resultCallback) {
-
-        mDownloadSourceClient.downLoadReservations(new DownloadCallback<List<ReservationEntity>>() {
+        final String[] message = {"download Data not found.!!"};
+        final String query = String.format("SELECT COUNT(id) FROM %s WHERE status_upload IN(0,3) ", NAME_RESERVATIONS);
+        final int countRecordsNotUpload =getCount(query);
+        if (countRecordsNotUpload > 0) {
+            message[0] = String.format("Found Records reserve not upload from local to remote,size: %s", countRecordsNotUpload);
+            Log1.d(TAG, message[0]);
+            //notifyToUI(resultCallback, ResponseObj.newInstance(message[0]));
+            //will start upload the records before download
+            uploadingData(resultCallback);
+        } else
+            mDownloadSourceClient.downLoadReservations(new DownloadCallback<List<ReservationEntity>>() {
             @Override
             public void onSuccess(List<ReservationEntity> tList) {
                 //save result from remote to db local
@@ -80,7 +91,8 @@ public final class ReservationRepository extends BaseRepository implements IRemo
                 mUploadingSourceClient.uploadReservation(dao.getDataAsLimit(5), new UploadCallback<ResponseObj>() {
                     @Override
                     public void onSuccess(ResponseObj obj) {
-                        updateStatusUpload(obj.getlId(), Long.parseLong(obj.getServeId()), 1);
+                        if (TextUtils.isDigitsOnly(obj.getServeId()))
+                        updateStatusUpload(obj.getlId(), Long.parseLong(obj.getServeId()), UPLOAD_STATUS_ONN);
                         if (resultCallback != null) {
                             resultCallback.onResult((obj));
                         }
@@ -109,7 +121,7 @@ public final class ReservationRepository extends BaseRepository implements IRemo
                 if (remoteRes.getLectureHallIdFk() == 0) remoteRes.setLectureHallIdFk(1);
                 dao.insertReservation(remoteRes);
             } else if (!localRes.equals(remoteRes)) {
-                remoteRes.setReserveId(localRes.getReserveId());
+                remoteRes.setLocalId(localRes.getLocalId());
                 dao.update(remoteRes);
             }
         }
@@ -128,7 +140,7 @@ public final class ReservationRepository extends BaseRepository implements IRemo
 
     public long insertReservation(ReservationEntity entity) {
         long rowID = 0;
-        insertFooter(entity, false);
+        insertFooter(entity);
         mExecutorService = Executors.newSingleThreadExecutor();
         Callable<Long> callable = () -> dao.insertWithTriggerLogic(entity);
         Future<Long> future = mExecutorService.submit(callable);
@@ -149,8 +161,11 @@ public final class ReservationRepository extends BaseRepository implements IRemo
     }
 
 
-    public void updateReserveStatus(long localID, int status) {
-        AppExecutor.getInstance().diskIO().execute(() -> dao.updateReserveStatus(localID, status));
+    public void updateReserveStatus(long id, int status) {
+        final String query = String.format("SELECT status_upload FROM %s WHERE id=%s ", NAME_RESERVATIONS,id);
+        int val=getValueStatusUpload(query);
+        final int valueStatusUpload =val==1?3:val==3?3:0;
+        AppExecutor.getInstance().diskIO().execute(() -> dao.updateReserveStatus(id, status,valueStatusUpload));
     }
 
 
@@ -196,22 +211,15 @@ public final class ReservationRepository extends BaseRepository implements IRemo
         //return dao.deleteAllRecords();
     }
 
-    /***
-     *  list data using pagedList
-     */
-    @NonNull
-    public LiveData<PagedList<JoinReserveALecture>> getReserveALectureList() {
-        return new LivePagedListBuilder<>(dao.getReserveALectureList(), configPagedList())
-                /*  .setFetchExecutor(Executors.newSingleThreadExecutor())*/.build();
-    }
+
 
 
     /***
      *  list data using pagedList
      */
     @NonNull
-    public LiveData<PagedList<JoinReserveALecture>> getReserveALectureHistList() {
-        return new LivePagedListBuilder<>(dao.getReserveALectureHistList(), configPagedList())
+    public LiveData<PagedList<JoinReserveALecture>> getReserveALectureHistList(String user_id) {
+        return new LivePagedListBuilder<>(dao.getReserveALectureHistList(user_id), configPagedList())
                 .setFetchExecutor(Executors.newSingleThreadExecutor()).build();
     }
 

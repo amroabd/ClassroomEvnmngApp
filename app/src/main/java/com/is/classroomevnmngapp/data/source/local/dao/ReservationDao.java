@@ -17,9 +17,9 @@ import java.util.List;
 public interface ReservationDao {
 
     @Query("UPDATE Reservations " +
-            "SET reserve_status=:status ,status_upload=0 " +
+            "SET reserve_status=:status ,status_upload=:statusUpload " +
             "WHERE id=:id")
-    void updateReserveStatus(long id, int status);
+    void updateReserveStatus(long id, int status,int statusUpload);
 
     @Query("UPDATE Reservations " +
             "SET id=:centerID,status_upload=:upload " +
@@ -52,7 +52,7 @@ public interface ReservationDao {
     @Query("SELECT * FROM Reservations WHERE id = :reserveId")
     ReservationEntity getReservationById(int reserveId);
 
-    @Query("SELECT * FROM Reservations WHERE status_upload=0 LIMIT :limit ")
+    @Query("SELECT * FROM Reservations WHERE status_upload IN(0,3)  LIMIT :limit ")
     List<ReservationEntity> getDataAsLimit(int limit);
 
     @Query("SELECT * FROM Reservations  ")
@@ -66,16 +66,7 @@ public interface ReservationDao {
 
 
     //=========================
-    @Query("SELECT lh.name AS title," +
-            "  lh.id AS lectureHallID,  " +
-            " rs.id AS reserveId, " +
-            " rs.reserve_start_time AS reserveStartTime, " +
-            " rs.reserve_end_time AS reserveEndTime ," +
-            " rs.reserve_status AS reserveStatus ," +
-            " rs.reserve_username_fk AS reserveUsername " +
-            " FROM LectureHalls  AS lh LEFT JOIN Reservations rs on rs.lecture_hall_id_fk=lh.id " +
-            " WHERE  rs.reserve_start_time ISNULL OR  rs.reserve_status=0 ")
-    DataSource.Factory<Integer, JoinReserveALecture>getReserveALectureList();
+
 
     @Query("SELECT lh.name AS title," +
             "  lh.id AS lectureHallID,  " +
@@ -84,7 +75,8 @@ public interface ReservationDao {
             " rs.reserve_end_time AS reserveEndTime ," +
             " rs.reserve_status AS reserveStatus ," +
             " rs.reserve_username_fk AS reserveUsername " +
-            " FROM LectureHalls  AS lh LEFT JOIN Reservations rs on rs.lecture_hall_id_fk=lh.id " )
-    DataSource.Factory<Integer, JoinReserveALecture>getReserveALectureHistList();
+            " FROM LectureHalls  AS lh INNER JOIN Reservations rs on rs.lecture_hall_id_fk=lh.id" +
+            " WHERE rs.reserve_username_fk=:id" )
+    DataSource.Factory<Integer, JoinReserveALecture>getReserveALectureHistList(String id);
 
 }

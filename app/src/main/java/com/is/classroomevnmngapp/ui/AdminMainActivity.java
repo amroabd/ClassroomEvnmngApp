@@ -12,6 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.is.classroomevnmngapp.ApplicationMVVM;
 import com.is.classroomevnmngapp.R;
 import com.is.classroomevnmngapp.data.repository.GetResultCallback;
 import com.is.classroomevnmngapp.data.repository.LectureHallRepository;
@@ -53,10 +54,12 @@ public class AdminMainActivity extends AppCompatActivity implements GetResultCal
             }
         });
 
-        //sync user from remote
-        remoteProcessorViewModel.downloadData(new UserRepository(this), this);
-        remoteProcessorViewModel.downloadData(LectureHallRepository.getInstance(this), this);
-        remoteProcessorViewModel.downloadData(ReservationRepository.getInstance(this), this);
+        if (ApplicationMVVM.isConnectedNetToast(this)) {
+            //sync user from remote
+            remoteProcessorViewModel.downloadData(new UserRepository(this), this);
+            remoteProcessorViewModel.downloadData(LectureHallRepository.getInstance(this), this);
+            remoteProcessorViewModel.downloadData(ReservationRepository.getInstance(this), this);
+        }
     }
 
     Toolbar toolbar;

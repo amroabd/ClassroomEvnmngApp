@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.is.classroomevnmngapp.ApplicationMVVM;
@@ -18,7 +17,6 @@ import com.is.classroomevnmngapp.data.source.local.entities.ReservationEntity;
 import com.is.classroomevnmngapp.databinding.FragmentAddReservationBinding;
 import com.is.classroomevnmngapp.ui.BaseFragment;
 import com.is.classroomevnmngapp.utils.ConvertData;
-import com.is.classroomevnmngapp.utils.DateUtils;
 import com.is.classroomevnmngapp.utils.Log1;
 import com.is.classroomevnmngapp.utils.SharePerf;
 import com.is.classroomevnmngapp.utils.ToastUtil1;
@@ -129,20 +127,21 @@ public class ReservationAddFragment extends BaseFragment implements GetResultCal
         } else {//in case user admin
             entity.setReserveUsername(userSpinnerAdapter.getId_s(userSpinnerAdapter.getSelectedIndex()));
         }
-
-        entity.setReserveDate(ConvertData.to2String(reservationBinding.dateEditText));
-        entity.setReserveStartTime(String.format("%s %s", DateUtils.getDate(), reservationBinding.startTimeSpinner.getSelectedItem()));
-        entity.setReserveEndTime(String.format("%s %s", DateUtils.getDate(), reservationBinding.endTimeSpinner.getSelectedItem()));
+         String date= ConvertData.to2String(reservationBinding.dateEditText);
+        entity.setReserveDate(date);
+        entity.setReserveStartTime(String.format("%s %s", date, reservationBinding.startTimeSpinner.getSelectedItem()));
+        entity.setReserveEndTime(String.format("%s %s", date, reservationBinding.endTimeSpinner.getSelectedItem()));
         entity.setReserveStatus(1);
         Log1.d(TAG, "startTimeSpinner :" + reservationBinding.startTimeSpinner.getSelectedItem());
 
         //------
         int id = (int) viewModel.addReservation(entity);
         if (id > 0) {
+            viewModel.updateLectureStatusReservation(lectureId,1);
             ToastUtil1.showToast(getContext(), String.format("Success in Added data Reservation to db.! ,id :%s", id));
 
             if (ApplicationMVVM.isConnectedNet(requireContext())) viewModel.uploadData(this);
-            else getNavController().popBackStack();
+             popBackStack();
 
         } else {
             ToastUtil1.showToastFail(getContext(), "Fail in Added data Reservation to db.!");
@@ -151,13 +150,13 @@ public class ReservationAddFragment extends BaseFragment implements GetResultCal
 
     @Override
     public void onResult(@NonNull Object o) {
-        ToastUtil1.showToast(getActivity().getApplicationContext(), o.toString());
+        //ToastUtil1.showToast(getActivity().getApplicationContext(), o.toString());
         //MyApplication.getInstance().popupWindow(reservationBinding.getRoot(),o,requireActivity());
-        getNavController();
+        //popBackStack();
     }
 
-    @NonNull
-    private NavController getNavController(){
-        return NavHostFragment.findNavController(ReservationAddFragment.this);
+
+    private void popBackStack(){
+        NavHostFragment.findNavController(ReservationAddFragment.this).popBackStack();
     }
 }

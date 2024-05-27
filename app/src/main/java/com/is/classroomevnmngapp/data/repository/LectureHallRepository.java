@@ -31,6 +31,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import static com.is.classroomevnmngapp.utils.constant.NameTableConst.NAME_LECTURE_HALLS;
+import static com.is.classroomevnmngapp.utils.constant.ParamsStatus.UPLOAD_STATUS_OFF;
+import static com.is.classroomevnmngapp.utils.constant.ParamsStatus.UPLOAD_STATUS_ONN_UPDATE;
 
 
 public final class LectureHallRepository extends BaseRepository implements IRemoteDataSource {
@@ -61,23 +63,32 @@ public final class LectureHallRepository extends BaseRepository implements IRemo
     @Override
     public void downloadData(GetResultCallback<ResponseObj> resultCallback) {
         final String[] message = {"download Data not found.!!"};
-        mDownloadSourceClient.downLoadLectureHalls(new DownloadCallback<List<LectureHallEntity>>() {
-            @Override
-            public void onSuccess(List<LectureHallEntity> tList) {
-                //here : insert list data return from remote
-                AppExecutor.getInstance().diskIO().execute(() -> syncLectureHalls(tList));
-                message[0] = String.format("result LectureHal from remote to db local ,size: %s", tList.size());
-                Log1.d(TAG, message[0]);
-                notifyToUI(resultCallback, ResponseObj.newInstance(message[0]));
-            }
+        final int countRecordsNotUpload =getCountAsUploadStatus(new int[]{UPLOAD_STATUS_OFF,UPLOAD_STATUS_ONN_UPDATE});
+        if (countRecordsNotUpload > 0) {
+            message[0] = String.format("Found Records not upload from local to remote,size: %s", countRecordsNotUpload);
+            Log1.d(TAG, message[0]);
+            notifyToUI(resultCallback, ResponseObj.newInstance(message[0]));
+            //will start upload the records before download
+            uploadingData(resultCallback);
+        } else {
+            mDownloadSourceClient.downLoadLectureHalls(new DownloadCallback<List<LectureHallEntity>>() {
+                @Override
+                public void onSuccess(List<LectureHallEntity> tList) {
+                    //here : insert list data return from remote
+                    AppExecutor.getInstance().diskIO().execute(() -> syncLectureHalls(tList));
+                    message[0] = String.format("result LectureHal from remote to db local ,size: %s", tList.size());
+                    Log1.d(TAG, message[0]);
+                    notifyToUI(resultCallback, ResponseObj.newInstance(message[0]));
+                }
 
-            @Override
-            public void onError(String error) {
-                message[0] = (String.format("onError  download LectureHal : %s", error));
-                notifyToUI(resultCallback, ResponseObj.newInstance(message[0]));
-                Log1.e(TAG, message[0]);
-            }
-        });
+                @Override
+                public void onError(String error) {
+                    message[0] = (String.format("onError  download LectureHal : %s", error));
+                    notifyToUI(resultCallback, ResponseObj.newInstance(message[0]));
+                    Log1.e(TAG, message[0]);
+                }
+            });
+        }
     }
 
     @Override
@@ -140,7 +151,7 @@ public final class LectureHallRepository extends BaseRepository implements IRemo
     @SuppressLint("NewApi")
     public long insertLectureHall(LectureHallEntity lectureHallEntity) {
         long rowID = 0;
-        insertFooter(lectureHallEntity, false);
+        insertFooter(lectureHallEntity);
         mExecutorService = Executors.newSingleThreadExecutor();
         Callable<Long> callable = () -> lectureHallDao.insertWithTriggerLogic(lectureHallEntity);
         Future<Long> future = mExecutorService.submit(callable);
@@ -160,6 +171,13 @@ public final class LectureHallRepository extends BaseRepository implements IRemo
         AppExecutor.getInstance().diskIO().execute(() -> lectureHallDao.insertAll(entities));
     }
 
+
+    public void updateLectureStatus(long id, int is_active) {
+        final String query = String.format("SELECT status_upload FROM %s WHERE id=%s ", NAME_LECTURE_HALLS,id);
+        int val=getValueStatusUpload(query);
+        final int valueStatusUpload =val==1?3:val==3?3:0;
+        AppExecutor.getInstance().diskIO().execute(() -> lectureHallDao.updateLectureStatus(id, is_active,valueStatusUpload));
+    }
 
     public LectureHallEntity getLectureHallById(int lectureHallId) {
         return lectureHallDao.getLectureHallById(lectureHallId);
@@ -187,10 +205,32 @@ public final class LectureHallRepository extends BaseRepository implements IRemo
                 .setFetchExecutor(Executors.newSingleThreadExecutor()).build();
     }
 
+    @NonNull
+    public LiveData<PagedList<LectureHallEntity>> getAllHallAvailFactory() {
+        return new LivePagedListBuilder<>(lectureHallDao.getAllHallAvailFactory(), configPagedList())
+                .setFetchExecutor(Executors.newSingleThreadExecutor()).build();
+    }
+
 
     public int getCount() {
         return getCount("id", NAME_LECTURE_HALLS);
         // return mDb.departmentDao().getCount();
+    }
+
+    public int getCountAsUploadStatus(int[] status) {
+        int count = 0;
+        mExecutorService = Executors.newSingleThreadExecutor();
+        Callable<Integer> integerCallable = () -> lectureHallDao.getCountAsUploadStatus(status);
+        Future<Integer> integerFuture = mExecutorService.submit(integerCallable);
+        try {
+            count = integerFuture.get(100, TimeUnit.MILLISECONDS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            shutdown(mExecutorService);
+            Log.d(TAG, String.format("getCountAsUploadStatus-> COUNT:%d", count));
+        }
+        return count;
     }
 
 

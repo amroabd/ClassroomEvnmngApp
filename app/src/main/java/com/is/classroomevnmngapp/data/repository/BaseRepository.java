@@ -51,7 +51,7 @@ public class BaseRepository {
     @NotNull
     @Contract(value = "_, _ -> new", pure = true)
     private SupportSQLiteQuery sqlQuery(String cols, String tableName) {
-        String query = "SELECT COUNT(" + cols + ") FROM " + tableName;
+        final String query = "SELECT COUNT(" + cols + ") FROM " + tableName;
         return new SimpleSQLiteQuery(query);
     }
 
@@ -71,11 +71,47 @@ public class BaseRepository {
         return count;
     }
 
+    public final String retrieveAnyValueField(String sqlQuery) {
+        String data = null;
+        mExecutorService = Executors.newSingleThreadExecutor();
+        Callable<String> integerCallable = () -> mBaseDao.retrieve(new SimpleSQLiteQuery(sqlQuery));
+        Future<String> integerFuture = mExecutorService.submit(integerCallable);
+        try {
+            data = integerFuture.get(100, TimeUnit.MILLISECONDS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            shutdown(mExecutorService);
+            Log.d(TAG, String.format("retrieveAnyValueField-----------> %s,data :%s", sqlQuery, data));
+        }
+        return data;
+    }
+
+    public final int getCount(String sqlQuery) {
+        Integer count= Integer.valueOf(retrieveAnyValueField(sqlQuery));
+        if (count!=null){
+            Log.d(TAG, String.format("getCount-> %s,COUNT:%d", sqlQuery, count));
+          return count;
+        }
+        return 0;
+    }
+
+    public final int getValueStatusUpload(String sqlQuery) {
+        Integer val= Integer.valueOf(retrieveAnyValueField(sqlQuery));
+        if (val!=null){
+            Log.d(TAG, String.format("getValueStatusUpload-> %s,value :%d", sqlQuery, val));
+            return val;
+        }
+        return 0;
+    }
+
+
     @NotNull
     @Contract(value = "_, _ -> new", pure = true)
     private SupportSQLiteQuery sqlDelQuery(String tableName, String where) {
         String query;
-        if (where !=null && where.length()>0) query = String.format("DELETE  FROM %s %s", tableName, where);
+        if (where != null && where.length() > 0)
+            query = String.format("DELETE  FROM %s %s", tableName, where);
         else query = String.format("DELETE  FROM %s", tableName);
         return new SimpleSQLiteQuery(query);
     }
@@ -89,7 +125,7 @@ public class BaseRepository {
     public final int delete(String tableName, String where) {
         int count = 0;
         mExecutorService = Executors.newSingleThreadExecutor();
-        Callable<Integer> integerCallable = () -> mBaseDao.deleteAllRecords(sqlDelQuery( tableName,where));
+        Callable<Integer> integerCallable = () -> mBaseDao.deleteAllRecords(sqlDelQuery(tableName, where));
         Future<Integer> integerFuture = mExecutorService.submit(integerCallable);
         try {
             count = integerFuture.get(100, TimeUnit.MILLISECONDS);
@@ -103,12 +139,12 @@ public class BaseRepository {
     }
 
 
-    protected final void insertFooter(@NonNull BaseEntity baseEntity, boolean isServer) {
-        baseEntity.setUserIdFk(isServer ? baseEntity.getUserIdFk() : Integer.parseInt(mSharePerf.getUserID()));
-        baseEntity.setCreatedDateTime(isServer ? baseEntity.getCreatedDateTime() : DateUtils.getCurrentDTime());
-        baseEntity.setLastModifiedDateTime(isServer ? baseEntity.getLastModifiedDateTime() : DateUtils.getCurrentDTime());
+    protected final void insertFooter(@NonNull BaseEntity baseEntity) {
+        baseEntity.setUserIdFk(Integer.parseInt(mSharePerf.getUserID()));
+        baseEntity.setCreatedDateTime(DateUtils.getCurrentDTime());
+        baseEntity.setLastModifiedDateTime(DateUtils.getCurrentDTime());
         baseEntity.setStatusSync(0);
-        baseEntity.setStatusUpload(isServer ? 1 : 0);
+        baseEntity.setStatusUpload(0);
     }
 
     protected void shutdown(ExecutorService executorService) {

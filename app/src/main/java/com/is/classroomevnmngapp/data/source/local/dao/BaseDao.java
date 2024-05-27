@@ -12,5 +12,8 @@ public interface BaseDao {
     int deleteAllRecords(SupportSQLiteQuery query);
 
     @RawQuery
+    String retrieve(SupportSQLiteQuery query);
+
+    @RawQuery
     int checkPoint(SupportSQLiteQuery supportSQLiteQuery);
 }

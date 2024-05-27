@@ -21,14 +21,16 @@
         <item name="shapeAppearanceSmallComponent">
             @style/ShapeAppearance.ClassroomEvnmngApp.SmallComponent
         </item>
-        <item name="shapeAppearanceMediumComponent">
-            @style/ShapeAppearance.ClassroomEvnmngApp.MediumComponent
-        </item>
-        <item name="shapeAppearanceLargeComponent">
-            @style/ShapeAppearance.ClassroomEvnmngApp.LargeComponent
-        </item>
+        <!--    <item name="shapeAppearanceMediumComponent">
+               @style/ShapeAppearance.ClassroomEvnmngApp.MediumComponent
+           </item>
+      <item name="shapeAppearanceLargeComponent">
+               @style/ShapeAppearance.ClassroomEvnmngApp.LargeComponent
+           </item>-->
         <!--here is put name attribute theme, will using without add in widget(button,...)  -->
+<!--
         <item name="materialCardViewStyle">@style/Widget.ClassroomEvnmngApp.MaterialCardView</item>
+-->
         <item name="materialButtonStyle">@style/Widget.ClassroomEvnmngApp.Button</item>
 
         <!--   <item name="textAppearanceButton">@style/TextAppearance.ClassroomEvnmngApp.Button</item>-->

@@ -12,6 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.is.classroomevnmngapp.ApplicationMVVM;
 import com.is.classroomevnmngapp.R;
 import com.is.classroomevnmngapp.data.repository.GetResultCallback;
 import com.is.classroomevnmngapp.data.repository.LectureHallRepository;
@@ -52,8 +53,10 @@ public class UserMainActivity extends AppCompatActivity {
 
         //---------
 
-        remoteProcessorViewModel.downloadData(LectureHallRepository.getInstance(this), mResultCallback);
-        remoteProcessorViewModel.downloadData(ReservationRepository.getInstance(this), mResultCallback);
+        if (ApplicationMVVM.isConnectedNetToast(this)) {
+            remoteProcessorViewModel.downloadData(LectureHallRepository.getInstance(this), mResultCallback);
+            remoteProcessorViewModel.downloadData(ReservationRepository.getInstance(this), mResultCallback);
+        }
         //--------
     }
 

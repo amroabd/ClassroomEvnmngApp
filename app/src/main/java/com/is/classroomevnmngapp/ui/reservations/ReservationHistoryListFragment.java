@@ -87,8 +87,10 @@ public class ReservationHistoryListFragment extends Fragment {
                         //----
                         holder.itemReserveBinding.itemStartTime.setText(String.format(" %s", item.getReserveStartTime()));
                         holder.itemReserveBinding.itemEndTime.setText(String.format("%s", item.getReserveEndTime()));
+                        holder.itemReserveBinding.itemStatusReserve.setText(String.format("%s", "تم بدا"));
                         holder.itemReserveBinding.cancelButton.setOnClickListener(view -> {
                             viewModel.updateReservation(item.getReserveId(), 0);
+                            viewModel.updateLectureStatusReservation(item.getLectureHallID(),1);
                         });
 
                     } else {
@@ -99,12 +101,12 @@ public class ReservationHistoryListFragment extends Fragment {
                         else {
                             holder.itemReserveBinding.cancelButton.setVisibility(View.GONE);
                             holder.itemReserveBinding.reserveDateLyt.setVisibility(View.GONE);
-                            holder.itemReserveBinding.itemStatusReserve.setText(String.format("%s", "متاح"));
+                            holder.itemReserveBinding.itemStatusReserve.setText(String.format("%s", "مكتمل"));
                         }
 
                     }
                 } else {
-                    holder.itemReserveBinding.itemStatusReserve.setText(String.format("%s", "متاح"));
+                    holder.itemReserveBinding.itemStatusReserve.setText(String.format("%s", "تم بدا"));
                 }
             }
 

@@ -28,7 +28,7 @@ public class UploadingSourceClient {
     private final ApiService apiService;
 
     public UploadingSourceClient() {
-        this.apiService= RestClient.getInstance().getApiService();
+        this.apiService = RestClient.getInstance().getApiService();
     }
 
     private void requestBody(@NotNull Call<ResponseObj> call) {
@@ -50,10 +50,10 @@ public class UploadingSourceClient {
     }
 
     @SuppressLint("NewApi")
-    private void request(@NotNull Call<?> headerCall ) {
-        Log1.w(TAG,"request:"+ headerCall.request().toString());
-       // Log1.w(TAG,"host:"+ headerCall.request().url().host());
-       // Log1.w(TAG,"encodedPath:"+ headerCall.request().url().encodedPath());
+    private void request(@NotNull Call<?> headerCall) {
+        Log1.w(TAG, "request:" + headerCall.request().toString());
+        // Log1.w(TAG,"host:"+ headerCall.request().url().host());
+        // Log1.w(TAG,"encodedPath:"+ headerCall.request().url().encodedPath());
         //Log1.w(TAG,"redact:"+ headerCall.request().url().redact());
         //Log1.w(TAG,"headers:"+headerCall.request().headers().toString());
     }
@@ -68,20 +68,20 @@ public class UploadingSourceClient {
     }
 
     @NotNull
-    private  String getRespError(@NotNull String d) {
+    private String getRespError(@NotNull String d) {
         return d.substring(0, d.lastIndexOf("url"));
     }
 
 
     //--------base handle  for  each task upload
     @NotNull
-    private  Callback<ResponseObj> mResponseCallback(int lId, String title, UploadCallback<ResponseObj> callback) {
+    private Callback<ResponseObj> mResponseCallback(int lId, String title, UploadCallback<ResponseObj> callback) {
         return new Callback<ResponseObj>() {
             @Override
             public void onResponse(@NotNull Call<ResponseObj> call, @NonNull Response<ResponseObj> response) {
                 if (response.isSuccessful()) {
-                    if (response.body() != null&&response.body().getCode().equals("Success")) {
-                        ResponseObj obj=  response.body();
+                    if (response.body() != null && response.body().getCode().equals("Success")) {
+                        ResponseObj obj = response.body();
                         obj.setlId(lId);
                         PrintEvent(String.format("1-onSuccess-> result %s :%s", title, obj));
                         callback.onSuccess(obj);
@@ -103,39 +103,55 @@ public class UploadingSourceClient {
         };
     }
 
-    private  void uploadData(int loId,String title, @NonNull Call<ResponseObj> call, UploadCallback<ResponseObj> callback) {
-        call.enqueue(mResponseCallback( loId, title, callback));
+    private void uploadData(int loId, String title, @NonNull Call<ResponseObj> call, UploadCallback<ResponseObj> callback) {
+        call.enqueue(mResponseCallback(loId, title, callback));
         requestBody(call);
     }
 
     //===========tasks =========================================
 
-    public  void uploadLectureHall(@NonNull List<LectureHallEntity> entities, UploadCallback<ResponseObj> callback){
+    public void uploadLectureHall(@NonNull List<LectureHallEntity> entities, UploadCallback<ResponseObj> callback) {
         //------------------
-        for (LectureHallEntity entity:entities){
-            Call<ResponseObj> subHeaderCall = apiService.createLectureHall(entity);
-            uploadData(entity.getLocalId(),"LectureHall", subHeaderCall, callback);
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        try {
+            for (LectureHallEntity entity : entities) {
+                if (entity.getStatusUpload() == 0) {
+                    Call<ResponseObj> subHeaderCall = apiService.createLectureHall(entity);
+                    uploadData(entity.getLocalId(), "LectureHall", subHeaderCall, callback);
+                } else if (entity.getStatusUpload() == 3) {
+                    Call<ResponseObj> subHeaderCall = apiService.updateLectureHall(entity);
+                    uploadData(entity.getLocalId(), "LectureHall", subHeaderCall, callback);
+                }
             }
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+
     }
-    public void uploadReservation(@NonNull List<ReservationEntity> entities, UploadCallback<ResponseObj> callback){
-        for (ReservationEntity entity:entities){
-            Call<ResponseObj> subHeaderCall = apiService.createReservation(entity);
-            uploadData(entity.getLocalId(),"Reservations", subHeaderCall, callback);
+
+    public void uploadReservation(@NonNull List<ReservationEntity> entities, UploadCallback<ResponseObj> callback) {
+        try {
+            for (ReservationEntity entity : entities) {
+                if (entity.getStatusUpload() == 0) {
+                    Call<ResponseObj> subHeaderCall = apiService.createReservation(entity);
+                    uploadData(entity.getLocalId(), "Reservations", subHeaderCall, callback);
+                } else if (entity.getStatusUpload() == 3) {
+                    Call<ResponseObj> subHeaderCall = apiService.updateReservation(entity);
+                    uploadData(entity.getLocalId(), "Reservations", subHeaderCall, callback);
+                }
+            }
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
-    public void uploadUser(List<UserEntity> entities, UploadCallback<ResponseObj> callback){
-        for (UserEntity entity:entities){
+    public void uploadUser(List<UserEntity> entities, UploadCallback<ResponseObj> callback) {
+        for (UserEntity entity : entities) {
             Call<ResponseObj> subHeaderCall = apiService.updateUser(entity);
-            uploadData(entity.getLocalId(),"User", subHeaderCall, callback);
+            uploadData(entity.getLocalId(), "User", subHeaderCall, callback);
         }
     }
-
 
 
 }

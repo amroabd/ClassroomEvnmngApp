@@ -18,6 +18,13 @@ import java.util.List;
 @Dao
 public interface LectureHallDao {
 
+
+    @Query("UPDATE LectureHalls " +
+            "SET is_active=:isActive ,status_upload=:statusUpload " +
+            "WHERE id=:id")
+    void updateLectureStatus(long id, int isActive,int statusUpload);
+
+
     @Query("UPDATE LectureHalls " +
             "SET id=:centerID,status_upload=:upload " +
             "WHERE localId=:localID")
@@ -54,21 +61,24 @@ public interface LectureHallDao {
     @Query("SELECT * FROM LectureHalls WHERE id = :lectureHallId")
     LectureHallEntity getLectureHallById(int lectureHallId);
 
-    @Query("SELECT * FROM LectureHalls WHERE status_upload=0 LIMIT :limit")
+    @Query("SELECT * FROM LectureHalls WHERE status_upload IN(0,3) LIMIT :limit")
     List<LectureHallEntity> getDataAsLimit(int limit);
 
 
     @Query("SELECT * FROM LectureHalls")
     List<LectureHallEntity> getAll();
 
-    @Query("SELECT * FROM LectureHalls")
+    @Query("SELECT * FROM LectureHalls ")
     DataSource.Factory<Integer,LectureHallEntity> getAllHallEntityFactory();
+
+    @Query("SELECT * FROM LectureHalls WHERE is_active=0 ")
+    DataSource.Factory<Integer,LectureHallEntity> getAllHallAvailFactory();
 
     @Query("SELECT COUNT(localId) FROM LectureHalls")
     int getCount();
 
-    @Query("SELECT COUNT(localId) FROM LectureHalls WHERE status_upload=:status")
-    int getCountAsUploadStatus(int status);
+    @Query("SELECT COUNT(localId) FROM LectureHalls WHERE status_upload IN(:status)")
+    int getCountAsUploadStatus(int[] status);
 
     @Query("DELETE FROM LectureHalls")
     int deleteAllRecords();

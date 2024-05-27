@@ -70,17 +70,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                android:layout_weight="0.4"
-                android:paddingHorizontal="16dp"
-                android:textAppearance="?attr/textAppearanceListItemSecondary"
+                android:layout_weight="0.5"
+                android:paddingHorizontal="8dp"
                 tools:targetApi="m"
-                android:text="حالة الحجز" />
+                android:text="حالة توفر قاعة" />
 
             <TextView
                 android:id="@+id/item_statusReserve"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.6"
+                android:layout_weight="0.5"
                 android:gravity="start"
                 android:paddingHorizontal="8dp"
                 android:textAppearance="?attr/textAppearanceListItemSecondary"
@@ -88,7 +87,7 @@
                 android:drawablePadding="8dp"
                 android:drawableEnd="@drawable/ci_arrow"
                 tools:targetApi="m"
-                android:text=" بدا عملية الحجز لتوا" />
+                android:text=" متاحة" />
 
 
         </LinearLayout>

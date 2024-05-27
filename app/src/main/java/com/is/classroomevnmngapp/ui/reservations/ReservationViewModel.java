@@ -11,7 +11,9 @@ import com.is.classroomevnmngapp.data.repository.GetResultCallback;
 import com.is.classroomevnmngapp.data.repository.LectureHallRepository;
 import com.is.classroomevnmngapp.data.repository.ReservationRepository;
 import com.is.classroomevnmngapp.data.repository.UserRepository;
+import com.is.classroomevnmngapp.data.source.local.entities.LectureHallEntity;
 import com.is.classroomevnmngapp.data.source.local.entities.ReservationEntity;
+import com.is.classroomevnmngapp.utils.SharePerf;
 import com.is.classroomevnmngapp.utils.spinner.ListSpinner;
 
 import java.util.List;
@@ -22,12 +24,14 @@ public class ReservationViewModel extends AndroidViewModel {
 
     private final LectureHallRepository sLectureHallRepository;
     private final UserRepository sUserRepository;
+    SharePerf sharePerf;
 
     public ReservationViewModel(Application application) {
         super(application);
         sReservationRepository = ReservationRepository.getInstance(application);
         sLectureHallRepository=LectureHallRepository.getInstance(application);
         sUserRepository=new UserRepository(application);
+        sharePerf=SharePerf.getInstance(application);
     }
 
     public void loadAsSpinnerDataLecture(GetResultCallback<List<ListSpinner>> getResultCallback){
@@ -38,12 +42,12 @@ public class ReservationViewModel extends AndroidViewModel {
         sUserRepository.loadAsSpinnerDataUser(getResultCallback);
     }
 
-    public LiveData<PagedList<JoinReserveALecture>> getReserveALectureList() {
-        return sReservationRepository.getReserveALectureList();
+    public LiveData<PagedList<LectureHallEntity>> getReserveALectureList() {
+        return sLectureHallRepository.getAllHallAvailFactory();
     }
 
     public LiveData<PagedList<JoinReserveALecture>> getReserveALectureHistList() {
-        return sReservationRepository.getReserveALectureHistList();
+        return sReservationRepository.getReserveALectureHistList(sharePerf.getUserID());
     }
 
     public int getReservedCount(){
@@ -53,6 +57,10 @@ public class ReservationViewModel extends AndroidViewModel {
 
     public long addReservation(ReservationEntity entity) {
         return sReservationRepository.insertReservation(entity);
+    }
+
+    public void updateLectureStatusReservation(int id, int status) {
+        sLectureHallRepository.updateLectureStatus(id, status);
     }
 
     public void updateReservation(int id, int status) {
